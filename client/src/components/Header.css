@@ -16,10 +16,14 @@
 
 .header__left > h4 {
   margin-left: 5px;
+  color: #4f772d;
 }
 
 .header__left > .MuiSvgIcon-root {
-  color: #4f772d;
+  color: #ffffff;
+  background-color: #4f772d;
+  border-radius: 20px;
+  padding: 5px;
 }
 
 .header__middle {

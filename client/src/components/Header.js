@@ -6,7 +6,7 @@ import { Avatar } from "@mui/material";
 
 function Header() {
   return (
-    <div className="header">
+    <nav className="header">
       <div className="header__left">
         <PetsIcon />
         <h4>DogGO</h4>
@@ -19,7 +19,7 @@ function Header() {
         <Avatar sx={{ height: "30px", width: "30px" }}></Avatar>
         <h4> Username </h4>
       </div>
-    </div>
+    </nav>
   );
 }
 
