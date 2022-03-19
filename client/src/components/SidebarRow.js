@@ -1,6 +1,7 @@
 import React from "react";
 import "./SidebarRow.css";
 
+//same as using props
 function SidebarRow({ Icon, sideName }) {
   return (
     <div className="sidebarRow">

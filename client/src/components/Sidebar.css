@@ -2,3 +2,9 @@
   width: 160px;
   position: sticky;
 }
+
+@media only screen and (max-width: 500px) {
+  .sidebar {
+    display: none;
+  }
+}

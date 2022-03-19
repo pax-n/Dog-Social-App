@@ -12,14 +12,24 @@
 .header__left {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-.header__left > h4 {
+.header__left > .menuIcon {
+  display: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo > h4 {
   margin-left: 5px;
   color: #4f772d;
 }
 
-.header__left > .MuiSvgIcon-root {
+.logo > .MuiSvgIcon-root {
   color: #ffffff;
   background-color: #4f772d;
   border-radius: 20px;
@@ -55,4 +65,25 @@
 
 .header__right > .MuiSvgIcon-root {
   width: 10px;
+}
+
+@media only screen and (max-width: 500px) {
+  .header__left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+  }
+
+  .header__left > .menuIcon {
+    display: flex;
+  }
+
+  .header__middle {
+    display: none;
+  }
+
+  .username {
+    display: none;
+  }
 }
