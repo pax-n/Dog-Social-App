@@ -49,7 +49,7 @@
   align-items: center;
 }
 
-.header__right > h4 {
+.header__right > span {
   margin-left: 10px;
 }
 
