@@ -17,7 +17,7 @@ function Header() {
       </div>
       <div className="header__right">
         <Avatar sx={{ height: "30px", width: "30px" }}></Avatar>
-        <h4> Username </h4>
+        <span> Username </span>
       </div>
     </nav>
   );
