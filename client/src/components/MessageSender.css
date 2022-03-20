@@ -1,0 +1,85 @@
+.wrapper {
+  background: #fff;
+  max-width: 800px;
+  width: 100%;
+  border-radius: 15px;
+  padding: 25px 25px 15px 25px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+}
+.top {
+  padding-top: 10px;
+  border-bottom: 1px solid #e6e6e6;
+}
+.top .text-area {
+  position: relative;
+  min-height: 130px;
+  max-height: 170px;
+  overflow-y: auto;
+}
+
+.text-area .input {
+  outline: none;
+  border: none;
+  width: 98%;
+  height: 110px;
+  font-size: 17px;
+  word-wrap: break-word;
+  word-break: break-all;
+  position: relative;
+  z-index: 5;
+  margin-top: -3px;
+  font-size: 22px;
+}
+
+.bottom {
+  display: flex;
+  margin-top: 13px;
+  align-items: center;
+  justify-content: space-between;
+}
+.bottom .icons {
+  display: flex;
+  margin-left: -35px;
+}
+
+.icons li {
+  list-style: none;
+  color: #4f772d;
+  margin: 0 2px;
+  height: 38px;
+  width: 38px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.icons li:hover {
+  background: #ecf39e;
+}
+
+.bottom .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom .bork {
+  padding: 9px 18px;
+  border: none;
+  outline: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  background: #4f772d;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.bottom .bork.active {
+  opacity: 1;
+  pointer-events: auto;
+}
