@@ -8,10 +8,10 @@ function Feed() {
     <div className="feed">
       <MessageSender />
       <Post
-        profilePic=""
-        username="Username"
+        profilePic="https://www.nicepng.com/png/detail/1-10149_doge-deal-with-it-doge-png-transparent.png"
+        username="Doge"
         timestamp="Time"
-        message="Hello World"
+        message="World Hello"
         image="https://images.ctfassets.net/a9237abdyvg9/5XYBjAvKsMFUid5n7Dm1hp/9d6542ace2f3e816b0498c03df8fe6ee/doge.jpeg"
         paws="10"
       />
