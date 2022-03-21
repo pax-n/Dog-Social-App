@@ -6,6 +6,8 @@ const database = require("../database-functions");
 /* GET home page. */
 
 router.get("/", function (req, res, next) {
+  //
+
   const userID = 1;
   database.getDog(userID).then((barks) => {
     res.json(barks);

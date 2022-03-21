@@ -16,7 +16,7 @@ const getDog = (userid) => {
 //Gets the posts created by the user.
 const getPostsFromDog = (userid) => {
   const queryStatement = `
-  SELECT * FROM Bark WHERE dog_id = $1;
+  SELECT * FROM barks WHERE dogs_id = $1;
   `;
   const queryParams = [userid];
   return db.query(queryStatement, queryParams).then((data) => {
@@ -27,7 +27,7 @@ const getPostsFromDog = (userid) => {
 //Get the list of friends of the user.
 const getFriends = (userid) => {
   const queryStatement = `
-  SELECT target_dog_id, requested_dog_id FROM Dog_Friendslist AS my_dog_id
+  SELECT target_dog_id, requested_dog_id FROM dog_friendlists AS my_dog_id
   WHERE requested_dog_id = $1 OR target_dog_id = $1 AND is_accepted IS TRUE; `;
   const queryParams = [userid];
   return db.query(queryStatement, queryParams).then((data) => {
@@ -39,13 +39,13 @@ const getFriends = (userid) => {
 const getPostsFromFriends = (userid) => {
   let friends = getFriends();
   const queryStatement = `
-  SELECT * FROM Bark WHERE dog_id = $1;`;
+  SELECT * FROM barks WHERE dogs_id = $1;`;
 };
 
 //Gets the user's bio
 const getUserBio = (userid) => {
   const queryStatement = `
-  SELECT bio_description FROM Dog WHERE dog_id = $1;`;
+  SELECT bio_description FROM dogs WHERE dogs_id = $1;`;
   const queryParams = [userid];
 };
 
@@ -59,7 +59,7 @@ const addBarks = (
   date_modified
 ) => {
   const queryStatement = `
-  INSERT INTO Bark (dog_id, caption VARCHAR(255), image_url, video_url, date_added, is_public, date_modified) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
+  INSERT INTO barks (dogs_id, caption VARCHAR(255), image_url, video_url, date_added, is_public, date_modified) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
 };
 
 module.exports = {
