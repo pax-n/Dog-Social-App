@@ -139,6 +139,7 @@ const deleteFriend = (requested_dog_id, target_dog_id) => {
     return Promise.resolve(data.rows);
   });
 };
+
 module.exports = {
   getDog,
   getPostsFromDog,
@@ -149,4 +150,5 @@ module.exports = {
   postComments,
   deleteComments,
   addFriend,
+  deleteFriend,
 };
