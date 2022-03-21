@@ -6,7 +6,7 @@ db.connect();
 //Gets the user from the database
 const getDog = (userid) => {
   const queryStatement = `
-  SELECT * FROM Dog WHERE id = $1;`;
+  SELECT * FROM dogs WHERE id = $1;`;
   const queryParams = [userid];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows[0]);
