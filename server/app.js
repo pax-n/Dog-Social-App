@@ -1,8 +1,16 @@
+require("dotenv").config();
+
+const PORT = process.env.PORT || 8080;
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+
+const { Pool } = require("pg");
+const dbParams = require("./lib/db.js");
+const db = new Pool(dbParams);
+db.connect();
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -40,6 +48,10 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render("error");
+});
+
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
 });
 
 module.exports = app;

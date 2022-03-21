@@ -6,7 +6,10 @@ const database = require("../database-functions");
 /* GET home page. */
 
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+  const userID = 1;
+  database.getDog(userID).then((barks) => {
+    res.json(barks);
+  });
 });
 
 router.get("/barks", (req, res) => {
