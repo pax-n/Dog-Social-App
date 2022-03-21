@@ -1,4 +1,5 @@
 # dependencies
+<<<<<<< HEAD
 node_modules/
 .env
 .env.development
@@ -6,3 +7,7 @@ node_modules/
 
 
 
+=======
+/node_modules
+.env
+>>>>>>> b6dd9a350b35d48ff004bad54cc7c8b31c3fb0e6
