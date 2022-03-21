@@ -6,20 +6,16 @@ const database = require("../database-functions");
 /* GET home page. */
 
 router.get("/", function (req, res, next) {
-  //
-
-  const userID = 1;
-  database.getDog(userID).then((barks) => {
+  console.log("Barks loaded.");
+  let userID = 1;
+  database.getPostsFromFriends(userID).then((barks) => {
     res.json(barks);
   });
 });
 
-router.get("/barks", (req, res) => {
-  //To load the posts by the users of the site.
-  //Needs a function to sort the newest posts and limit the number of barks on the page
-  //Placeholder until login is set up.
+router.get("/friends", (req, res) => {
   const userID = 1;
-  database.getPostsFromFriends(userID).then((barks) => {
+  database.getFriends(userID).then((barks) => {
     res.json(barks);
   });
 });
