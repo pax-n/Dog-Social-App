@@ -6,12 +6,12 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 function MessageSender() {
   return (
     <div className="wrapper">
-      <div className="top">
+      <div className="MessageSender__top">
         <div className="text-area">
           <textarea placeholder="What's barking?" className="input"></textarea>
         </div>
       </div>
-      <div className="bottom">
+      <div className="MessageSender__bottom">
         <ul className="icons">
           <li>
             <ImageIcon />
