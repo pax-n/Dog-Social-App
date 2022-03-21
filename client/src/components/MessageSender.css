@@ -1,16 +1,18 @@
 .wrapper {
   background: #fff;
-  max-width: 800px;
-  width: 100%;
+  width: 800px;
   border-radius: 15px;
-  padding: 25px 25px 15px 25px;
-  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+  padding: 15px 25px 15px 25px;
+  box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
 }
-.top {
+
+.MessageSender__top {
   padding-top: 10px;
   border-bottom: 1px solid #e6e6e6;
 }
-.top .text-area {
+
+.MessageSender__top .text-area {
   position: relative;
   min-height: 130px;
   max-height: 170px;
@@ -31,13 +33,13 @@
   font-size: 22px;
 }
 
-.bottom {
+.MessageSender__bottom {
   display: flex;
   margin-top: 13px;
   align-items: center;
   justify-content: space-between;
 }
-.bottom .icons {
+.MessageSender__bottom .icons {
   display: flex;
   margin-left: -35px;
 }
@@ -60,13 +62,13 @@
   background: #ecf39e;
 }
 
-.bottom .content {
+.MessageSender__bottom .content {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.bottom .bork {
+.MessageSender__bottom .bork {
   padding: 9px 18px;
   border: none;
   outline: none;
@@ -79,7 +81,7 @@
   transition: background 0.2s ease;
 }
 
-.bottom .bork.active {
+.MessageSender__bottom .bork.active {
   opacity: 1;
   pointer-events: auto;
 }
