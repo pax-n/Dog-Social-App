@@ -12,7 +12,8 @@ router.get("/", function (req, res, next) {
 router.get("/barks", (req, res) => {
   //To load the posts by the users of the site.
   //Needs a function to sort the newest posts and limit the number of barks on the page
-  const userID = req.session.user.id;
+  //Placeholder until login is set up.
+  const userID = 1;
   database.getPostsFromFriends(userID).then((barks) => {
     res.json(barks);
   });
@@ -20,7 +21,7 @@ router.get("/barks", (req, res) => {
 
 router.post("/barks", (req, res) => {
   //Posting a word post (review description variable)
-  const dog_id = req.session.user.id;
+  const dog_id = 1;
   const caption = req.body.caption;
   database.addBarks();
 });

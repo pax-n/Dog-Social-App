@@ -1,7 +1,7 @@
-// const { Pool } = require("pg");
-// const dbParams = require("./lib/db.js");
-// const db = new Pool(dbParams);
-// db.connect();
+const { Pool } = require("pg");
+const dbParams = require("./lib/db.js");
+const db = new Pool(dbParams);
+db.connect();
 
 //Gets the user from the database
 const getDog = (userid) => {
@@ -16,7 +16,7 @@ const getDog = (userid) => {
 //Gets the posts created by the user.
 const getPostsFromDog = (userid) => {
   const queryStatement = `
-  SELECT * FROM post WHERE user_id = $1;
+  SELECT * FROM Bark WHERE dog_id = $1;
   `;
   const queryParams = [userid];
   return db.query(queryStatement, queryParams).then((data) => {
@@ -27,8 +27,8 @@ const getPostsFromDog = (userid) => {
 //Get the list of friends of the user.
 const getFriends = (userid) => {
   const queryStatement = `
-  SELECT target_user_id, requested_user_id FROM User_Friendslist AS my_dog_id
-  WHERE requested_user_id = $1 OR target_user_id = $1 AND is_accepted IS TRUE; `;
+  SELECT target_dog_id, requested_dog_id FROM Dog_Friendslist AS my_dog_id
+  WHERE requested_dog_id = $1 OR target_dog_id = $1 AND is_accepted IS TRUE; `;
   const queryParams = [userid];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows[0]);
@@ -39,13 +39,13 @@ const getFriends = (userid) => {
 const getPostsFromFriends = (userid) => {
   let friends = getFriends();
   const queryStatement = `
-  SELECT * FROM post WHERE user_id = $1;`;
+  SELECT * FROM Bark WHERE dog_id = $1;`;
 };
 
 //Gets the user's bio
 const getUserBio = (userid) => {
   const queryStatement = `
-  SELECT bio_description FROM user WHERE user_id = $1;`;
+  SELECT bio_description FROM Dog WHERE dog_id = $1;`;
   const queryParams = [userid];
 };
 
