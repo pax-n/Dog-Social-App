@@ -6,5 +6,11 @@ CREATE TABLE events (
   location_id INTEGER REFERENCES locations(id) ON DELETE CASCADE,
   start_time TIMESTAMP,
   end_time TIMESTAMP,
-  description VARCHAR(1000)
+  description VARCHAR(1000),
+  location_point POINT,
+  location_name VARCHAR(100),
+  city VARCHAR(100),
+  country VARCHAR(100),
+  created_at TIMESTAMP default current_timestamp,
+  updated_at TIMESTAMP
 );

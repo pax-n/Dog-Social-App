@@ -6,7 +6,7 @@ CREATE TABLE barks (
   caption VARCHAR(255),
   image_url VARCHAR(255),
   video_url VARCHAR(255),
-  date_added TIMESTAMP default current_timestamp,
-  date_modified TIMESTAMP,
-  is_public BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMP default current_timestamp,
+  updated_at TIMESTAMP,
+  is_public BOOLEAN DEFAULT TRUE
 );

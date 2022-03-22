@@ -1,4 +1,4 @@
-INSERT INTO comments (dog_id,bark_id,comment,date_added) VALUES
+INSERT INTO comments (dog_id,bark_id,comment,created_at) VALUES
 (5,1,'Cute!','2022-03-02 10:35:00'),
 (1,1,'I knows it!','2022-03-02 16:52:00'),
 (6,3,'lol.','2022-03-15 15:23:00'),

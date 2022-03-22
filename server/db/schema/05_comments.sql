@@ -5,5 +5,6 @@ CREATE TABLE comments (
   dog_id INTEGER REFERENCES dogs(id) ON DELETE CASCADE,
   bark_id INTEGER REFERENCES barks(id) ON DELETE CASCADE,
   comment VARCHAR(255),
-  date_added TIMESTAMP default current_timestamp
+  created_at TIMESTAMP default current_timestamp,
+  updated_at TIMESTAMP
 );

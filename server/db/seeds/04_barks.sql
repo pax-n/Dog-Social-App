@@ -1,4 +1,4 @@
-INSERT INTO barks (dog_id, caption, image_url, video_url, date_added, is_public) VALUES
+INSERT INTO barks (dog_id, caption, image_url, video_url, created_at, is_public) VALUES
 (1,'Bae caught me slippin', 'https://imgur.com/p6Up33L','','2022-03-01 10:33:00',true),
 (1,'No caption needed.', 'https://imgur.com/ma9TO3y','','2022-03-10 13:15:00',true),
 (1,'Hungry. Send food.', '', '', '2022-03-14 09:34:00',true),
