@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-.post__user > .avatar {
+.post__user > .post__avatar {
   margin-right: 10px;
 }
 

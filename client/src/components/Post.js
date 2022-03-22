@@ -9,7 +9,7 @@ function Post({ profilePic, username, message, image, timestamp, paws }) {
     <div className="post">
       <div className="post__top">
         <div className="post__user">
-          <Avatar className="avatar" src={profilePic} />
+          <Avatar className="post__avatar" src={profilePic} />
           <h4>{username}</h4>
         </div>
         <p>{timestamp}</p>
