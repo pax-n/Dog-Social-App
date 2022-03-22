@@ -5,12 +5,18 @@ const database = require("../database-functions");
 
 /* GET home page. */
 
-router.get("/", function (req, res, next) {
+router.get("/barks", function (req, res, next) {
   console.log("Barks loaded.");
   let userID = 1;
-  database.getPostsFromFriends(userID).then((barks) => {
-    res.json(barks);
-  });
+  database
+    .getPostsFromFriends(userID)
+    .then((barks) => {
+      res.json(barks);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ err: "Could not read database." });
+    });
 });
 
 router.get("/friends", (req, res) => {

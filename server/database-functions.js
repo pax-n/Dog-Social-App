@@ -39,12 +39,13 @@ const getFriends = (userid) => {
 const getPostsFromFriends = (userid) => {
   //Shows only the posts from friends that are accepted.
   const queryStatement = `
-    SELECT dog_id, caption FROM barks
-    JOIN dogs d ON d.id = dog_id
+    SELECT d.dog_name, dog_id, caption, image_url, video_url, profile_pic_url, b.created_at FROM barks AS b
+    JOIN dogs AS d ON d.id = dog_id
     WHERE dog_id in 
-    (SELECT target_dog_id FROM dog_friendlists WHERE requested_dog_id = $1 AND is_accepted IS TRUE) 
-    OR dog_id in (SELECT requested_dog_id FROM dog_friendlists WHERE target_dog_id = $1 AND is_accepted IS TRUE) 
-    or dog_id = $1 AND is_public IS TRUE;
+    (SELECT target_dog_id FROM dog_friendlists WHERE requested_dog_id = $1 AND is_accepted = 'a') 
+    OR dog_id in (SELECT requested_dog_id FROM dog_friendlists WHERE target_dog_id = $1 AND is_accepted = 'a') 
+    or dog_id = $1 AND is_public IS TRUE
+    ORDER BY b.created_at DESC;
   `;
   const queryParams = [userid];
 
