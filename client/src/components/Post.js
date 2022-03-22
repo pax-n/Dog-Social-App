@@ -4,23 +4,30 @@ import { Avatar } from "@mui/material";
 import PetsIcon from "@mui/icons-material/Pets";
 import ChatBubbleOutlinedIcon from "@mui/icons-material/ChatBubbleOutlined";
 
-function Post({ profilePic, username, message, image, timestamp, paws }) {
+function Post({
+  profile_pic_url,
+  dog_name,
+  caption,
+  image_url,
+  created_at,
+  paws,
+}) {
   return (
     <div className="post">
       <div className="post__top">
         <div className="post__user">
-          <Avatar className="post__avatar" src={profilePic} />
-          <h4>{username}</h4>
+          <Avatar className="post__avatar" src={profile_pic_url} />
+          <h4>{dog_name}</h4>
         </div>
-        <p>{timestamp}</p>
+        <p>{created_at}</p>
       </div>
 
       <div className="post__bottom">
-        <p>{message}</p>
+        <p>{caption}</p>
       </div>
 
       <div className="post__image">
-        <img src={image} />
+        <img src={image_url} />
       </div>
 
       <div className="post__counter">
