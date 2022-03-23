@@ -9,6 +9,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Button from '@mui/material/Button';
 
 
 function Login() {
@@ -38,23 +39,27 @@ function Login() {
       component="form"
       sx={{
         '& > :not(style)': { m: 1, width: '25ch' },
-        display: 'flex',
-        mx: "auto", 
-        width: 320
       }}
       noValidate
       autoComplete="off"
+      style={{
+        position: 'absolute', 
+        left: '50%', 
+        top: '50%',
+        transform: 'translate(-50%, -50%)'
+      }}
     >
+      <form action="/login" method="POST">
       <div>
       <h1>Login</h1>
-        <FormControl sx={{ m: 0.5, width: '30ch' }} variant="outlined">
+        <FormControl sx={{ my: 0.5, width: '30ch' }} variant="outlined">
           <TextField
             id="outlined-uncontrolled"
             label="Email"
             sx={{ width: '30ch' }}
           />
         </FormControl>
-        <FormControl sx={{ m: 0.5, width: '30ch' }} variant="outlined">
+        <FormControl sx={{ my: 0.5, width: '30ch' }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
@@ -75,10 +80,13 @@ function Login() {
             }
             label="Password"
           />
+          <Button variant="contained" type="Submit" sx={{ my: 0.5 }}>Submit</Button>
         </FormControl>
+      <Button href="/Register" ><strong>Not registered?</strong></Button>
       </div>
-      
+      </form>
     </Box>
+
   );
 
 }
