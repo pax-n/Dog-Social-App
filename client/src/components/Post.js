@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Post.css";
 import { Avatar } from "@mui/material";
 import PetsIcon from "@mui/icons-material/Pets";
 import ChatBubbleOutlinedIcon from "@mui/icons-material/ChatBubbleOutlined";
+import axios from "axios";
 
 function Post({
   profile_pic_url,
@@ -10,8 +11,26 @@ function Post({
   caption,
   image_url,
   created_at,
-  paws,
+  likes,
 }) {
+  const [paws, setPaws] = useState(0);
+
+  useEffect(() => {
+    Promise.all([axios.get("/paws")]).then((response) => {
+      const likes = response[0].data;
+      setPaws(likes);
+    });
+  });
+
+  // const pawsLike = (dog_id) => {
+  //   console.log("Paws clicked.");
+  //   dog_id = 1;
+
+  //   axios.put("/paws").then((result) => {
+  //     setPaws();
+  //   });
+  // };
+
   return (
     <div className="post">
       <div className="post__top">
@@ -32,7 +51,7 @@ function Post({
 
       <div className="post__counter">
         <PetsIcon />
-        <p>{paws} paws</p>
+        <p>{likes} paws</p>
       </div>
 
       <div className="post__buttons">

@@ -194,6 +194,17 @@ const registerDog = (
   });
 };
 
+const getLikesByPostID = (bark_id) => {
+  const querYStatement = `
+  SELECT COUNT (*) FROM likes
+  WHERE bark_id = $1
+  `;
+  const queryParams = [bark_id];
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows[0]);
+  });
+};
+
 //
 module.exports = {
   getDog,
@@ -206,4 +217,8 @@ module.exports = {
   deleteComments,
   addFriend,
   deleteFriend,
+  dogBreeds,
+  getBreedIDbyBreedName,
+  registerDog,
+  getLikesByPostID,
 };

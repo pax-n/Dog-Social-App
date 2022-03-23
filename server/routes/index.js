@@ -31,10 +31,20 @@ router.post("/barks", (req, res) => {
 });
 
 router.get("/friends", (req, res) => {
-  const userID = 1;
-  database.getFriends(userID).then((barks) => {
+  const dog_id = 1;
+  database.getFriends(dog_id).then((barks) => {
     res.json(barks);
   });
+});
+
+router.get("/paws", (req, res) => {
+  const dog_id = 1;
+  database.getLikesByPostID(dog_id).then((paws) => {
+    res.json(paws);
+  });
+});
+router.put("/paws", (req, res) => {
+  const userID = 1;
 });
 
 module.exports = router;
