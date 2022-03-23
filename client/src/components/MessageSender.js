@@ -4,7 +4,6 @@ import { useState } from "react";
 import axios from "axios";
 import ImageIcon from "@mui/icons-material/Image";
 import VideocamIcon from "@mui/icons-material/Videocam";
-import { useEffect } from "react";
 
 function MessageSender(props) {
   const [caption, setCaption] = useState(props.caption || "");

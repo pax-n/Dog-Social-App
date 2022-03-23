@@ -126,6 +126,15 @@ const deleteFriend = (requested_dog_id, target_dog_id) => {
   });
 };
 
+//Query dog breeds table and get all the dog breeds
+const dogBreeds = (dogs) => {
+  const queryStatement = `
+  SELECT * FROM breeds;`;
+  return db.query(queryStatement).then((data) => {
+    return Promise.resolve(data.rows);
+  });
+};
+
 module.exports = {
   getDog,
   getPostsFromDog,
