@@ -206,4 +206,8 @@ module.exports = {
   deleteComments,
   addFriend,
   deleteFriend,
+  getDogByEmail,
+  dogBreeds,
+  getBreedIDbyBreedName,
+  registerDog,
 };
