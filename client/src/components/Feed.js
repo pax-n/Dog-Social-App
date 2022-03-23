@@ -12,17 +12,19 @@ function Feed() {
     {
       profile_pic_url:
         "https://www.nicepng.com/png/detail/1-10149_doge-deal-with-it-doge-png-transparent.png",
-      dog_name: "Doge",
-      created_at: "Time",
-      caption: "World Hello",
+      username: "Doge",
+      timestamp: "Time",
+      caption: "Tibetan Mastiff",
       image_url:
         "https://images.ctfassets.net/a9237abdyvg9/5XYBjAvKsMFUid5n7Dm1hp/9d6542ace2f3e816b0498c03df8fe6ee/doge.jpeg",
       paws: "10",
     },
   ]);
 
+  const [paws, setPaws] = useState(0);
   useEffect(() => {
-    Promise.all([axios.get("/barks")])
+    let bark_id = 1;
+    Promise.all([axios.get(`/barks/${bark_id}`), axios.get(`/paws/${bark_id}`)])
       .then((responses) => {
         console.log(responses[0]);
         const posts = responses[0].data;
