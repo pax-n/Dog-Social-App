@@ -19,18 +19,22 @@ router.get("/barks", function (req, res, next) {
     });
 });
 
+router.post("/barks", (req, res) => {
+  //Posting a word post (review description variable)
+
+  console.log("Req.body: ", req.body);
+  const caption = req.body.caption;
+  const dog_id = req.body.dog_id;
+  database.addBarks(caption, dog_id).then(() => {
+    res.send({ caption, dog_id });
+  });
+});
+
 router.get("/friends", (req, res) => {
   const userID = 1;
   database.getFriends(userID).then((barks) => {
     res.json(barks);
   });
-});
-
-router.post("/barks", (req, res) => {
-  //Posting a word post (review description variable)
-  const dog_id = 1;
-  const caption = req.body.caption;
-  database.addBarks();
 });
 
 module.exports = router;

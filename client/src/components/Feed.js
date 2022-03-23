@@ -36,7 +36,7 @@ function Feed() {
   return (
     <div className="feed">
       <Profile />
-      <MessageSender />
+      <MessageSender setPosts={setPosts} />
       {posts.map((post) => {
         return (
           <Post

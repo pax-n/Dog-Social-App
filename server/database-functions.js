@@ -37,6 +37,7 @@ const getFriends = (userid) => {
 };
 
 const getPostsFromFriends = (userid) => {
+  //All info that gets posted (i.e. dog name, timestamp, etc.) that is required for a post is pulled here.
   //Shows only the posts from friends that are accepted.
   const queryStatement = `
     SELECT d.dog_name, dog_id, caption, image_url, video_url, profile_pic_url, b.created_at FROM barks AS b
@@ -64,28 +65,12 @@ const getUserBio = (userid) => {
   });
 };
 
-//BELOW HERE IS UNTESTED UNTIL CONNECTED TO FRONT END :)
 //Adds the content of the posts
-const addBarks = (
-  dog_id,
-  caption,
-  image_url,
-  video_url,
-  date_added,
-  is_public,
-  date_modified
-) => {
+//Needs to continue to be updated
+const addBarks = (caption, dog_id) => {
   const queryStatement = `
-  INSERT INTO barks (dogs_id, caption VARCHAR(255), image_url, video_url, date_added, is_public, date_modified) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
-  const queryParams = [
-    dog_id,
-    caption,
-    image_url,
-    video_url,
-    date_added,
-    is_public,
-    date_modified,
-  ];
+  INSERT INTO barks (caption, dog_id) VALUES ($1, $2) RETURNING *;`;
+  const queryParams = [caption, dog_id];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows[0]);
   });
