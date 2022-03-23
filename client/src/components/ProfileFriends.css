@@ -1,0 +1,10 @@
+.profilefriends {
+  display: flex;
+}
+
+.profilefriends__friend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 30px 15px 35px;
+}

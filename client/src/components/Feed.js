@@ -2,69 +2,53 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import "./Feed.css";
+import axios from "axios";
 import MessageSender from "./MessageSender";
 import Post from "./Post";
+import Profile from "./Profile";
 
 function Feed() {
   const [posts, setPosts] = useState([
     {
-      profilePic:
+      profile_pic_url:
         "https://www.nicepng.com/png/detail/1-10149_doge-deal-with-it-doge-png-transparent.png",
-      username: "Doge",
-      timestamp: "Time",
-      message: "Tibetan Mastiff",
-      image:
-        "https://images.ctfassets.net/a9237abdyvg9/5XYBjAvKsMFUid5n7Dm1hp/9d6542ace2f3e816b0498c03df8fe6ee/doge.jpeg",
-      paws: "10",
-    },
-    {
-      profilePic:
-        "https://www.nicepng.com/png/detail/1-10149_doge-deal-with-it-doge-png-transparent.png",
-      username: "Doge",
-      timestamp: "Time",
-      message: "Hey Test",
-      image:
+      dog_name: "Doge",
+      created_at: "Time",
+      caption: "World Hello",
+      image_url:
         "https://images.ctfassets.net/a9237abdyvg9/5XYBjAvKsMFUid5n7Dm1hp/9d6542ace2f3e816b0498c03df8fe6ee/doge.jpeg",
       paws: "10",
     },
   ]);
 
   useEffect(() => {
-    alert("OH NO ALERT");
+    Promise.all([axios.get("/barks")])
+      .then((responses) => {
+        console.log(responses[0]);
+        const posts = responses[0].data;
+        setPosts(posts);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (
     <div className="feed">
-      <MessageSender />
+      <Profile />
+      <MessageSender setPosts={setPosts} />
       {posts.map((post) => {
         return (
           <Post
-            profilePic={post.profilePic}
-            username={post.username}
-            timestamp={post.timestamp}
-            message={post.message}
-            image={post.image}
+            profile_pic_url={post.profile_pic_url}
+            dog_name={post.dog_name}
+            created_at={post.created_at}
+            caption={post.caption}
+            image_url={post.image_url}
             paws={post.paws}
           />
         );
       })}
-
-      {/* <Post
-        profilePic="https://www.nicepng.com/png/detail/1-10149_doge-deal-with-it-doge-png-transparent.png"
-        username="Doge"
-        timestamp="Time"
-        message="World Hello"
-        image="https://images.ctfassets.net/a9237abdyvg9/5XYBjAvKsMFUid5n7Dm1hp/9d6542ace2f3e816b0498c03df8fe6ee/doge.jpeg"
-        paws="10"
-      />
-      <Post
-        profilePic=""
-        username="Username"
-        timestamp="Time"
-        message="Hello World"
-        image="https://images.ctfassets.net/a9237abdyvg9/5XYBjAvKsMFUid5n7Dm1hp/9d6542ace2f3e816b0498c03df8fe6ee/doge.jpeg"
-        paws="10"
-      /> */}
     </div>
   );
 }

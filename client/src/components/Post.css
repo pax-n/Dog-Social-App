@@ -3,7 +3,7 @@
   margin-top: 15px;
   border-radius: 15px;
   background-color: white;
-  padding: 15px 25px 15px 25px;
+  padding: 25px 25px 15px 25px;
   box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
 }
 
@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-.post__user > .avatar {
+.post__user > .post__avatar {
   margin-right: 10px;
 }
 
