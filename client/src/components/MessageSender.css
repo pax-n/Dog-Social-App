@@ -68,6 +68,13 @@
   justify-content: center;
 }
 
+.MessageSender__bottom .switch {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  color: #4f772d;
+}
+
 .MessageSender__bottom .bork {
   padding: 9px 18px;
   border: none;
