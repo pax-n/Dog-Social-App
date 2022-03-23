@@ -1,6 +1,6 @@
 import "./App.css";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+import Header from "./layout/Header";
+import Sidebar from "./layout/Sidebar";
 import Feed from "./Feed";
 
 function App() {

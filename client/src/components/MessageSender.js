@@ -14,6 +14,7 @@ function MessageSender(props) {
   //image and previewer state for uploading image
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
+  //references input button to image icon
   const fileInputRef = useRef();
   //reads image as a data url
   useEffect(() => {
