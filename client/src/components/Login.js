@@ -52,14 +52,14 @@ function Login() {
       <form action="/login" method="POST">
       <div>
       <h1>Login</h1>
-        <FormControl sx={{ my: 0.5, width: '30ch' }} variant="outlined">
+        <FormControl sx={{ my: 0.25, width: '30ch' }} variant="outlined">
           <TextField
             id="outlined-uncontrolled"
             label="Email"
             sx={{ width: '30ch' }}
           />
         </FormControl>
-        <FormControl sx={{ my: 0.5, width: '30ch' }} variant="outlined">
+        <FormControl sx={{ my: 0.25, width: '30ch' }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
@@ -82,7 +82,7 @@ function Login() {
           />
           <Button variant="contained" type="Submit" sx={{ my: 0.5 }}>Submit</Button>
         </FormControl>
-      <Button href="/Register" ><strong>Not registered?</strong></Button>
+      <Button href="/register" ><strong>Not registered?</strong></Button>
       </div>
       </form>
     </Box>

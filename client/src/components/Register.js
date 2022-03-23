@@ -14,6 +14,8 @@ import DateAdapter from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import SearchLocation from "./SearchLocation";
+import Button from '@mui/material/Button';
+
 
 
 function Register() {
@@ -42,8 +44,9 @@ function Register() {
   };
 
   return (
-    <Box
-      component="form"
+      <form action="/register" method="POST">  
+
+      <Box
       sx={{
         '& > :not(style)': { m: 1 },
       }}
@@ -52,12 +55,10 @@ function Register() {
       style={{
         position: 'absolute', 
         left: '50%', 
-        top: '50%',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-50%)'
       }}
     >
       <h1>Register</h1>
-        
       <TextField
         id="outlined-uncontrolled"
         label="Email"
@@ -126,6 +127,7 @@ function Register() {
 
       <LocalizationProvider dateAdapter={DateAdapter}>
         <DatePicker
+          sx={{ m: 0.5, width: '29.8ch' }}
           label="Dog's Date of Birth"
           value={values.date}
           onChange={(newValue) => {
@@ -165,7 +167,9 @@ function Register() {
         rows={4}
       />
 
+    <Button variant="contained" type="Submit" sx={{ m: 0.5 }}>Submit</Button>
     </Box>
+    </form>
   );
 
 }
