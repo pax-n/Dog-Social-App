@@ -126,15 +126,75 @@ const deleteFriend = (requested_dog_id, target_dog_id) => {
   });
 };
 
+//For the login, get the dog_id by the email inputted.
+const getDogByEmail = (email) => {
+  const queryStatement = `
+  SELECT id FROM dogs
+  WHERE email = '$1';
+  `;
+  const queryParams = [email];
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows[0]);
+  });
+};
+
 //Query dog breeds table and get all the dog breeds
 const dogBreeds = (dogs) => {
   const queryStatement = `
-  SELECT * FROM breeds;`;
+  SELECT breed_name FROM breeds;`;
   return db.query(queryStatement).then((data) => {
     return Promise.resolve(data.rows);
   });
 };
 
+//Get the breed id by the breed name to post when registering.
+const getBreedIDbyBreedName = (breed_name) => {
+  const queryStatement = `
+  SELECT id FROM breeds
+  WHERE breed_name = '$1';`;
+  const queryParams = [breed_name];
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows[0]);
+  });
+};
+
+//Registration parameters
+const registerDog = (
+  email,
+  password,
+  dog_name,
+  breed_id,
+  gender,
+  birth_date,
+  owner_first_name,
+  owner_last_name,
+  profile_pic_url,
+  bio_description,
+  city,
+  country
+) => {
+  const queryStatement = `
+  INSERT INTO dogs (email, password, dog_name, breed_id, gender, birth_date, owner_first_name, owner_last_name, profile_pic_url, bio_description, city, country) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`;
+  const queryParams = [
+    email,
+    password,
+    dog_name,
+    breed_id,
+    gender,
+    birth_date,
+    owner_first_name,
+    owner_last_name,
+    profile_pic_url,
+    bio_description,
+    city,
+    country,
+  ];
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows[0]);
+  });
+};
+
+//
 module.exports = {
   getDog,
   getPostsFromDog,
