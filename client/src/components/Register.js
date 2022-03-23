@@ -13,6 +13,7 @@ import Select from '@mui/material/Select';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
+import SearchLocation from "./SearchLocation";
 
 
 function Register() {
@@ -148,12 +149,22 @@ function Register() {
       <br />
 
       <TextField
+        id="outlined-uncontrolled"
+        label="Profile Image URL"
+        sx={{ m: 0.5, width: '62ch' }}
+      />
+      <SearchLocation />
+
+      <br />
+      
+      <TextField
         sx={{ m: 0.5, width: '62ch' }}
         id="outlined-multiline-static"
         label="Bio"
         multiline
         rows={4}
-        />
+      />
+
     </Box>
   );
 
