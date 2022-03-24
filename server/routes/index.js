@@ -5,43 +5,44 @@ var router = express.Router();
 
 const database = require("../database-functions");
 
-const cookieSession = require('cookie-session');
+const cookieSession = require("cookie-session");
 
-router.use(cookieSession({
-  name: 'session',
-  keys: [process.env.KEY1, process.env.KEY2],
+router.use(
+  cookieSession({
+    name: "session",
+    keys: [process.env.KEY1, process.env.KEY2],
 
-  // Cookie Options
-  maxAge: 24 * 60 * 60 * 1000 // 24 hours
-}));
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  })
+);
 
 router.post("/login", (req, res) => {
   const email = req.body.email;
   console.log(email);
-  database.getDogByEmail(email)
-    .then(data => {
-      const user = data[0]
-      if (user === undefined){
-        return res.status(403).send(`<p>Email not found</p><a href="/">Click here to go back</a>`);
+  database
+    .getDogByEmail(email)
+    .then((data) => {
+      const user = data[0];
+      if (user === undefined) {
+        return res
+          .status(403)
+          .send(`<p>Email not found</p><a href="/">Click here to go back</a>`);
       }
       if (user.email === email) {
-          req.session.user = user;
-          return res.redirect("../");
-        }
-
+        req.session.user = user;
+        return res.redirect("../");
+      }
     })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
     });
 });
-
 
 // receiving:
 // { email, password, dog_name, breed, gender, birth_date, owner_first_name, owner_last_name, profile_pic_url, bio_description, location};
 router.post("/register", (req, res) => {
-  const breed_id = database.getBreedIDbyBreedName(req.body.breed)
+  const breed_id = database.getBreedIDbyBreedName(req.body.breed);
   const email = req.body.email;
   const password = req.body.password;
   const dog_name = req.body.dog_name;
@@ -52,30 +53,29 @@ router.post("/register", (req, res) => {
   const profile_pic_url = req.body.profile_pic_url;
   const bio_description = req.body.bio_description;
   const location = req.body.location;
-  database.registerDog(
-  email,
-  password,
-  dog_name,
-  breed_id,
-  gender,
-  birth_date,
-  owner_first_name,
-  owner_last_name,
-  profile_pic_url,
-  bio_description,
-  location)
+  database
+    .registerDog(
+      email,
+      password,
+      dog_name,
+      breed_id,
+      gender,
+      birth_date,
+      owner_first_name,
+      owner_last_name,
+      profile_pic_url,
+      bio_description,
+      location
+    )
     .then(() => {
-      database.getDogByEmail(email)
-      .then(data => {
-        const user = data[0]
+      database.getDogByEmail(email).then((data) => {
+        const user = data[0];
         req.session.user = user;
         return res.redirect("../");
-      })
+      });
     })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
     });
 });
 

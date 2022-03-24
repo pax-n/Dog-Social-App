@@ -53,7 +53,6 @@ const getPostsFromFriends = (userid) => {
     SELECT b.id, d.profile_pic_url, b.dog_id, d.dog_name, b.caption, b.image_url, b.video_url, b.created_at FROM barks AS b
     JOIN dogs AS d ON d.id = dog_id
     ORDER BY b.created_at DESC;`;
-  const queryParams = [userid];
 
   return db.query(queryStatement).then((data) => {
     return Promise.resolve(data.rows);
@@ -156,7 +155,7 @@ const dogBreeds = (dogs) => {
 const getBreedIDbyBreedName = (breed_name) => {
   const queryStatement = `
   SELECT id FROM breeds
-  WHERE breed_name = '$1';`;
+  WHERE breed_name = $1;`;
   const queryParams = [breed_name];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows[0]);
@@ -190,7 +189,7 @@ const registerDog = (
     owner_last_name,
     profile_pic_url,
     bio_description,
-    location
+    location,
   ];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows[0]);
