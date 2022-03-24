@@ -1,0 +1,9 @@
+.FriendsListUser {
+  display: flex;
+  align-items: center;
+  padding: 45px;
+}
+
+.FriendsListUser h3 {
+  margin-left: 10px;
+}

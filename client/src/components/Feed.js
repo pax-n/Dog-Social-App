@@ -28,8 +28,8 @@ function Feed({ show }) {
 
   return (
     <div className="feed">
-      {show === "Profile" && <Profile />}
       {show === "Friends" && <FriendsList />}
+      {show === "Profile" && <Profile />}
       {show === "Feed" && (
         <>
           <MessageSender setPosts={setPosts} />
