@@ -42,7 +42,8 @@ router.post("/login", (req, res) => {
 // receiving:
 // { email, password, dog_name, breed, gender, birth_date, owner_first_name, owner_last_name, profile_pic_url, bio_description, location};
 router.post("/register", (req, res) => {
-  const breed_id = database.getBreedIDbyBreedName(req.body.breed);
+  // const breed_id = database.getBreedIDbyBreedName(req.body.breed)
+  const breed_id = 1;
   const email = req.body.email;
   const password = req.body.password;
   const dog_name = req.body.dog_name;
@@ -53,6 +54,8 @@ router.post("/register", (req, res) => {
   const profile_pic_url = req.body.profile_pic_url;
   const bio_description = req.body.bio_description;
   const location = req.body.location;
+  console.log("breed_id: ", breed_id);
+
   database
     .registerDog(
       email,
@@ -73,6 +76,7 @@ router.post("/register", (req, res) => {
         req.session.user = user;
         return res.redirect("../");
       });
+      res.status(201).send("");
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -122,9 +126,7 @@ router.get(`/paws/:bark_id`, (req, res) => {
     })
     .catch((error) => {
       console.log(error);
-      res
-        .status(500)
-        .json({ err: `Could not read error base for bark_id: `, barks_id });
+      res.status(500).json({ err: "Could not read database." });
     });
 });
 
