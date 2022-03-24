@@ -46,7 +46,9 @@ router.get(`/paws/:bark_id`, (req, res) => {
     })
     .catch((error) => {
       console.log(error);
-      res.status(500).json({ err: "Could not read database." });
+      res
+        .status(500)
+        .json({ err: `Could not read error base for bark_id: `, barks_id });
     });
 });
 
