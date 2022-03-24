@@ -7,31 +7,40 @@ import ChatBubbleOutlinedIcon from "@mui/icons-material/ChatBubbleOutlined";
 import axios from "axios";
 
 function Post({
+  bark_id,
   profile_pic_url,
   dog_name,
   caption,
   image_url,
   created_at,
-  likes,
 }) {
   const [paws, setPaws] = useState(0);
   const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
-    Promise.all([axios.get("/paws")]).then((response) => {
-      const likes = response[0].data;
-      setPaws(likes);
+    console.log(`The post useEffect has run: `, bark_id);
+    axios.get(`/paws/${bark_id}`).then((response) => {
+      console.log("Like response: ", response);
+      const likes = response.data.count;
+      setPaws((prev) => {
+        return likes;
+      });
     });
-  });
+  }, []);
 
-  // const pawsLike = (dog_id) => {
-  //   console.log("Paws clicked.");
-  //   dog_id = 1;
+  const pawsLike = (dog_id) => {
+    console.log("Paws clicked.");
+    dog_id = 1;
+    const bark_id = 1;
+    axios.put(`/paws/${bark_id}`).then(() => {
+      setPaws((prev) => {
+        return parseInt(prev) + 1;
+      });
+      console.log("Paw set.");
+    });
+  };
 
-  //   axios.put("/paws").then((result) => {
-  //     setPaws();
-  //   });
-  // };
+  //Send an object with a put.
 
   return (
     <div className="post">
@@ -53,11 +62,11 @@ function Post({
 
       <div className="post__counter">
         <PetsIcon />
-        <p>{likes} paws</p>
+        <p>{paws} paws</p>
       </div>
 
       <div className="post__buttons">
-        <div className="pawButton">
+        <div className="pawButton" onClick={pawsLike}>
           <PetsIcon />
           <p>Paw</p>
         </div>

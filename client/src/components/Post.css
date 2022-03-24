@@ -54,6 +54,7 @@
   padding-left: 35px;
   padding-right: 45px;
   transition: background 0.2s ease;
+  cursor: pointer;
 }
 
 .pawButton > p {

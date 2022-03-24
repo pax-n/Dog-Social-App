@@ -22,9 +22,12 @@ function Feed({ show }) {
     },
   ]);
 
+  const [paws, setPaws] = useState(0);
   useEffect(() => {
-    Promise.all([axios.get("/barks")])
+    let bark_id = 1;
+    Promise.all([axios.get(`/barks/${bark_id}`)])
       .then((responses) => {
+        console.log("Responses: ", responses);
         console.log(responses[0]);
         const posts = responses[0].data;
         setPosts(posts);
@@ -44,6 +47,7 @@ function Feed({ show }) {
           {posts.map((post) => {
             return (
               <Post
+                bark_id={post.id}
                 profile_pic_url={post.profile_pic_url}
                 dog_name={post.dog_name}
                 created_at={post.created_at}
