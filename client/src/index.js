@@ -3,10 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
+import UserProvider from './components/providers/UserProvider';
+import ToggleProvider from './components/providers/ToggleProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <UserProvider>
+      <ToggleProvider>
+        <App />
+      </ToggleProvider>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

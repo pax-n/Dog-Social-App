@@ -24,7 +24,7 @@ function loadScript(src, position, id) {
 
 const autocompleteService = { current: null };
 
-function SearchLocation() {
+function SearchLocation(props) {
   const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
@@ -107,6 +107,7 @@ function SearchLocation() {
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
+        props.onChange(newInputValue);
       }}
       renderInput={(params) => (
         <TextField {...params} label="City" sx={{ m: 0, width: '62ch' }} />

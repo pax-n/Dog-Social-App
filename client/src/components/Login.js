@@ -1,9 +1,13 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { userContext } from './providers/UserProvider';
+import { toggleContext } from './providers/ToggleProvider';
+import axios from "axios";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -13,8 +17,11 @@ import Button from '@mui/material/Button';
 
 
 function Login() {
+  const { login } = useContext(userContext);
+  const { toggle } = useContext(toggleContext);
 
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
+    email: '',
     password: '',
     showPassword: false,
   });
@@ -34,8 +41,23 @@ function Login() {
     event.preventDefault();
   };
 
+  const onSubmit = function(event) {
+    event.preventDefault();
+    const email = values.email;
+    const password = values.password;
+    const data = { email, password };
+    console.log(data);
+    axios.post("/login", data).then((responses) => {
+      console.log("Post sent to database.");
+      console.log("Response: ", responses);
+      values.email && login(values.email, values.password);
+    });
+  };
+
   return (
+
     <Box
+      onSubmit={onSubmit}
       component="form"
       sx={{
         '& > :not(style)': { m: 1, width: '25ch' },
@@ -48,17 +70,19 @@ function Login() {
         top: '50%',
         transform: 'translate(-50%, -50%)'
       }}
-    >
-      <form action="/login" method="POST">
+      >
       <div>
       <h1>Login</h1>
-        <FormControl sx={{ my: 0.25, width: '30ch' }} variant="outlined">
+      <FormControl sx={{ my: 0.25, width: '30ch' }} variant="outlined">
+        <FormGroup sx={{ my: 0.25, width: '30ch' }} variant="outlined">
           <TextField
             id="outlined-uncontrolled"
             label="Email"
             sx={{ width: '30ch' }}
-          />
-        </FormControl>
+            value={values.email}
+            onChange={handleChange('email')}
+            />
+        </FormGroup>
         <FormControl sx={{ my: 0.25, width: '30ch' }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
@@ -73,18 +97,18 @@ function Login() {
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
                   edge="end"
-                >
+                  >
                   {values.showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
             }
             label="Password"
-          />
+            />
+            </FormControl>
           <Button variant="contained" type="Submit" sx={{ my: 0.5 }}>Submit</Button>
         </FormControl>
-      <Button href="/register" ><strong>Not registered?</strong></Button>
+      <Button onClick={toggle} ><strong>Not registered?</strong></Button>
       </div>
-      </form>
     </Box>
 
   );

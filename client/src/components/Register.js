@@ -1,4 +1,6 @@
 import React from 'react';
+import { useContext } from 'react';
+import { toggleContext } from './providers/ToggleProvider';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
@@ -19,13 +21,22 @@ import Button from '@mui/material/Button';
 
 
 function Register() {
-
+  const { toggle } = useContext(toggleContext);
+  
+  const [location, setLocation] = React.useState('');
   const [values, setValues] = React.useState({
     password: '',
     showPassword: false,
     breed:'',
     gender:'',
     date: null,
+    email:'',
+    dog_name:'',
+    gender:'',
+    owner_first_name:'',
+    owner_last_name:'',
+    profile_pic_url:'',
+    bio_description:'',
   });
   
   const handleChange = (prop) => (event) => {
@@ -43,10 +54,33 @@ function Register() {
     event.preventDefault();
   };
 
+  const onSubmit = function(event) {
+    event.preventDefault();
+    const email = values.email;
+    const password = values.password;
+    const dog_name = values.dog_name;
+    const breed = values.breed;
+    const gender = values.gender;
+    const date = values.date;
+    const owner_first_name = values.owner_first_name;
+    const owner_last_name = values.owner_last_name;
+    const profile_pic_url = values.profile_pic_url;
+    const bio_description = values.bio_description;
+
+    const data = { email, password, dog_name, breed, gender, date, owner_first_name, owner_last_name, profile_pic_url, bio_description, location};
+    console.log(data)
+    // axios.post("/register", data).then((responses) => {
+      // console.log("Post sent to database.");
+      // console.log("Response: ", responses);
+      // values.email && login(values.email, values.password);
+    // });
+  };
+
   return (
-      <form action="/register" method="POST">  
 
       <Box
+      onSubmit={onSubmit}
+      component="form"
       sx={{
         '& > :not(style)': { m: 1 },
       }}
@@ -63,6 +97,8 @@ function Register() {
         id="outlined-uncontrolled"
         label="Email"
         sx={{ m: 0.5, width: '30ch' }}
+        value={values.email}
+        onChange={handleChange('email')}
       />
       
       <FormControl sx={{ m: 0.5, width: '29.8ch' }} variant="outlined">
@@ -93,6 +129,8 @@ function Register() {
         id="outlined-uncontrolled"
         label="Dog Name"
         sx={{ m: 0.5, width: '30ch' }}
+        value={values.dog_name}
+        onChange={handleChange('dog_name')}
         />
       
       <FormControl sx={{ m: 0.5, width: '30ch' }}>
@@ -142,11 +180,15 @@ function Register() {
         id="outlined-uncontrolled"
         label="Owner's First Name"
         sx={{ m: 0.5, width: '30ch' }}
+        value={values.owner_first_name}
+        onChange={handleChange('owner_first_name')}
       />
       <TextField
         id="outlined-uncontrolled"
         label="Owner's Last Name"
         sx={{ m: 0.5, width: '30ch' }}
+        value={values.owner_last_name}
+        onChange={handleChange('owner_last_name')}
       />
       <br />
 
@@ -154,8 +196,11 @@ function Register() {
         id="outlined-uncontrolled"
         label="Profile Image URL"
         sx={{ m: 0.5, width: '62ch' }}
+        value={values.profile_pic_url}
+        onChange={handleChange('profile_pic_url')}
       />
-      <SearchLocation />
+      <SearchLocation onChange={setLocation}
+      />
 
       <br />
       
@@ -165,11 +210,13 @@ function Register() {
         label="Bio"
         multiline
         rows={4}
+        value={values.bio_description}
+        onChange={handleChange('bio_description')}
       />
 
     <Button variant="contained" type="Submit" sx={{ m: 0.5 }}>Submit</Button>
+    <Button onClick={toggle} ><strong>Already registered?</strong></Button>
     </Box>
-    </form>
   );
 
 }
