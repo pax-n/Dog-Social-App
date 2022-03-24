@@ -26,31 +26,36 @@ const getPostsFromDog = (userid) => {
 };
 
 //Get the list of friends of the user.
-const getFriends = (userid) => {
+
+const getAllPosts = () => {
   const queryStatement = `
-  SELECT target_dog_id, requested_dog_id FROM dog_friendlists AS my_dog_id
-  WHERE requested_dog_id = $1 OR target_dog_id = $1 AND is_accepted IS TRUE; `;
-  const queryParams = [userid];
-  return db.query(queryStatement, queryParams).then((data) => {
-    return Promise.resolve(data.rows[0]);
+  SELECT * FROM barks
+  LIMIT {15}
+  ORDER BY created_at DESC;`;
+  return db.query(queryStatement).then((data) => {
+    return Promise.resolve(data.rows);
   });
 };
 
 const getPostsFromFriends = (userid) => {
-  //All info that gets posted (i.e. dog name, timestamp, etc.) that is required for a post is pulled here.
-  //Shows only the posts from friends that are accepted.
+  // All info that gets posted (i.e. dog name, timestamp, etc.) that is required for a post is pulled here.
+  // Shows only the posts from friends that are accepted.
+  // const queryStatement = `
+  //   SELECT d.dog_name, dog_id, caption, image_url, video_url, profile_pic_url, b.created_at FROM barks AS b
+  //   JOIN dogs AS d ON d.id = dog_id
+  //   WHERE dog_id in
+  //   (SELECT target_dog_id FROM dog_friendlists WHERE requested_dog_id = $1 AND is_accepted = 'a')
+  //   OR dog_id in (SELECT requested_dog_id FROM dog_friendlists WHERE target_dog_id = $1 AND is_accepted = 'a')
+  //   or dog_id = $1 AND is_public IS TRUE
+  //   ORDER BY b.created_at DESC;
+  // `;
   const queryStatement = `
-    SELECT d.dog_name, dog_id, caption, image_url, video_url, profile_pic_url, b.created_at FROM barks AS b
+    SELECT b.id, d.profile_pic_url, b.dog_id, d.dog_name, b.caption, b.image_url, b.video_url, b.created_at FROM barks AS b
     JOIN dogs AS d ON d.id = dog_id
-    WHERE dog_id in 
-    (SELECT target_dog_id FROM dog_friendlists WHERE requested_dog_id = $1 AND is_accepted = 'a') 
-    OR dog_id in (SELECT requested_dog_id FROM dog_friendlists WHERE target_dog_id = $1 AND is_accepted = 'a') 
-    or dog_id = $1 AND is_public IS TRUE
-    ORDER BY b.created_at DESC;
-  `;
+    ORDER BY b.created_at DESC;`;
   const queryParams = [userid];
 
-  return db.query(queryStatement, queryParams).then((data) => {
+  return db.query(queryStatement).then((data) => {
     return Promise.resolve(data.rows);
   });
 };
@@ -195,9 +200,9 @@ const registerDog = (
 };
 
 const getLikesByPostID = (bark_id) => {
-  const querYStatement = `
+  const queryStatement = `
   SELECT COUNT (*) FROM likes
-  WHERE bark_id = $1
+  WHERE bark_id = $1;
   `;
   const queryParams = [bark_id];
   return db.query(queryStatement, queryParams).then((data) => {
@@ -205,11 +210,17 @@ const getLikesByPostID = (bark_id) => {
   });
 };
 
+const addLike = (bark_id) => {
+  const queryStatement = `
+  INSERT INTO likes (bark_id) VALUES ($1);`;
+  return db.query(queryStatement, [bark_id]);
+};
+
 //
 module.exports = {
   getDog,
   getPostsFromDog,
-  getFriends,
+  getAllPosts,
   getPostsFromFriends,
   addBarks,
   deleteBarks,
@@ -218,7 +229,9 @@ module.exports = {
   addFriend,
   deleteFriend,
   dogBreeds,
+  getDogByEmail,
   getBreedIDbyBreedName,
   registerDog,
   getLikesByPostID,
+  addLike,
 };
