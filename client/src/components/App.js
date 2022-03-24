@@ -27,8 +27,7 @@ function App() {
         Until then, manually comment and uncomment below code as needed */}
         {/* <Login /> */}
         {/* <Register /> */}
-        {/* <Sidebar changePage={changePage} />
-        <Feed show={show} /> */}
+        {/* <Main /> */}
       </div>
     </div>
   );
