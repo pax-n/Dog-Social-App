@@ -6,8 +6,9 @@ import axios from "axios";
 import MessageSender from "./MessageSender";
 import Post from "./Post";
 import Profile from "./Profile";
+import FriendsList from "./FriendsList";
 
-function Feed() {
+function Feed({ show }) {
   const [posts, setPosts] = useState([]);
 
   const [paws, setPaws] = useState(0);
@@ -27,22 +28,26 @@ function Feed() {
 
   return (
     <div className="feed">
-      <Profile />
-      <MessageSender setPosts={setPosts} />
-      {posts.map((post) => {
-        console.log("Post: ", post);
-        return (
-          <Post
-            bark_id={post.id}
-            profile_pic_url={post.profile_pic_url}
-            dog_name={post.dog_name}
-            created_at={post.created_at}
-            caption={post.caption}
-            image_url={post.image_url}
-            paws={post.paws}
-          />
-        );
-      })}
+      {show === "Profile" && <Profile />}
+      {show === "Friends" && <FriendsList />}
+      {show === "Feed" && (
+        <>
+          <MessageSender setPosts={setPosts} />
+          {posts.map((post) => {
+            return (
+              <Post
+                bark_id={post.id}
+                profile_pic_url={post.profile_pic_url}
+                dog_name={post.dog_name}
+                created_at={post.created_at}
+                caption={post.caption}
+                image_url={post.image_url}
+                paws={post.paws}
+              />
+            );
+          })}
+        </>
+      )}
     </div>
   );
 }
