@@ -2,8 +2,9 @@ import "./App.css";
 import { useContext } from 'react';
 import { userContext } from './providers/UserProvider';
 import { toggleContext } from './providers/ToggleProvider';
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+import React, { useState } from "react";
+import Header from "./layout/Header";
+import Sidebar from "./layout/Sidebar";
 import Feed from "./Feed";
 import Login from "./Login";
 import Register from "./Register";
@@ -11,20 +12,24 @@ import Register from "./Register";
 function App() {
   const { loggedin } = useContext(userContext);
   const { toggleRegister } = useContext(toggleContext);
+  const [show, setShow] = useState("Feed");
+  const changePage = (page) => {
+    setShow(page);
+  };
 
   return (
     <div className="App">
-      <Header />
+      <Header changePage={changePage} />
       <div className="body">
         {!loggedin && toggleRegister && <Register />}
         {!loggedin && !toggleRegister && <Login />}
-        {loggedin && <Sidebar /> && <Feed />}
-        {/* Uncomment above once cookies properly implemented
-        Until then, manually comment and uncomment below */}
+        {loggedin && <Sidebar changePage={changePage} /> && <Feed show={show} />}
+        {/* Uncomment above code once cookies properly implemented
+        Until then, manually comment and uncomment below code as needed */}
         {/* <Login /> */}
         {/* <Register /> */}
-        {/* <Sidebar />
-        <Feed /> */}
+        {/* <Sidebar changePage={changePage} />
+        <Feed show={show} /> */}
       </div>
     </div>
   );

@@ -81,9 +81,9 @@ router.post("/register", (req, res) => {
 
 /* GET home page. */
 
-router.get("/barks", function (req, res, next) {
+router.get("/barks/:id", function (req, res, next) {
   console.log("Barks loaded.");
-  let userID = 1;
+  const userID = req.params.id;
   database
     .getPostsFromFriends(userID)
     .then((barks) => {
@@ -107,10 +107,36 @@ router.post("/barks", (req, res) => {
 });
 
 router.get("/friends", (req, res) => {
-  const userID = 1;
-  database.getFriends(userID).then((barks) => {
+  const dog_id = 1;
+  database.getFriends(dog_id).then((barks) => {
     res.json(barks);
   });
+});
+
+router.get(`/paws/:bark_id`, (req, res) => {
+  const barks_id = req.params.bark_id;
+  database
+    .getLikesByPostID(barks_id)
+    .then((paws) => {
+      res.json(paws);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ err: "Could not read database." });
+    });
+});
+
+router.put(`/paws/:bark_id`, (request, res) => {
+  const bark_id = request.params.bark_id;
+  database
+    .addLike(bark_id)
+    .then(() => {
+      res.status(201).send("");
+    })
+    .catch((error) => {
+      console.log("addLike(()): ", error.message);
+      res.status(500).send({ error: error.message });
+    });
 });
 
 module.exports = router;
