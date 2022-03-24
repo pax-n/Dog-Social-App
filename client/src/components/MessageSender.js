@@ -11,24 +11,7 @@ import PublicOffIcon from "@mui/icons-material/PublicOff";
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
 function MessageSender(props) {
-  //image and previewer state for uploading image
-  const [image, setImage] = useState();
-  const [preview, setPreview] = useState();
-  //references input button to image icon
-  const fileInputRef = useRef();
-  //reads image as a data url
-  useEffect(() => {
-    if (image) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result);
-      };
-      reader.readAsDataURL(image);
-    } else {
-      setPreview(null);
-    }
-  }, [image]);
-
+  const [showImgURL, setShowImgURL] = useState(false);
   const [caption, setCaption] = useState(props.caption || "");
   const onClick = function () {
     console.log("Button clicked.");
@@ -56,32 +39,12 @@ function MessageSender(props) {
               onChange={(event) => setCaption(event.target.value)}
             />
           </form>
-          <img src={preview} />
         </div>
       </div>
       <div className="MessageSender__bottom">
         <ul className="icons">
           <li>
-            <ImageIcon
-              onClick={(event) => {
-                event.preventDefault();
-                fileInputRef.current.click();
-              }}
-            />
-            <input
-              type="file"
-              style={{ display: "none" }}
-              ref={fileInputRef}
-              accept="image/*"
-              onChange={(event) => {
-                const file = event.target.files[0];
-                if (file) {
-                  setImage(file);
-                } else {
-                  setImage(null);
-                }
-              }}
-            />
+            <ImageIcon onClick={() => setShowImgURL(!showImgURL)} />
           </li>
           <li>
             <VideocamIcon />
@@ -98,6 +61,11 @@ function MessageSender(props) {
           </button>
         </div>
       </div>
+      {showImgURL ? (
+        <div className="MessageSender__imgURL">
+          <input type="text" placeholder="Upload Image URL"></input>
+        </div>
+      ) : null}
     </div>
   );
 }
