@@ -1,15 +1,21 @@
 import "./App.css";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+import React, { useState } from "react";
+import Header from "./layout/Header";
+import Sidebar from "./layout/Sidebar";
 import Feed from "./Feed";
 
 function App() {
+  const [show, setShow] = useState("Feed");
+  const changePage = (page) => {
+    setShow(page);
+  };
+
   return (
     <div className="App">
-      <Header />
+      <Header changePage={changePage} />
       <div className="body">
-        <Sidebar />
-        <Feed />
+        <Sidebar changePage={changePage} />
+        <Feed show={show} />
       </div>
     </div>
   );

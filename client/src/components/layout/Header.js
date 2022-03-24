@@ -8,9 +8,12 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-function Header() {
+function Header({ changePage }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const clickLogo = (page) => () => {
+    changePage(page);
+  };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -22,7 +25,7 @@ function Header() {
     <nav className="header">
       <div className="header__left">
         <MenuIcon className="menuIcon" />
-        <div className="logo">
+        <div onClick={clickLogo("Feed")} className="logo">
           <PetsIcon />
           <h4>DogGO</h4>
         </div>

@@ -14,6 +14,7 @@ function MessageSender(props) {
   //image and previewer state for uploading image
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
+  //references input button to image icon
   const fileInputRef = useRef();
   //reads image as a data url
   useEffect(() => {
@@ -31,13 +32,11 @@ function MessageSender(props) {
   const [caption, setCaption] = useState(props.caption || "");
   const onClick = function () {
     console.log("Button clicked.");
-    console.log("Caption in MessageSender: ", caption);
     //PLACEHOLDER DOG_ID UNTIL LOGIN IS IMPLEMENTED
     let dog_id = 1;
     let data = { caption, dog_id };
     axios.post("/barks", data).then((responses) => {
       console.log("Post sent to database.");
-      console.log("Response: ", responses);
       setCaption("");
       //PESSIMISTIC PROGRAMMING --> Only loads the post at the top when the data has been sent to the database.
       props.setPosts((prev) => [data, ...prev]);
@@ -48,7 +47,7 @@ function MessageSender(props) {
     <div className="wrapper">
       <div className="MessageSender__top">
         <div className="text-area">
-          <form className="input">
+          <form className="form">
             <input
               className="input"
               type="text"
