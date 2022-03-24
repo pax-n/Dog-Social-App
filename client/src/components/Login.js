@@ -47,7 +47,7 @@ function Login() {
     const password = values.password;
     const data = { email, password };
     console.log(data);
-    axios.post("http://localhost:8000/login", data).then((responses) => {
+    axios.post("/login", data).then((responses) => {
       console.log("Post sent to database.");
       console.log("Response: ", responses);
       values.email && login(values.email, values.password);
