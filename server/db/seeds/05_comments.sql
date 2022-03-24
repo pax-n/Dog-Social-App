@@ -11,4 +11,5 @@ INSERT INTO comments (dog_id,bark_id,comment,created_at) VALUES
 (8,25,'LOL love it!','2022-03-12 23:34:00'),
 (8,26,'We need to do this again soon!','2022-03-20 16:01:00'),
 (4,27,'We all just pretend to be our dogs, basically','2022-03-15 00:23:00'),
-(7,27,'Okay...','2022-03-15 12:24:00');
+(7,27,'Okay...','2022-03-15 12:24:00'),
+(3,8, 'Nice post.', '2022-03-15 12:24:00');

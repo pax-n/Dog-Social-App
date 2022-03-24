@@ -130,17 +130,27 @@ router.get(`/paws/:bark_id`, (req, res) => {
     });
 });
 
-router.put(`/paws/:bark_id`, (request, res) => {
+router.post(`/paws/:bark_id`, (request, res) => {
   const bark_id = request.params.bark_id;
+  const dog_id = request.body.dog_id;
   database
-    .addLike(bark_id)
-    .then(() => {
+    .addLike(dog_id, bark_id)
+    .then((paws) => {
       res.status(201).send("");
     })
     .catch((error) => {
       console.log("addLike(()): ", error.message);
       res.status(500).send({ error: error.message });
     });
+});
+
+router.get(`/api/comments/:bark_id`, (req, res) => {
+  const bark_id = req.params.bark_id;
+  console.log("Comment is being fetched from the database.");
+  console.log("Bark_id received: ", bark_id);
+  database.getCommentsFromPost(bark_id).then((comments) => {
+    res.json(comments);
+  });
 });
 
 module.exports = router;

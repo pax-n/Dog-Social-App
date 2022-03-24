@@ -90,6 +90,18 @@ const deleteBarks = (bark_id) => {
   });
 };
 
+//For the GET request to show the comments under the post/bark_id.
+const getCommentsFromPost = (bark_id) => {
+  const queryStatement = `
+  SELECT * FROM comments
+  WHERE bark_id = $1;
+  `;
+  const queryParams = [bark_id];
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows);
+  });
+};
+
 const postComments = (dog_id, bark_id, comment, date_added) => {
   const queryStatement = `
   INSERT INTO comments (dog_id, bark_id, comment, date_added) VALUES ($1, $2, $3, $4) RETURNING *;`;
@@ -207,10 +219,12 @@ const getLikesByPostID = (bark_id) => {
   });
 };
 
-const addLike = (bark_id) => {
+const addLike = (dog_id, bark_id) => {
   const queryStatement = `
-  INSERT INTO likes (bark_id) VALUES ($1);`;
-  return db.query(queryStatement, [bark_id]);
+  INSERT INTO likes (dog_id, bark_id) VALUES ($1, $2);`;
+  return db.query(queryStatement, [dog_id, bark_id]).then((data) => {
+    return Promise.resolve(data.rows[0]);
+  });
 };
 
 //
@@ -221,6 +235,7 @@ module.exports = {
   getPostsFromFriends,
   addBarks,
   deleteBarks,
+  getCommentsFromPost,
   postComments,
   deleteComments,
   addFriend,
