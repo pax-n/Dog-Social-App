@@ -21,16 +21,16 @@ function App() {
     <div className="App">
       <Header changePage={changePage} />
       <div className="body">
-        {!loggedin && toggleRegister && <Register />}
+        {/* {!loggedin && toggleRegister && <Register />}
         {!loggedin && !toggleRegister && <Login />}
         {loggedin && <Sidebar changePage={changePage} />}
-        {loggedin && <Feed show={show} />}
+        {loggedin && <Feed show={show} />} */}
         {/* Uncomment above code once cookies properly implemented
         Until then, manually comment and uncomment below code as needed */}
         {/* <Login /> */}
         {/* <Register /> */}
-        {/* <Sidebar changePage={changePage} />
-        <Feed show={show} /> */}
+        <Sidebar changePage={changePage} />
+        <Feed show={show} />
       </div>
     </div>
   );
