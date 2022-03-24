@@ -15,8 +15,8 @@ db.connect();
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var loginRoutes = require("./routes/login");
-var registerRoutes = require("./routes/register");
+// var loginRoutes = require("./routes/login");
+// var registerRoutes = require("./routes/register");
 
 var app = express();
 
@@ -35,8 +35,8 @@ app.options('*', cors())
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/login", loginRoutes);
-app.use("/register", registerRoutes);
+// app.use("/login", loginRoutes);
+// app.use("/register", registerRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

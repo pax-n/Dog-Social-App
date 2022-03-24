@@ -12,8 +12,7 @@ CREATE TABLE dogs (
   birth_date DATE,
   bio_description VARCHAR(500),
   gender VARCHAR(1),
-  country VARCHAR(100),
-  city VARCHAR(100),
+  location VARCHAR(100),
   created_at TIMESTAMP NOT NULL default current_timestamp,
   updated_at TIMESTAMP
 );

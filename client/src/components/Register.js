@@ -1,6 +1,8 @@
 import React from 'react';
 import { useContext } from 'react';
+import { userContext } from './providers/UserProvider';
 import { toggleContext } from './providers/ToggleProvider';
+import axios from "axios";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
@@ -21,6 +23,7 @@ import Button from '@mui/material/Button';
 
 
 function Register() {
+  const { login } = useContext(userContext);
   const { toggle } = useContext(toggleContext);
   
   const [location, setLocation] = React.useState('');
@@ -66,14 +69,16 @@ function Register() {
     const owner_last_name = values.owner_last_name;
     const profile_pic_url = values.profile_pic_url;
     const bio_description = values.bio_description;
-
-    const data = { email, password, dog_name, breed, gender, date, owner_first_name, owner_last_name, profile_pic_url, bio_description, location};
+    const parsedDate = ("0" + date.getUTCDate()).slice(-2)
+    const parsedMonth = ("0" + (date.getUTCMonth() + 1)).slice(-2)
+    const birth_date = date.getFullYear()+"-"+parsedMonth+"-"+parsedDate
+    const data = { email, password, dog_name, breed, gender, birth_date, owner_first_name, owner_last_name, profile_pic_url, bio_description, location};
     console.log(data)
-    // axios.post("/register", data).then((responses) => {
-      // console.log("Post sent to database.");
-      // console.log("Response: ", responses);
-      // values.email && login(values.email, values.password);
-    // });
+    axios.post("/register", data).then((responses) => {
+      console.log("Post sent to database.");
+      console.log("Response: ", responses);
+      values.email && login(values.email, values.password);
+    });
   };
 
   return (
@@ -213,6 +218,7 @@ function Register() {
         value={values.bio_description}
         onChange={handleChange('bio_description')}
       />
+      <br />
 
     <Button variant="contained" type="Submit" sx={{ m: 0.5 }}>Submit</Button>
     <Button onClick={toggle} ><strong>Already registered?</strong></Button>
