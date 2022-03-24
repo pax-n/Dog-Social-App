@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Post.css";
+import PostComment from "./PostComment";
 import { Avatar } from "@mui/material";
 import PetsIcon from "@mui/icons-material/Pets";
 import ChatBubbleOutlinedIcon from "@mui/icons-material/ChatBubbleOutlined";
@@ -14,6 +15,7 @@ function Post({
   likes,
 }) {
   const [paws, setPaws] = useState(0);
+  const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
     Promise.all([axios.get("/paws")]).then((response) => {
@@ -59,11 +61,29 @@ function Post({
           <PetsIcon />
           <p>Paw</p>
         </div>
-        <div className="commentButton">
+        <div
+          className="commentButton"
+          onClick={() => setShowComments(!showComments)}
+        >
           <ChatBubbleOutlinedIcon />
           <p>Comment</p>
         </div>
       </div>
+
+      {showComments ? (
+        <div className="post__commentSection">
+          <div className="commentSender">
+            <Avatar className="commentSender__avatar" />
+            <div className="commentSender__content">
+              <input type="text" placeholder="Write a comment"></input>
+              <button className="commentBork">Bork</button>
+            </div>
+          </div>
+          <div className="userComments">
+            <PostComment />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -47,7 +47,7 @@ function MessageSender(props) {
     <div className="wrapper">
       <div className="MessageSender__top">
         <div className="text-area">
-          <form className="input">
+          <form className="form">
             <input
               className="input"
               type="text"

@@ -7,14 +7,38 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import ChatIcon from "@mui/icons-material/Chat";
 
-function Sidebar() {
+function Sidebar({ changePage }) {
+  const handleClick = (page) => () => {
+    changePage(page);
+  };
+
   return (
     <div className="sidebar">
-      <SidebarRow Icon={PersonIcon} sideName="Profile" />
-      <SidebarRow Icon={GroupIcon} sideName="Friends" />
-      <SidebarRow Icon={CalendarMonthIcon} sideName="Events" />
-      <SidebarRow Icon={StorefrontIcon} sideName="Marketplace" />
-      <SidebarRow Icon={ChatIcon} sideName="Chat" />
+      <SidebarRow
+        onClick={handleClick("Profile")}
+        Icon={PersonIcon}
+        sideName="Profile"
+      />
+      <SidebarRow
+        onClick={handleClick("Friends")}
+        Icon={GroupIcon}
+        sideName="Friends"
+      />
+      <SidebarRow
+        onClick={handleClick("Events")}
+        Icon={CalendarMonthIcon}
+        sideName="Events"
+      />
+      <SidebarRow
+        onClick={handleClick("Market")}
+        Icon={StorefrontIcon}
+        sideName="Marketplace"
+      />
+      <SidebarRow
+        onClick={handleClick("Chat")}
+        Icon={ChatIcon}
+        sideName="Chat"
+      />
     </div>
   );
 }

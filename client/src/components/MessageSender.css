@@ -88,7 +88,10 @@
   transition: background 0.2s ease;
 }
 
-.MessageSender__bottom .bork.active {
-  opacity: 1;
-  pointer-events: auto;
+.MessageSender__bottom .bork:hover {
+  background-color: #7baa53;
+}
+
+.MessageSender__bottom .bork:active {
+  background-color: #5f8b38;
 }
