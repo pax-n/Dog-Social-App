@@ -8,6 +8,7 @@ import axios from "axios";
 
 function Post({
   bark_id,
+  dog_id,
   profile_pic_url,
   dog_name,
   caption,
@@ -16,11 +17,10 @@ function Post({
 }) {
   const [paws, setPaws] = useState(0);
   const [showComments, setShowComments] = useState(false);
+  const [loadComments, setLoadComments] = useState([]);
 
   useEffect(() => {
-    console.log(`The post useEffect has run: `, bark_id);
     axios.get(`/paws/${bark_id}`).then((response) => {
-      console.log("Like response: ", response);
       const likes = response.data.count;
       setPaws((prev) => {
         return likes;
@@ -28,15 +28,30 @@ function Post({
     });
   }, []);
 
-  const pawsLike = (dog_id) => {
+  const pawsLike = (dog_id, bark_id) => {
     console.log("Paws clicked.");
-    dog_id = 1;
-    const bark_id = 1;
-    axios.put(`/paws/${bark_id}`).then(() => {
+    console.log("Dog_id: ", dog_id);
+    console.log("Bark_id: ", bark_id);
+    // dog_id = 5;
+    // const bark_id = 15;
+    const data = { dog_id };
+    axios.post(`/paws/${bark_id}`, data).then((response) => {
+      console.log("pawsLike PUT Response: ", response);
       setPaws((prev) => {
         return parseInt(prev) + 1;
       });
       console.log("Paw set.");
+    });
+  };
+
+  const loadCommentsForPost = (bark_id) => {
+    const data = { bark_id };
+    console.log("Load comments bark_id: ", data);
+    setShowComments(!showComments);
+    axios.get(`/api/comments/${bark_id}`).then((response) => {
+      console.log("Load Comments Response: ", response);
+      const comments = response.data;
+      setLoadComments(comments);
     });
   };
 
@@ -66,13 +81,21 @@ function Post({
       </div>
 
       <div className="post__buttons">
-        <div className="pawButton" onClick={pawsLike}>
+        <div
+          className="pawButton"
+          onClick={() => {
+            pawsLike(dog_id, bark_id);
+          }}
+        >
           <PetsIcon />
           <p>Paw</p>
         </div>
         <div
           className="commentButton"
-          onClick={() => setShowComments(!showComments)}
+          onClick={() => {
+            loadCommentsForPost(bark_id);
+          }}
+          // onClick={() => setShowComments(!showComments)}
         >
           <ChatBubbleOutlinedIcon />
           <p>Comment</p>
@@ -89,7 +112,18 @@ function Post({
             </div>
           </div>
           <div className="userComments">
-            <PostComment />
+            <PostComment loadComments={loadComments} />
+            {loadComments.map((comment) => {
+              return (
+                <PostComment
+                  profile_pic_url={comment.profile_pic_url}
+                  dog_id={comment.dog_id}
+                  comment_id={comment.id}
+                  comment={comment.comment}
+                  created_at={comment.created_at}
+                />
+              );
+            })}
           </div>
         </div>
       ) : null}
