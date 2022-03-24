@@ -1,5 +1,9 @@
 # dependencies
+<<<<<<< HEAD
 /node_modules
+=======
+node_modules/
+>>>>>>> b9b0a7374106f9f99553a1052c1d721a9263c635
 .env
 .env.development
 .env.test

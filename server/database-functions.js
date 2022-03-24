@@ -175,11 +175,10 @@ const registerDog = (
   owner_last_name,
   profile_pic_url,
   bio_description,
-  city,
-  country
+  location
 ) => {
   const queryStatement = `
-  INSERT INTO dogs (email, password, dog_name, breed_id, gender, birth_date, owner_first_name, owner_last_name, profile_pic_url, bio_description, city, country) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`;
+  INSERT INTO dogs (email, password, dog_name, breed_id, gender, birth_date, owner_first_name, owner_last_name, profile_pic_url, bio_description, location) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`;
   const queryParams = [
     email,
     password,
@@ -191,8 +190,7 @@ const registerDog = (
     owner_last_name,
     profile_pic_url,
     bio_description,
-    city,
-    country,
+    location
   ];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows[0]);
