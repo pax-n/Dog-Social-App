@@ -35,7 +35,6 @@ function Register() {
     date: null,
     email:'',
     dog_name:'',
-    gender:'',
     owner_first_name:'',
     owner_last_name:'',
     profile_pic_url:'',
@@ -81,6 +80,10 @@ function Register() {
     });
   };
 
+  const dogBreeds = ['Shiba Inu','Dachshund','Labrador Retriever','Shih-tzu','Husky','Poodle','Greyhound'];
+  const breedMenu = dogBreeds.map((element) => (
+    <MenuItem value={element}>{element}</MenuItem>
+  ));
   return (
 
       <Box
@@ -147,9 +150,7 @@ function Register() {
         value={values.breed}
         onChange={handleChange('breed')}
       >
-          <MenuItem value={"Dachshund"}>Dachshund</MenuItem>
-          <MenuItem value={"Shiba Inu"}>Shiba Inu</MenuItem>
-          <MenuItem value={"Shih-tzu"}>Shih-tzu</MenuItem>
+          {breedMenu}
       </Select>
       </FormControl>
       <br />

@@ -187,7 +187,7 @@ const registerDog = (
   location
 ) => {
   const queryStatement = `
-  INSERT INTO dogs (email, password, dog_name, breed_id, gender, birth_date, owner_first_name, owner_last_name, profile_pic_url, bio_description, location) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`;
+  INSERT INTO dogs (email, password, dog_name, breed_id, gender, birth_date, owner_first_name, owner_last_name, profile_pic_url, bio_description, location) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id`;
   const queryParams = [
     email,
     password,

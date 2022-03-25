@@ -12,6 +12,11 @@
   border-radius: 10px;
 }
 
+.sidebarRow:active {
+  background-color: #90a955;
+  border-radius: 10px;
+}
+
 .sidebarRow > h4 {
   margin-left: 10px;
 }
