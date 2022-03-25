@@ -8,7 +8,7 @@ const database = require("../database-functions");
 const cookieSession = require('cookie-session');
 
 router.use(cookieSession({
-  name: 'session',
+  name: 'dogGO session',
   keys: [process.env.KEY1, process.env.KEY2],
 
   // Cookie Options
@@ -41,8 +41,18 @@ router.post("/login", (req, res) => {
 // receiving:
 // { email, password, dog_name, breed, gender, birth_date, owner_first_name, owner_last_name, profile_pic_url, bio_description, location};
 router.post("/register", (req, res) => {
-  // const breed_id = database.getBreedIDbyBreedName(req.body.breed)
-  const breed_id = 1
+  const breed = req.body.breed;
+  const breedCheck = (element) => {
+    let index;
+    const breedList = ['Shiba Inu','Dachshund','Labrador Retriever','Shih-tzu','Husky','Poodle','Greyhound'];
+    for (let i = 0; i < breedList.length; i++) {
+      if (element === breedList[i]) {
+        index = i;
+      }
+    }
+    return index;
+  }  
+  const breed_id = breedCheck(breed);
   const email = req.body.email;
   const password = req.body.password;
   const dog_name = req.body.dog_name;
@@ -53,7 +63,6 @@ router.post("/register", (req, res) => {
   const profile_pic_url = req.body.profile_pic_url;
   const bio_description = req.body.bio_description;
   const location = req.body.location;
-  console.log("breed_id: ", breed_id);
   
   database.registerDog(
   email,
@@ -67,13 +76,9 @@ router.post("/register", (req, res) => {
   profile_pic_url,
   bio_description,
   location)
-    .then(() => {
-      database.getDogByEmail(email)
-      .then(data => {
-        const user = data[0]
+    .then((data) => {
+        const user = data.id
         req.session.user = user;
-        return res.redirect("../");
-      })
       res.status(201).send("");
     })
     .catch(err => {
