@@ -24,7 +24,7 @@ import Button from '@mui/material/Button';
 
 function Register() {
   const { login } = useContext(userContext);
-  const { toggle } = useContext(toggleContext);
+  const { toggle, toggleReset } = useContext(toggleContext);
   
   const [location, setLocation] = React.useState('');
   const [values, setValues] = React.useState({
@@ -82,6 +82,7 @@ function Register() {
           login(responses.data)
         };
       });
+      toggleReset();
     });
   };
 

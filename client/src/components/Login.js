@@ -17,7 +17,7 @@ import Button from "@mui/material/Button";
 
 function Login() {
   const { login } = useContext(userContext);
-  const { toggle } = useContext(toggleContext);
+  const { toggle, toggleReset } = useContext(toggleContext);
 
   const [values, setValues] = useState({
     email: "",
@@ -55,6 +55,7 @@ function Login() {
           login(responses.data)
         };
       });
+      toggleReset();
     });
   };
 
