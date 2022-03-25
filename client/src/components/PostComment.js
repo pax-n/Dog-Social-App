@@ -14,11 +14,13 @@ function PostComment({
     <div className="postcomment">
       <Avatar className="commentAvatar" src={profile_pic_url} />
       <div className="postcomment__comment">
-        <h4>{dog_name}</h4>
-        <div>
+        <div className="postcomment__content">
+          <h4>{dog_name}</h4>
+          <p>{comment}</p>
+        </div>
+        <div className="postcomment__timestamp">
           <p>{created_at}</p>
         </div>
-        <p>{comment}</p>
       </div>
     </div>
   );

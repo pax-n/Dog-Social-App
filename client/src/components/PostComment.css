@@ -6,7 +6,7 @@
   margin-right: 15px;
 }
 
-.postcomment__comment {
+.postcomment__content {
   display: flex;
   flex-direction: column;
   background-color: #e9e9e9;
@@ -24,4 +24,11 @@
 .postcomment__comment p {
   margin: 0;
   padding: 10px 0px 0px 0px;
+}
+
+.postcomment__timestamp p {
+  margin: 0;
+  padding: 0px 0px 0px 0px;
+  font-size: 10px;
+  color: #9e9e9e;
 }
