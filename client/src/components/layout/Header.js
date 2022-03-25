@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { userContext } from "../providers/UserProvider";
+import axios from "axios";
 import "./Header.css";
 import PetsIcon from "@mui/icons-material/Pets";
 import SearchIcon from "@mui/icons-material/Search";
@@ -11,7 +12,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 function Header({ changePage }) {
-  const { loggedin } = useContext(userContext);
+  const { loggedin, logout } = useContext(userContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const clickLogo = (page) => () => {
@@ -23,6 +24,13 @@ function Header({ changePage }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogout = () => {
+    handleClose();
+    axios.post("/logout").then(() => {
+      logout();
+    });
+  }
 
   return (
     <nav className="header">
@@ -64,7 +72,7 @@ function Header({ changePage }) {
           >
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>}
         </div>
       </div>

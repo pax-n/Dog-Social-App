@@ -38,6 +38,11 @@ router.post("/login", (req, res) => {
     });
 });
 
+router.post("/logout", (req, res) => {
+  req.session = null
+  res.status(201).send("");
+});
+
 // receiving:
 // { email, password, dog_name, breed, gender, birth_date, owner_first_name, owner_last_name, profile_pic_url, bio_description, location};
 router.post("/register", (req, res) => {
