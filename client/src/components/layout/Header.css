@@ -62,7 +62,7 @@
 }
 
 .header__right > .UserProfile {
-  margin-left: 10px;
+  margin-right: 4px;
 }
 
 #basic-button {
@@ -92,4 +92,5 @@
   .username {
     display: none;
   }
+
 }

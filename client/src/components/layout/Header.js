@@ -32,7 +32,7 @@ function Header({ changePage }) {
     });
   }
   console.log("userInfo: ", userInfo);
-
+  
   return (
     <nav className="header">
       <div className="header__left">
@@ -50,7 +50,6 @@ function Header({ changePage }) {
         }
         {loggedin && 
       <div className="header__right">
-        <Avatar sx={{ height: "30px", width: "30px" }}></Avatar>
         <div className="UserProfile">
           <Button
             id="basic-button"
@@ -59,7 +58,7 @@ function Header({ changePage }) {
             aria-expanded={open ? "true" : undefined}
             onClick={handleClick}
           >
-            Username
+            {userInfo.dog_name}
           </Button>
           <Menu
             id="basic-menu"
@@ -75,6 +74,8 @@ function Header({ changePage }) {
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </div>
+          <Avatar sx={{ height: "34px", width: "34px" }}
+                src={userInfo.profile_pic_url}></Avatar>
       </div>
           }
     </nav>

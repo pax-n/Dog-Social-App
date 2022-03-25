@@ -7,7 +7,7 @@ export const userContext = createContext();
 export default function UserProvider(props) {
   const [loggedin, setLoggedin] = useState(false);
   const [userDog, setUserDog] = useState(null);
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState({bio_description:null,birth_date:null,breed_id:null,created_at:null,dog_name:null,email:null,gender:null,id:null,location:null,owner_first_name:null,owner_last_name:null,password:null,profile_pic_url:null,updated_at:null});
 
   
   // Perform login process for the user & save ID etc
@@ -19,7 +19,7 @@ export default function UserProvider(props) {
   const logout = function() {
     setLoggedin(false);
     setUserDog(null);
-    setUserInfo(null);
+    setUserInfo({bio_description:null,birth_date:null,breed_id:null,created_at:null,dog_name:null,email:null,gender:null,id:null,location:null,owner_first_name:null,owner_last_name:null,password:null,profile_pic_url:null,updated_at:null});
   };
 
   // userContext will expose these items
