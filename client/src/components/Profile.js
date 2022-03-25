@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Profile.css";
 import ProfileFriends from "./ProfileFriends";
 import { Avatar } from "@mui/material";
@@ -10,6 +10,7 @@ import PetsIcon from "@mui/icons-material/Pets";
 import WcIcon from "@mui/icons-material/Wc";
 import PublicIcon from "@mui/icons-material/Public";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
+import axios from "axios";
 
 function Profile({
   username,
@@ -43,6 +44,14 @@ function Profile({
     },
   ]);
 
+  useEffect(() => {
+    //Gets list of friends for user 1 and populates the friends section.
+    let dog_id = 1;
+    axios.get(`/api/friends/${dog_id}`).then((response) => {
+      console.log("Friends response: ", response);
+      const friends = response;
+    });
+  });
   return (
     <div className="profile">
       <div className="profile__top">

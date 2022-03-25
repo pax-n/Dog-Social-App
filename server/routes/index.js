@@ -45,14 +45,22 @@ router.post("/register", (req, res) => {
   const breed = req.body.breed;
   const breedCheck = (element) => {
     let index;
-    const breedList = ['Shiba Inu','Dachshund','Labrador Retriever','Shih-tzu','Husky','Poodle','Greyhound'];
+    const breedList = [
+      "Shiba Inu",
+      "Dachshund",
+      "Labrador Retriever",
+      "Shih-tzu",
+      "Husky",
+      "Poodle",
+      "Greyhound",
+    ];
     for (let i = 0; i < breedList.length; i++) {
       if (element === breedList[i]) {
         index = i;
       }
     }
     return index;
-  }  
+  };
   const breed_id = breedCheck(breed);
   const email = req.body.email;
   const password = req.body.password;
@@ -64,7 +72,7 @@ router.post("/register", (req, res) => {
   const profile_pic_url = req.body.profile_pic_url;
   const bio_description = req.body.bio_description;
   const location = req.body.location;
-  
+
   database
     .registerDog(
       email,
@@ -77,10 +85,11 @@ router.post("/register", (req, res) => {
       owner_last_name,
       profile_pic_url,
       bio_description,
-      location)
+      location
+    )
     .then((data) => {
-        const user = data.id
-        req.session.user = user;
+      const user = data.id;
+      req.session.user = user;
       res.status(201).send("");
     })
     .catch((err) => {
@@ -155,6 +164,14 @@ router.get(`/api/comments/:bark_id`, (req, res) => {
   console.log("Bark_id received: ", bark_id);
   database.getCommentsFromPost(bark_id).then((comments) => {
     res.json(comments);
+  });
+});
+
+router.get(`/api/friends/:dog_id`, (req, res) => {
+  const dog_id = req.params.dog_id;
+  database.getFriends(dog_id).then((friends) => {
+    console.log("Route for friends: ", friends);
+    res.json(friends);
   });
 });
 
