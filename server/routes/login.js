@@ -16,7 +16,7 @@ router.use(cookieSession({
 
 router.post("/", (req, res) => {
   const email = req.body.email;
-  console.log(email);
+  console.log("req: ", req.body);
   database.getDogByEmail(email)
     .then(data => {
       const user = data[0]

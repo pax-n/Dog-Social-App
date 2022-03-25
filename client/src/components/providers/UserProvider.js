@@ -13,7 +13,7 @@ export default function UserProvider(props) {
     setUserDog(userID);
   }
   // Perform login process for the user & save ID etc
-  const login = function(email, password) {
+  const login = function(id) {
     
     
     // Promise.all([axios.get("/login:"+email)])
@@ -25,8 +25,7 @@ export default function UserProvider(props) {
     //   });
    
     setLoggedin(true);
-    const id = "1";
-    setUserDog({ id });
+    setUserDog(id);
   };
 
   const logout = function() {

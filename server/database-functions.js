@@ -144,11 +144,11 @@ const deleteFriend = (requested_dog_id, target_dog_id) => {
 const getDogByEmail = (email) => {
   const queryStatement = `
   SELECT id FROM dogs
-  WHERE email = '$1';
+  WHERE email = $1;
   `;
   const queryParams = [email];
   return db.query(queryStatement, queryParams).then((data) => {
-    return Promise.resolve(data.rows[0]);
+    return Promise.resolve(data.rows[0].id);
   });
 };
 

@@ -11,7 +11,7 @@ import Sidebar from "./layout/Sidebar";
 import Feed from "./Feed";
 
 function App() {
-  const { loggedin, setUser } = useContext(userContext);
+  const { loggedin, login } = useContext(userContext);
   const { toggleRegister } = useContext(toggleContext);
   const [show, setShow] = useState("Feed");
   const changePage = (page) => {
@@ -20,7 +20,7 @@ function App() {
   axios.get("/auth").then((responses) => {
     console.log("Response: ", responses.data);
     if (responses.data) {
-      setUser(responses.data)
+      login(responses.data)
     };
   });
 

@@ -76,7 +76,12 @@ function Register() {
     axios.post("/register", data).then((responses) => {
       console.log("Post sent to database.");
       console.log("Response: ", responses);
-      values.email && login(values.email, values.password);
+      axios.get("/auth").then((responses) => {
+        console.log("Response: ", responses.data);
+        if (responses.data) {
+          login(responses.data)
+        };
+      });
     });
   };
 

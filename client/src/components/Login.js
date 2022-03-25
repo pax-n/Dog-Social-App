@@ -44,12 +44,17 @@ function Login() {
     event.preventDefault();
     const email = values.email;
     const password = values.password;
-    const data = [ email, password ];
-    console.log(data);
+    const data = { email, password };
+    console.log("login data: ", data);
     axios.post("/login", data).then((responses) => {
       console.log("Post sent to database.");
       console.log("Response: ", responses);
-      values.email && login(values.email, values.password);
+      axios.get("/auth").then((responses) => {
+        console.log("Response: ", responses.data);
+        if (responses.data) {
+          login(responses.data)
+        };
+      });
     });
   };
 

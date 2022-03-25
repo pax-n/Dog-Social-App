@@ -19,20 +19,18 @@ router.use(
 
 router.post("/login", (req, res) => {
   const email = req.body.email;
-  console.log(email);
+  console.log("req.body: ", req.body);
   database
     .getDogByEmail(email)
     .then((data) => {
-      console.log(data);
-      const user = data[0];
+      const user = data;
       if (user === undefined) {
         return res
           .status(403)
           .send(`<p>Email not found</p><a href="/">Click here to go back</a>`);
-      }
-      if (user.email === email) {
-        req.session.user = user;
-        return res.redirect("../");
+      } else {
+      req.session.user = user;
+      res.status(201).send("");
       }
     })
     .catch((err) => {
