@@ -44,7 +44,7 @@ function Login() {
     event.preventDefault();
     const email = values.email;
     const password = values.password;
-    const data = { email, password };
+    const data = [ email, password ];
     console.log(data);
     axios.post("/login", data).then((responses) => {
       console.log("Post sent to database.");

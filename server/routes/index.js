@@ -9,7 +9,7 @@ const cookieSession = require("cookie-session");
 
 router.use(
   cookieSession({
-    name: "dogGO-session",
+    name: "session",
     keys: [process.env.KEY1, process.env.KEY2],
 
     // Cookie Options
@@ -23,6 +23,7 @@ router.post("/login", (req, res) => {
   database
     .getDogByEmail(email)
     .then((data) => {
+      console.log(data)
       const user = data[0];
       if (user === undefined) {
         return res
@@ -103,6 +104,13 @@ router.get("/barks/:id", function (req, res, next) {
       res.status(500).json({ err: "Could not read database." });
     });
 });
+
+router.get("/auth", (req, res) => {
+  if (req.session.user) {
+    res.json(req.session.user);
+  }
+  res.send("false");
+})
 
 router.post("/barks", (req, res) => {
   //Posting a word post (review description variable)
