@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS dogs CASCADE;
 
 CREATE TABLE dogs (
   id SERIAL PRIMARY KEY NOT NULL,
-  breed_id INTEGER REFERENCES breeds(id) ON DELETE CASCADE,
+  breed_id INTEGER,
   email VARCHAR(100) NOT NULL,
   dog_name VARCHAR(100) NOT NULL,
   owner_first_name VARCHAR(100),

@@ -23,7 +23,7 @@ router.post("/login", (req, res) => {
   database
     .getDogByEmail(email)
     .then((data) => {
-      console.log(data)
+      console.log(data);
       const user = data[0];
       if (user === undefined) {
         return res
@@ -46,14 +46,22 @@ router.post("/register", (req, res) => {
   const breed = req.body.breed;
   const breedCheck = (element) => {
     let index;
-    const breedList = ['Shiba Inu','Dachshund','Labrador Retriever','Shih-tzu','Husky','Poodle','Greyhound'];
+    const breedList = [
+      "Shiba Inu",
+      "Dachshund",
+      "Labrador Retriever",
+      "Shih-tzu",
+      "Husky",
+      "Poodle",
+      "Greyhound",
+    ];
     for (let i = 0; i < breedList.length; i++) {
       if (element === breedList[i]) {
         index = i;
       }
     }
     return index;
-  }  
+  };
   const breed_id = breedCheck(breed);
   const email = req.body.email;
   const password = req.body.password;
@@ -65,7 +73,7 @@ router.post("/register", (req, res) => {
   const profile_pic_url = req.body.profile_pic_url;
   const bio_description = req.body.bio_description;
   const location = req.body.location;
-  
+
   database
     .registerDog(
       email,
@@ -78,10 +86,11 @@ router.post("/register", (req, res) => {
       owner_last_name,
       profile_pic_url,
       bio_description,
-      location)
+      location
+    )
     .then((data) => {
-        const user = data.id
-        req.session.user = user;
+      const user = data.id;
+      req.session.user = user;
       res.status(201).send("");
     })
     .catch((err) => {
@@ -108,9 +117,10 @@ router.get("/barks/:id", function (req, res, next) {
 router.get("/auth", (req, res) => {
   if (req.session.user) {
     res.json(req.session.user);
+  } else {
+    res.send("false");
   }
-  res.send("false");
-})
+});
 
 router.post("/barks", (req, res) => {
   //Posting a word post (review description variable)
