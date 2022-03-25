@@ -9,6 +9,7 @@ const getDog = (userid) => {
   const queryStatement = `
   SELECT * FROM dogs WHERE id = $1;`;
   const queryParams = [userid];
+  console.log(queryStatement, queryParams)
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows[0]);
   });

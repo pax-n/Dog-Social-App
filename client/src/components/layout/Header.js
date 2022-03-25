@@ -12,7 +12,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 function Header({ changePage }) {
-  const { loggedin, logout } = useContext(userContext);
+  const { loggedin, logout, userInfo } = useContext(userContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const clickLogo = (page) => () => {
@@ -31,6 +31,7 @@ function Header({ changePage }) {
       logout();
     });
   }
+  console.log("userInfo: ", userInfo);
 
   return (
     <nav className="header">

@@ -7,6 +7,7 @@ export const userContext = createContext();
 export default function UserProvider(props) {
   const [loggedin, setLoggedin] = useState(false);
   const [userDog, setUserDog] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
 
   
   // Perform login process for the user & save ID etc
@@ -18,10 +19,11 @@ export default function UserProvider(props) {
   const logout = function() {
     setLoggedin(false);
     setUserDog(null);
+    setUserInfo(null);
   };
 
   // userContext will expose these items
-  const userData = { loggedin, userDog, login, logout };
+  const userData = { loggedin, userDog, userInfo, setUserInfo, login, logout };
 
   // We can use this component to wrap any content we want to share this context
   return (

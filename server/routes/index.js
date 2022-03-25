@@ -101,6 +101,20 @@ router.post("/register", (req, res) => {
     });
 });
 
+router.get("/dog/:id", function (req, res) {
+  const userID = req.params.id;
+  database
+    .getDog(userID)
+    .then((dog) => {
+      res.json(dog);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ err: "Could not read database." });
+    });
+});
+
+
 /* GET home page. */
 
 router.get("/barks/:id", function (req, res, next) {

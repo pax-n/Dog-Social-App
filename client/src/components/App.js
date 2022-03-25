@@ -1,5 +1,5 @@
 import "./App.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { userContext } from "./providers/UserProvider";
 import { toggleContext } from "./providers/ToggleProvider";
 import React, { useState } from "react";
@@ -11,18 +11,23 @@ import Sidebar from "./layout/Sidebar";
 import Feed from "./Feed";
 
 function App() {
-  const { loggedin, login } = useContext(userContext);
+  const { loggedin, login, setUserInfo } = useContext(userContext);
   const { toggleRegister } = useContext(toggleContext);
   const [show, setShow] = useState("Feed");
   const changePage = (page) => {
     setShow(page);
   };
+  useEffect(() => {
   axios.get("/auth").then((responses) => {
     console.log("Response: ", responses.data);
     if (responses.data) {
       login(responses.data)
+      axios.get(`/dog/${responses.data}`).then((dog) => {
+        setUserInfo(dog.data);
+      });
     };
   });
+}, [loggedin]);
 
   return (
     <div className="App">
@@ -32,12 +37,6 @@ function App() {
         {!loggedin && !toggleRegister && <Login />}
         {loggedin && <Sidebar changePage={changePage} />}
         {loggedin && <Feed show={show} />}
-        {/* Uncomment above code once cookies properly implemented
-        Until then, manually comment and uncomment below code as needed */}
-        {/* <Login /> */}
-        {/* <Register /> */}
-        {/* <Sidebar changePage={changePage} />
-        <Feed show={show} /> */}
       </div>
     </div>
   );
