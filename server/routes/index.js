@@ -5,38 +5,39 @@ var router = express.Router();
 
 const database = require("../database-functions");
 
-const cookieSession = require('cookie-session');
+const cookieSession = require("cookie-session");
 
-router.use(cookieSession({
-  name: 'dogGO session',
-  keys: [process.env.KEY1, process.env.KEY2],
+router.use(
+  cookieSession({
+    name: "dogGO-session",
+    keys: [process.env.KEY1, process.env.KEY2],
 
-  // Cookie Options
-  maxAge: 24 * 60 * 60 * 1000 // 24 hours
-}));
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  })
+);
 
 router.post("/login", (req, res) => {
   const email = req.body.email;
   console.log(email);
-  database.getDogByEmail(email)
-    .then(data => {
-      const user = data[0]
-      if (user === undefined){
-        return res.status(403).send(`<p>Email not found</p><a href="/">Click here to go back</a>`);
+  database
+    .getDogByEmail(email)
+    .then((data) => {
+      const user = data[0];
+      if (user === undefined) {
+        return res
+          .status(403)
+          .send(`<p>Email not found</p><a href="/">Click here to go back</a>`);
       }
       if (user.email === email) {
-          req.session.user = user;
-          return res.redirect("../");
-        }
-
+        req.session.user = user;
+        return res.redirect("../");
+      }
     })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
     });
 });
-
 
 // receiving:
 // { email, password, dog_name, breed, gender, birth_date, owner_first_name, owner_last_name, profile_pic_url, bio_description, location};
@@ -64,27 +65,26 @@ router.post("/register", (req, res) => {
   const bio_description = req.body.bio_description;
   const location = req.body.location;
   
-  database.registerDog(
-  email,
-  password,
-  dog_name,
-  breed_id,
-  gender,
-  birth_date,
-  owner_first_name,
-  owner_last_name,
-  profile_pic_url,
-  bio_description,
-  location)
+  database
+    .registerDog(
+      email,
+      password,
+      dog_name,
+      breed_id,
+      gender,
+      birth_date,
+      owner_first_name,
+      owner_last_name,
+      profile_pic_url,
+      bio_description,
+      location)
     .then((data) => {
         const user = data.id
         req.session.user = user;
       res.status(201).send("");
     })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
     });
 });
 
@@ -135,17 +135,27 @@ router.get(`/paws/:bark_id`, (req, res) => {
     });
 });
 
-router.put(`/paws/:bark_id`, (request, res) => {
+router.post(`/paws/:bark_id`, (request, res) => {
   const bark_id = request.params.bark_id;
+  const dog_id = request.body.dog_id;
   database
-    .addLike(bark_id)
-    .then(() => {
+    .addLike(dog_id, bark_id)
+    .then((paws) => {
       res.status(201).send("");
     })
     .catch((error) => {
       console.log("addLike(()): ", error.message);
       res.status(500).send({ error: error.message });
     });
+});
+
+router.get(`/api/comments/:bark_id`, (req, res) => {
+  const bark_id = req.params.bark_id;
+  console.log("Comment is being fetched from the database.");
+  console.log("Bark_id received: ", bark_id);
+  database.getCommentsFromPost(bark_id).then((comments) => {
+    res.json(comments);
+  });
 });
 
 module.exports = router;

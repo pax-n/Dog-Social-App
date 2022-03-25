@@ -16,8 +16,6 @@ function Feed({ show }) {
     let bark_id = 1;
     Promise.all([axios.get(`/barks/${bark_id}`), axios.get(`/paws/${bark_id}`)])
       .then((responses) => {
-        console.log("Responses: ", responses);
-        console.log(responses[0]);
         const posts = responses[0].data;
         setPosts(posts);
       })
@@ -28,8 +26,8 @@ function Feed({ show }) {
 
   return (
     <div className="feed">
-      {show === "Profile" && <Profile />}
       {show === "Friends" && <FriendsList />}
+      {show === "Profile" && <Profile />}
       {show === "Feed" && (
         <>
           <MessageSender setPosts={setPosts} />
@@ -37,6 +35,7 @@ function Feed({ show }) {
             return (
               <Post
                 bark_id={post.id}
+                dog_id={post.dog_id}
                 profile_pic_url={post.profile_pic_url}
                 dog_name={post.dog_name}
                 created_at={post.created_at}

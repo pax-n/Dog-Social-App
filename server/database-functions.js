@@ -53,7 +53,6 @@ const getPostsFromFriends = (userid) => {
     SELECT b.id, d.profile_pic_url, b.dog_id, d.dog_name, b.caption, b.image_url, b.video_url, b.created_at FROM barks AS b
     JOIN dogs AS d ON d.id = dog_id
     ORDER BY b.created_at DESC;`;
-  const queryParams = [userid];
 
   return db.query(queryStatement).then((data) => {
     return Promise.resolve(data.rows);
@@ -85,6 +84,18 @@ const deleteBarks = (bark_id) => {
   const queryStatement = `
   DELETE FROM barks
   WHERE bark_id = $1;`;
+  const queryParams = [bark_id];
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows);
+  });
+};
+
+//For the GET request to show the comments under the post/bark_id.
+const getCommentsFromPost = (bark_id) => {
+  const queryStatement = `
+  SELECT * FROM comments
+  WHERE bark_id = $1;
+  `;
   const queryParams = [bark_id];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows);
@@ -156,7 +167,7 @@ const dogBreeds = (dogs) => {
 const getBreedIDbyBreedName = (breed_name) => {
   const queryStatement = `
   SELECT id FROM breeds
-  WHERE breed_name = '$1';`;
+  WHERE breed_name = $1;`;
   const queryParams = [breed_name];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows[0]);
@@ -190,7 +201,7 @@ const registerDog = (
     owner_last_name,
     profile_pic_url,
     bio_description,
-    location
+    location,
   ];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows[0]);
@@ -208,10 +219,12 @@ const getLikesByPostID = (bark_id) => {
   });
 };
 
-const addLike = (bark_id) => {
+const addLike = (dog_id, bark_id) => {
   const queryStatement = `
-  INSERT INTO likes (bark_id) VALUES ($1);`;
-  return db.query(queryStatement, [bark_id]);
+  INSERT INTO likes (dog_id, bark_id) VALUES ($1, $2);`;
+  return db.query(queryStatement, [dog_id, bark_id]).then((data) => {
+    return Promise.resolve(data.rows[0]);
+  });
 };
 
 //
@@ -222,6 +235,7 @@ module.exports = {
   getPostsFromFriends,
   addBarks,
   deleteBarks,
+  getCommentsFromPost,
   postComments,
   deleteComments,
   addFriend,

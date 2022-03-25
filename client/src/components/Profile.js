@@ -18,8 +18,7 @@ function Profile({
   ownerName,
   breed,
   gender,
-  country,
-  city,
+  location,
 }) {
   const [friends, setFriends] = useState([
     {
@@ -79,11 +78,7 @@ function Profile({
           </div>
           <div className="profile__country">
             <PublicIcon />
-            <p>{country}Country</p>
-          </div>
-          <div className="profile__city">
-            <LocationCityIcon />
-            <p>{city}City</p>
+            <p>{location}Location</p>
           </div>
         </div>
 
