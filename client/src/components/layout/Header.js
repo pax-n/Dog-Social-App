@@ -58,7 +58,7 @@ function Header({ changePage }) {
             aria-expanded={open ? "true" : undefined}
             onClick={handleClick}
           >
-            {userInfo.dog_name}
+            <strong>{userInfo.dog_name}</strong>
           </Button>
           <Menu
             id="basic-menu"
