@@ -93,9 +93,7 @@ const deleteBarks = (bark_id) => {
 //For the GET request to show the comments under the post/bark_id.
 const getCommentsFromPost = (bark_id) => {
   const queryStatement = `
-  SELECT * FROM comments
-  WHERE bark_id = $1;
-  `;
+  SELECT c.id, c.dog_id, c.bark_id, c.comment, c.created_at, d.profile_pic_url FROM comments AS c JOIN dogs AS d ON d.id = c.dog_id WHERE bark_id = $1`;
   const queryParams = [bark_id];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows);

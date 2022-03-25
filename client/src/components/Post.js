@@ -18,6 +18,7 @@ function Post({
   const [paws, setPaws] = useState(0);
   const [showComments, setShowComments] = useState(false);
   const [loadComments, setLoadComments] = useState([]);
+  const [postComment, setPostComment] = useState("");
 
   useEffect(() => {
     axios.get(`/paws/${bark_id}`).then((response) => {
@@ -45,8 +46,7 @@ function Post({
   };
 
   const loadCommentsForPost = (bark_id) => {
-    const data = { bark_id };
-    console.log("Load comments bark_id: ", data);
+    console.log("Load comments bark_id: ", bark_id);
     setShowComments(!showComments);
     axios.get(`/api/comments/${bark_id}`).then((response) => {
       console.log("Load Comments Response: ", response);
@@ -54,8 +54,6 @@ function Post({
       setLoadComments(comments);
     });
   };
-
-  //Send an object with a put.
 
   return (
     <div className="post">
@@ -112,7 +110,7 @@ function Post({
             </div>
           </div>
           <div className="userComments">
-            <PostComment loadComments={loadComments} />
+            {/* <PostComment loadComments={loadComments} /> */}
             {loadComments.map((comment) => {
               return (
                 <PostComment
