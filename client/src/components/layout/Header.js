@@ -41,16 +41,16 @@ function Header({ changePage }) {
           <h4>DogGO</h4>
         </div>
       </div>
+      {loggedin &&
       <div className="header__middle">
-        <SearchIcon />
+      <SearchIcon />
         <input type="text" placeholder="Search"></input>
       </div>
+        }
+        {loggedin && 
       <div className="header__right">
-        {!loggedin && <p></p>}
-        {loggedin && 
-        <Avatar sx={{ height: "30px", width: "30px" }}></Avatar>}
+        <Avatar sx={{ height: "30px", width: "30px" }}></Avatar>
         <div className="UserProfile">
-        {loggedin && 
           <Button
             id="basic-button"
             aria-controls={open ? "basic-menu" : undefined}
@@ -59,8 +59,7 @@ function Header({ changePage }) {
             onClick={handleClick}
           >
             Username
-          </Button>}
-          {loggedin && 
+          </Button>
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}
@@ -73,9 +72,10 @@ function Header({ changePage }) {
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          </Menu>}
+          </Menu>
         </div>
       </div>
+          }
     </nav>
   );
 }
