@@ -8,22 +8,9 @@ export default function UserProvider(props) {
   const [loggedin, setLoggedin] = useState(false);
   const [userDog, setUserDog] = useState(null);
 
-  const setUser = function(userID) {
-    setLoggedin(true);
-    setUserDog(userID);
-  }
+  
   // Perform login process for the user & save ID etc
-  const login = function(id) {
-    
-    
-    // Promise.all([axios.get("/login:"+email)])
-    //   .then((responses) => {
-    //     console.log(responses[0]);
-    //   })
-    //   .catch((error) => {
-    //     console.log("Provider error: ", error);
-    //   });
-   
+  const login = function(id) {  
     setLoggedin(true);
     setUserDog(id);
   };
@@ -34,7 +21,7 @@ export default function UserProvider(props) {
   };
 
   // userContext will expose these items
-  const userData = { loggedin, userDog, login, logout, setUser };
+  const userData = { loggedin, userDog, login, logout };
 
   // We can use this component to wrap any content we want to share this context
   return (

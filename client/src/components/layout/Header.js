@@ -1,4 +1,6 @@
 import React from "react";
+import { useContext } from "react";
+import { userContext } from "../providers/UserProvider";
 import "./Header.css";
 import PetsIcon from "@mui/icons-material/Pets";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,6 +11,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 function Header({ changePage }) {
+  const { loggedin } = useContext(userContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const clickLogo = (page) => () => {
@@ -35,8 +38,11 @@ function Header({ changePage }) {
         <input type="text" placeholder="Search"></input>
       </div>
       <div className="header__right">
-        <Avatar sx={{ height: "30px", width: "30px" }}></Avatar>
+        {!loggedin && <p></p>}
+        {loggedin && 
+        <Avatar sx={{ height: "30px", width: "30px" }}></Avatar>}
         <div className="UserProfile">
+        {loggedin && 
           <Button
             id="basic-button"
             aria-controls={open ? "basic-menu" : undefined}
@@ -45,7 +51,8 @@ function Header({ changePage }) {
             onClick={handleClick}
           >
             Username
-          </Button>
+          </Button>}
+          {loggedin && 
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}
@@ -58,7 +65,7 @@ function Header({ changePage }) {
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
             <MenuItem onClick={handleClose}>Logout</MenuItem>
-          </Menu>
+          </Menu>}
         </div>
       </div>
     </nav>
