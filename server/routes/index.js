@@ -178,6 +178,8 @@ router.post(`/paws/:bark_id`, (request, res) => {
 
 router.get(`/api/comments/:bark_id`, (req, res) => {
   const bark_id = req.params.bark_id;
+  console.log("Comment is being fetched from the database.");
+  console.log("Bark_id received: ", bark_id);
   database.getCommentsFromPost(bark_id).then((comments) => {
     res.json(comments);
   });
@@ -186,6 +188,7 @@ router.get(`/api/comments/:bark_id`, (req, res) => {
 router.get(`/api/friends/:dog_id`, (req, res) => {
   const dog_id = req.params.dog_id;
   database.getFriends(dog_id).then((friends) => {
+    console.log("Route for friends: ", friends);
     res.json(friends);
   });
 });
@@ -193,6 +196,7 @@ router.get(`/api/friends/:dog_id`, (req, res) => {
 router.get(`/api/profile/:dog_id`, (req, res) => {
   const dog_id = req.params.dog_id;
   database.getDog(dog_id).then((profile) => {
+    console.log("Profile get route: ", profile);
     res.json(profile);
   });
 });
@@ -206,4 +210,5 @@ router.post(`/api/addfriend/`, (req, res) => {
     res.json(data);
   });
 });
+
 module.exports = router;
