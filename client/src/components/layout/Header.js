@@ -57,6 +57,7 @@ function Header({ changePage }) {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
             onClick={handleClick}
+            sx= {{ fontSize: "16px"}}
           >
             <strong>{userInfo.dog_name}</strong>
           </Button>
@@ -68,14 +69,15 @@ function Header({ changePage }) {
             MenuListProps={{
               "aria-labelledby": "basic-button",
             }}
+            
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </div>
           <Avatar sx={{ height: "34px", width: "34px" }}
-                src={userInfo.profile_pic_url}></Avatar>
+                src={userInfo.profile_pic_url}
+                style={{border: '3px solid #4f772d'}}></Avatar>
       </div>
           }
     </nav>
