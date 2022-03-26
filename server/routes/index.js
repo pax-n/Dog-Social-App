@@ -150,13 +150,6 @@ router.post("/barks", (req, res) => {
   });
 });
 
-router.get("/friends", (req, res) => {
-  const dog_id = 1;
-  database.getFriends(dog_id).then((barks) => {
-    res.json(barks);
-  });
-});
-
 router.get(`/paws/:bark_id`, (req, res) => {
   const barks_id = req.params.bark_id;
   database
@@ -193,4 +186,19 @@ router.get(`/api/comments/:bark_id`, (req, res) => {
   });
 });
 
+router.get(`/api/friends/:dog_id`, (req, res) => {
+  const dog_id = req.params.dog_id;
+  database.getFriends(dog_id).then((friends) => {
+    console.log("Route for friends: ", friends);
+    res.json(friends);
+  });
+});
+
+router.get(`/api/profile/:dog_id`, (req, res) => {
+  const dog_id = req.params.dog_id;
+  database.getDog(dog_id).then((profile) => {
+    console.log("Profile get route: ", profile);
+    res.json(profile);
+  });
+});
 module.exports = router;
