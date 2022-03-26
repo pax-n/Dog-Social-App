@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./FriendsList.css";
 import FriendsListUser from "./FriendsListUser";
+import FriendRequest from "./FriendRequest";
 import axios from "axios";
 import { useContext } from "react";
 import { userContext } from "./providers/UserProvider";
@@ -22,18 +23,21 @@ function FriendsList() {
 
   return (
     <div className="friendslist">
-      <div className="friendslist__title">
-        <h2>Friends</h2>
-      </div>
-      <div className="friendslist__users">
-        {friends.map((friend) => {
-          return (
-            <FriendsListUser
-              profile_pic_url={friend.profile_pic_url}
-              name={friend.dog_name}
-            />
-          );
-        })}
+      <FriendRequest />
+      <div className="friendslist__main">
+        <div className="friendslist__title">
+          <h2>Friends</h2>
+        </div>
+        <div className="friendslist__users">
+          {friends.map((friend) => {
+            return (
+              <FriendsListUser
+                profile_pic_url={friend.profile_pic_url}
+                name={friend.dog_name}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );
