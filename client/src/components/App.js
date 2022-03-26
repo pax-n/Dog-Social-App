@@ -18,16 +18,16 @@ function App() {
     setShow(page);
   };
   useEffect(() => {
-  axios.get("/auth").then((responses) => {
-    console.log("Response: ", responses.data);
-    if (responses.data) {
-      login(responses.data)
-      axios.get(`/dog/${responses.data}`).then((dog) => {
-        setUserInfo(dog.data);
-      });
-    };
-  });
-}, [loggedin]);
+    axios.get("/auth").then((responses) => {
+      console.log("Response: ", responses.data);
+      if (responses.data) {
+        login(responses.data);
+        axios.get(`/dog/${responses.data}`).then((dog) => {
+          setUserInfo(dog.data);
+        });
+      }
+    });
+  }, [loggedin]);
 
   return (
     <div className="App">

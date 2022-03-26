@@ -7,6 +7,7 @@ import MessageSender from "./MessageSender";
 import Post from "./Post";
 import Profile from "./Profile";
 import FriendsList from "./FriendsList";
+import EventsFeed from "./events/EventsFeed";
 
 function Feed({ show, changePage }) {
   const [posts, setPosts] = useState([]);
@@ -27,6 +28,7 @@ function Feed({ show, changePage }) {
 
   return (
     <div className="feed">
+      {show === "Events" && <EventsFeed />}
       {show === "Friends" && <FriendsList />}
       {show === "Profile" && <Profile userID={targetID}/>}
       {show === "Feed" && (
