@@ -65,8 +65,8 @@ function Post({
   const handleProfileClick = (page) => () => {
     settargetID(dog_id);
     changePage(page);
-  }
-  
+  };
+
   const sendComment = () => {
     console.log("Comment button clicked.");
     let dog_id = userDog;
@@ -82,10 +82,16 @@ function Post({
     <div className="post">
       <div className="post__top">
         <div className="post__user">
-          <Avatar className="post__avatar" src={profile_pic_url} onClick={handleProfileClick("Profile")} />
+          <Avatar
+            className="post__avatar"
+            src={profile_pic_url}
+            onClick={handleProfileClick("Profile")}
+          />
           <h4 onClick={handleProfileClick("Profile")}>{dog_name}</h4>
         </div>
-        <Moment fromNow>{created_at}</Moment>
+        <Moment className="timestamp" fromNow>
+          {created_at}
+        </Moment>
       </div>
 
       <div className="post__bottom">
