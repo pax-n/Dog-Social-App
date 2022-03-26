@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Moment from 'react-moment';
+import Moment from "react-moment";
 import "./Post.css";
 import PostComment from "./PostComment";
 import { Avatar } from "@mui/material";
@@ -31,18 +31,11 @@ function Post({
   }, []);
 
   const pawsLike = (dog_id, bark_id) => {
-    console.log("Paws clicked.");
-    console.log("Dog_id: ", dog_id);
-    console.log("Bark_id: ", bark_id);
-    // dog_id = 5;
-    // const bark_id = 15;
     const data = { dog_id };
     axios.post(`/paws/${bark_id}`, data).then((response) => {
-      console.log("pawsLike PUT Response: ", response);
       setPaws((prev) => {
         return parseInt(prev) + 1;
       });
-      console.log("Paw set.");
     });
   };
 
@@ -50,7 +43,6 @@ function Post({
     console.log("Load comments bark_id: ", bark_id);
     setShowComments(!showComments);
     axios.get(`/api/comments/${bark_id}`).then((response) => {
-      console.log("Load Comments Response: ", response);
       const comments = response.data;
       setLoadComments(comments);
     });
@@ -63,7 +55,9 @@ function Post({
           <Avatar className="post__avatar" src={profile_pic_url} />
           <h4>{dog_name}</h4>
         </div>
-        <p><Moment fromNow>{created_at}</Moment></p>
+        <p>
+          <Moment fromNow>{created_at}</Moment>
+        </p>
       </div>
 
       <div className="post__bottom">

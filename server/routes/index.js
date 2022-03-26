@@ -29,8 +29,8 @@ router.post("/login", (req, res) => {
           .status(403)
           .send(`<p>Email not found</p><a href="/">Click here to go back</a>`);
       } else {
-      req.session.user = user;
-      res.status(201).send("");
+        req.session.user = user;
+        res.status(201).send("");
       }
     })
     .catch((err) => {
@@ -39,7 +39,7 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  req.session = null
+  req.session = null;
   res.status(201).send("");
 });
 
@@ -114,7 +114,6 @@ router.get("/dog/:id", function (req, res) {
     });
 });
 
-
 /* GET home page. */
 
 router.get("/barks/:id", function (req, res, next) {
@@ -179,8 +178,6 @@ router.post(`/paws/:bark_id`, (request, res) => {
 
 router.get(`/api/comments/:bark_id`, (req, res) => {
   const bark_id = req.params.bark_id;
-  console.log("Comment is being fetched from the database.");
-  console.log("Bark_id received: ", bark_id);
   database.getCommentsFromPost(bark_id).then((comments) => {
     res.json(comments);
   });
@@ -189,7 +186,6 @@ router.get(`/api/comments/:bark_id`, (req, res) => {
 router.get(`/api/friends/:dog_id`, (req, res) => {
   const dog_id = req.params.dog_id;
   database.getFriends(dog_id).then((friends) => {
-    console.log("Route for friends: ", friends);
     res.json(friends);
   });
 });
@@ -197,8 +193,17 @@ router.get(`/api/friends/:dog_id`, (req, res) => {
 router.get(`/api/profile/:dog_id`, (req, res) => {
   const dog_id = req.params.dog_id;
   database.getDog(dog_id).then((profile) => {
-    console.log("Profile get route: ", profile);
     res.json(profile);
+  });
+});
+
+router.post(`/api/addfriend/`, (req, res) => {
+  console.log("Add friend req body: ", req.body);
+  const requested_dog_id = req.body.requested_dog_id;
+  const target_dog_id = req.body.target_dog_id;
+  database.addFriend(requested_dog_id, target_dog_id).then((data) => {
+    console.log("Add friend data: ", data);
+    res.json(data);
   });
 });
 module.exports = router;

@@ -11,6 +11,8 @@ import WcIcon from "@mui/icons-material/Wc";
 import PublicIcon from "@mui/icons-material/Public";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import axios from "axios";
+import { useContext } from "react";
+import { userContext } from "./providers/UserProvider";
 
 function Profile({
   dog_name,
@@ -40,10 +42,11 @@ function Profile({
         "https://m.media-amazon.com/images/I/51Tahu98IiL._AC_SL1001_.jpg",
     },
   ]);
+  const { userDog } = useContext(userContext);
 
   useEffect(() => {
     //Gets list of friends for user 1 and populates the friends section.
-    let dog_id = 1;
+    let dog_id = userDog;
     axios.get(`/api/friends/${dog_id}`).then((response) => {
       console.log("Friends response: ", response);
       let friendlist = response.data;
@@ -52,12 +55,23 @@ function Profile({
   }, []);
 
   useEffect(() => {
-    let dog_id = 2;
+    let dog_id = userDog;
     axios.get(`/api/profile/${dog_id}`).then((response) => {
       console.log("Profile response: ", response);
       setProfile(response.data);
     });
   }, []);
+
+  const addDogAsFriend = () => {
+    let requested_dog_id = userDog;
+
+    //PLACEHOLDER until profiles are set up.
+    let target_dog_id = 10;
+    const data = { requested_dog_id, target_dog_id };
+    axios.post(`/api/addfriend/`, data).then((response) => {
+      console.log("Add dog as friend response: ");
+    });
+  };
   return (
     <div className="profile">
       <div className="profile__top">
@@ -69,7 +83,9 @@ function Profile({
         />
         <div className="profile__user">
           <p>{profile.dog_name}</p>
-          <Button variant="outlined">Add Friend</Button>
+          <Button variant="outlined" onClick={addDogAsFriend}>
+            Add Friend
+          </Button>
         </div>
       </div>
 
