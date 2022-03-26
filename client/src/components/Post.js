@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { toggleContext } from "./providers/ToggleProvider";
 import Moment from "react-moment";
 import "./Post.css";
 import PostComment from "./PostComment";
@@ -15,11 +16,13 @@ function Post({
   caption,
   image_url,
   created_at,
+  changePage,
 }) {
   const [paws, setPaws] = useState(0);
   const [showComments, setShowComments] = useState(false);
   const [loadComments, setLoadComments] = useState([]);
   const [postComment, setPostComment] = useState("");
+  const { settargetID } = useContext(toggleContext);
 
   useEffect(() => {
     axios.get(`/paws/${bark_id}`).then((response) => {
@@ -48,12 +51,17 @@ function Post({
     });
   };
 
+  const handleProfileClick = (page) => () => {
+    settargetID(dog_id);
+    changePage(page);
+  }
+
   return (
     <div className="post">
       <div className="post__top">
         <div className="post__user">
-          <Avatar className="post__avatar" src={profile_pic_url} />
-          <h4>{dog_name}</h4>
+          <Avatar className="post__avatar" src={profile_pic_url} onClick={handleProfileClick("Profile")} />
+          <h4 onClick={handleProfileClick("Profile")}>{dog_name}</h4>
         </div>
         <p>
           <Moment fromNow>{created_at}</Moment>

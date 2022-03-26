@@ -1,6 +1,6 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { toggleContext } from "./providers/ToggleProvider";
 import "./Feed.css";
 import axios from "axios";
 import MessageSender from "./MessageSender";
@@ -8,8 +8,9 @@ import Post from "./Post";
 import Profile from "./Profile";
 import FriendsList from "./FriendsList";
 
-function Feed({ show }) {
+function Feed({ show, changePage }) {
   const [posts, setPosts] = useState([]);
+  const { targetID } = useContext(toggleContext);
 
   const [paws, setPaws] = useState(0);
   useEffect(() => {
@@ -27,7 +28,7 @@ function Feed({ show }) {
   return (
     <div className="feed">
       {show === "Friends" && <FriendsList />}
-      {show === "Profile" && <Profile />}
+      {show === "Profile" && <Profile userID={targetID}/>}
       {show === "Feed" && (
         <>
           <MessageSender setPosts={setPosts} />
@@ -42,6 +43,7 @@ function Feed({ show }) {
                 caption={post.caption}
                 image_url={post.image_url}
                 paws={post.paws}
+                changePage={changePage}
               />
             );
           })}

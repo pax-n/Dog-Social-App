@@ -36,7 +36,7 @@ function App() {
         {!loggedin && toggleRegister && <Register />}
         {!loggedin && !toggleRegister && <Login />}
         {loggedin && <Sidebar changePage={changePage} />}
-        {loggedin && <Feed show={show} />}
+        {loggedin && <Feed show={show} changePage={changePage} />}
       </div>
     </div>
   );
