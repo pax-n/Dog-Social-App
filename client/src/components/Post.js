@@ -85,7 +85,7 @@ function Post({
           <Avatar className="post__avatar" src={profile_pic_url} onClick={handleProfileClick("Profile")} />
           <h4 onClick={handleProfileClick("Profile")}>{dog_name}</h4>
         </div>
-        <p>{created_at}</p>
+        <Moment fromNow>{created_at}</Moment>
       </div>
 
       <div className="post__bottom">
