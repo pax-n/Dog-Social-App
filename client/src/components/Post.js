@@ -8,7 +8,6 @@ import PetsIcon from "@mui/icons-material/Pets";
 import ChatBubbleOutlinedIcon from "@mui/icons-material/ChatBubbleOutlined";
 import axios from "axios";
 import resolveProps from "@mui/utils/resolveProps";
-import { useContext } from "react";
 import { userContext } from "./providers/UserProvider";
 
 function Post({
