@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Moment from 'react-moment';
 import "./Post.css";
 import PostComment from "./PostComment";
 import { Avatar } from "@mui/material";
@@ -62,7 +63,7 @@ function Post({
           <Avatar className="post__avatar" src={profile_pic_url} />
           <h4>{dog_name}</h4>
         </div>
-        <p>{created_at}</p>
+        <p><Moment fromNow>{created_at}</Moment></p>
       </div>
 
       <div className="post__bottom">

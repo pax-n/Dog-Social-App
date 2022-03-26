@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from 'react-moment';
 import "./PostComment.css";
 import { Avatar } from "@mui/material";
 
@@ -19,7 +20,7 @@ function PostComment({
           <p>{comment}</p>
         </div>
         <div className="postcomment__timestamp">
-          <p>{created_at}</p>
+          <p><Moment fromNow>{created_at}</Moment></p>
         </div>
       </div>
     </div>
