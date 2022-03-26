@@ -31,8 +31,8 @@ function Profile(prop) {
       owner_first_name: null,
       owner_last_name: null,
       breed_id: null,
-      Gender: null,
-      Location: null,
+      gender: null,
+      location: null,
       profile_pic_url: null,
     },
   ]);
@@ -79,6 +79,30 @@ function Profile(prop) {
       console.log("Add dog as friend response: ");
     });
   };
+
+  const parseGender = (genderKey) => {
+    if (genderKey === 'm') {
+      return 'Male';
+    } else if (genderKey === 'f') {
+      return 'Female';
+    } else if (genderKey === 'u') {
+      return 'Other/Unknown';
+    }
+  };
+
+  const parseBreed = (breedKey) => {
+    const breedList = [
+      "Shiba Inu",
+      "Dachshund",
+      "Labrador Retriever",
+      "Shih-tzu",
+      "Husky",
+      "Poodle",
+      "Greyhound",
+    ];
+    return breedList[breedKey-1];
+  }
+
   return (
     <div className="profile">
       <div className="profile__top">
@@ -110,11 +134,11 @@ function Profile(prop) {
           </div>
           <div className="profile__breed">
             <PetsIcon />
-            <p>Breed: {profile.breed_id}</p>
+            <p>Breed: {parseBreed(profile.breed_id)}</p>
           </div>
           <div className="profile__gender">
             <WcIcon />
-            <p>Gender: {profile.gender}</p>
+            <p>Gender: {parseGender(profile.gender)}</p>
           </div>
           <div className="profile__country">
             <PublicIcon />

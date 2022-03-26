@@ -48,7 +48,7 @@ router.post("/logout", (req, res) => {
 router.post("/register", (req, res) => {
   const breed = req.body.breed;
   const breedCheck = (element) => {
-    let index;
+    let parsedBreed;
     const breedList = [
       "Shiba Inu",
       "Dachshund",
@@ -60,10 +60,10 @@ router.post("/register", (req, res) => {
     ];
     for (let i = 0; i < breedList.length; i++) {
       if (element === breedList[i]) {
-        index = i;
+        parsedBreed = i+1;
       }
     }
-    return index;
+    return parsedBreed;
   };
   const breed_id = breedCheck(breed);
   const email = req.body.email;
