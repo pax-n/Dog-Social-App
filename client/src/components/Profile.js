@@ -10,6 +10,8 @@ import PetsIcon from "@mui/icons-material/Pets";
 import WcIcon from "@mui/icons-material/Wc";
 import PublicIcon from "@mui/icons-material/Public";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import axios from "axios";
 import { useContext } from "react";
 import { userContext } from "./providers/UserProvider";
@@ -149,14 +151,18 @@ function Profile(prop) {
         <div className="profile__friends">
           <h4>Friends</h4>
           <div className="profile__friendslist">
-            {friends.map((friend) => {
-              return (
-                <ProfileFriends
-                  profilePic={friend.profile_pic_url}
-                  name={friend.dog_name}
-                />
-              );
-            })}
+            <Box>
+              <Grid container spacing={0}>
+                {friends.map((friend) => {
+                  return (
+                    <ProfileFriends
+                      profilePic={friend.profile_pic_url}
+                      name={friend.dog_name}
+                    />
+                  );
+                })}
+              </Grid>
+            </Box>
           </div>
         </div>
       </div>
