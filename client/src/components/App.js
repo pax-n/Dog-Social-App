@@ -18,25 +18,27 @@ function App() {
     setShow(page);
   };
   useEffect(() => {
-  axios.get("/auth").then((responses) => {
-    console.log("Response: ", responses.data);
-    if (responses.data) {
-      login(responses.data)
-      axios.get(`/dog/${responses.data}`).then((dog) => {
-        setUserInfo(dog.data);
-      });
-    };
-  });
-}, [loggedin]);
+    axios.get("/auth").then((responses) => {
+      console.log("Response: ", responses.data);
+      if (responses.data) {
+        login(responses.data);
+        axios.get(`/dog/${responses.data}`).then((dog) => {
+          setUserInfo(dog.data);
+        });
+      }
+    });
+  }, [loggedin]);
 
   return (
     <div className="App">
       <Header changePage={changePage} />
       <div className="body">
-        {!loggedin && toggleRegister && <Register />}
+        {/* {!loggedin && toggleRegister && <Register />}
         {!loggedin && !toggleRegister && <Login />}
         {loggedin && <Sidebar changePage={changePage} />}
-        {loggedin && <Feed show={show} />}
+        {loggedin && <Feed show={show} />} */}
+        <Sidebar changePage={changePage} />
+        <Feed show={show} />
       </div>
     </div>
   );
