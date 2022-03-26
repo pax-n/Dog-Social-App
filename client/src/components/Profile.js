@@ -17,6 +17,7 @@ import { userContext } from "./providers/UserProvider";
 function Profile(prop) {
 
   const [ownProfile, setOwnProfile] = useState(true)
+  const [isFriend, setisFriend] = useState(false)
   
   const [friends, setFriends] = useState([
     {
@@ -40,8 +41,10 @@ function Profile(prop) {
   useEffect(() => {
     if (prop.userID !== userDog) {
       setOwnProfile(false);  
+    } else {
+      setOwnProfile(true);
     }
-  }, []);
+  }, [prop]);
   
 
   useEffect(() => {
@@ -51,8 +54,13 @@ function Profile(prop) {
       console.log("Friends response: ", response);
       let friendlist = response.data;
       setFriends(friendlist);
+      for (let friend in friendlist) {
+        if (friendlist[friend].id === userDog) {
+          setisFriend(true)
+        }
+      }
     });
-  }, []);
+  }, [prop]);
 
   useEffect(() => {
     let dog_id = prop.userID;
@@ -60,7 +68,7 @@ function Profile(prop) {
       console.log("Profile response: ", response);
       setProfile(response.data);
     });
-  }, []);
+  }, [prop]);
 
   const addDogAsFriend = () => {
     let requested_dog_id = userDog;
@@ -82,9 +90,9 @@ function Profile(prop) {
         />
         <div className="profile__user">
           <p>{profile.dog_name}</p>
-          <Button variant="outlined" onClick={addDogAsFriend}>
+          {!ownProfile && !isFriend && <Button variant="outlined" onClick={addDogAsFriend}>
             Add Friend
-          </Button>
+          </Button>}
         </div>
       </div>
 
