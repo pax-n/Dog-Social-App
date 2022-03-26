@@ -14,59 +14,66 @@ import axios from "axios";
 import { useContext } from "react";
 import { userContext } from "./providers/UserProvider";
 
-function Profile({
-  dog_name,
-  profilePic,
-  bio,
-  ownerName,
-  breed,
-  gender,
-  location,
-}) {
+function Profile(prop) {
+
+  const [ownProfile, setOwnProfile] = useState(true)
+  const [isFriend, setisFriend] = useState(false)
+  
   const [friends, setFriends] = useState([
     {
-      profilePic:
-        "https://www.nicepng.com/png/detail/1-10149_doge-deal-with-it-doge-png-transparent.png",
-      name: "Doge",
+      profilePic: null,
+      name: null,
     },
   ]);
   const [profile, setProfile] = useState([
     {
-      bio_description: "A doggo.",
-      owner_first_name: "Doge",
-      owner_last_name: "Dogest",
-      breed_id: 1,
-      Gender: "m",
-      Location: "Toronto, ON, Canada",
-      profile_pic_url:
-        "https://m.media-amazon.com/images/I/51Tahu98IiL._AC_SL1001_.jpg",
+      bio_description: null,
+      owner_first_name: null,
+      owner_last_name: null,
+      breed_id: null,
+      Gender: null,
+      Location: null,
+      profile_pic_url: null,
     },
   ]);
   const { userDog } = useContext(userContext);
 
   useEffect(() => {
+    if (prop.userID !== userDog) {
+      setOwnProfile(false);  
+    } else {
+      setOwnProfile(true);
+    }
+  }, [prop]);
+  
+
+  useEffect(() => {
     //Gets list of friends for user 1 and populates the friends section.
-    let dog_id = userDog;
+    let dog_id = prop.userID;
     axios.get(`/api/friends/${dog_id}`).then((response) => {
       console.log("Friends response: ", response);
       let friendlist = response.data;
       setFriends(friendlist);
+      for (let friend in friendlist) {
+        if (friendlist[friend].id === userDog) {
+          setisFriend(true)
+        }
+      }
     });
-  }, []);
+  }, [prop]);
 
   useEffect(() => {
-    let dog_id = userDog;
+    let dog_id = prop.userID;
     axios.get(`/api/profile/${dog_id}`).then((response) => {
       console.log("Profile response: ", response);
       setProfile(response.data);
     });
-  }, []);
+  }, [prop]);
 
   const addDogAsFriend = () => {
     let requested_dog_id = userDog;
 
-    //PLACEHOLDER until profiles are set up.
-    let target_dog_id = 10;
+    let target_dog_id = prop.userID;
     const data = { requested_dog_id, target_dog_id };
     axios.post(`/api/addfriend/`, data).then((response) => {
       console.log("Add dog as friend response: ");
@@ -83,9 +90,9 @@ function Profile({
         />
         <div className="profile__user">
           <p>{profile.dog_name}</p>
-          <Button variant="outlined" onClick={addDogAsFriend}>
+          {!ownProfile && !isFriend && <Button variant="outlined" onClick={addDogAsFriend}>
             Add Friend
-          </Button>
+          </Button>}
         </div>
       </div>
 

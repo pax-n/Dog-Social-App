@@ -1,4 +1,7 @@
 import React from "react";
+import { useContext } from "react";
+import { userContext } from "../providers/UserProvider";
+import { toggleContext } from "../providers/ToggleProvider";
 import SidebarRow from "./SidebarRow";
 import "./Sidebar.css";
 import PersonIcon from "@mui/icons-material/Person";
@@ -8,14 +11,22 @@ import StorefrontIcon from "@mui/icons-material/Storefront";
 import ChatIcon from "@mui/icons-material/Chat";
 
 function Sidebar({ changePage }) {
+  const { settargetID } = useContext(toggleContext);
+  const { userDog } = useContext(userContext);
+
   const handleClick = (page) => () => {
     changePage(page);
   };
 
+  const handleProfileClick = (page) => () => {
+    settargetID(userDog)
+    changePage(page);
+  }
+
   return (
     <div className="sidebar">
       <SidebarRow
-        onClick={handleClick("Profile")}
+        onClick={handleProfileClick("Profile")}
         Icon={PersonIcon}
         sideName="Profile"
       />

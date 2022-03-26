@@ -33,12 +33,10 @@ function App() {
     <div className="App">
       <Header changePage={changePage} />
       <div className="body">
-        {/* {!loggedin && toggleRegister && <Register />}
+        {!loggedin && toggleRegister && <Register />}
         {!loggedin && !toggleRegister && <Login />}
         {loggedin && <Sidebar changePage={changePage} />}
-        {loggedin && <Feed show={show} />} */}
-        <Sidebar changePage={changePage} />
-        <Feed show={show} />
+        {loggedin && <Feed show={show} changePage={changePage} />}
       </div>
     </div>
   );

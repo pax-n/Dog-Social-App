@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { toggleContext } from "./providers/ToggleProvider";
+import Moment from "react-moment";
 import "./Post.css";
 import PostComment from "./PostComment";
 import { Avatar } from "@mui/material";
@@ -6,7 +8,6 @@ import PetsIcon from "@mui/icons-material/Pets";
 import ChatBubbleOutlinedIcon from "@mui/icons-material/ChatBubbleOutlined";
 import axios from "axios";
 import resolveProps from "@mui/utils/resolveProps";
-import { useContext } from "react";
 import { userContext } from "./providers/UserProvider";
 
 function Post({
@@ -17,11 +18,13 @@ function Post({
   caption,
   image_url,
   created_at,
+  changePage,
 }) {
   const [paws, setPaws] = useState(0);
   const [showComments, setShowComments] = useState(false);
   const [loadComments, setLoadComments] = useState([]);
   const [postComment, setPostComment] = useState("");
+  const { settargetID } = useContext(toggleContext);
   const { userDog } = useContext(userContext);
 
   useEffect(() => {
@@ -59,6 +62,11 @@ function Post({
     });
   };
 
+  const handleProfileClick = (page) => () => {
+    settargetID(dog_id);
+    changePage(page);
+  }
+  
   const sendComment = () => {
     console.log("Comment button clicked.");
     let dog_id = userDog;
@@ -74,8 +82,8 @@ function Post({
     <div className="post">
       <div className="post__top">
         <div className="post__user">
-          <Avatar className="post__avatar" src={profile_pic_url} />
-          <h4>{dog_name}</h4>
+          <Avatar className="post__avatar" src={profile_pic_url} onClick={handleProfileClick("Profile")} />
+          <h4 onClick={handleProfileClick("Profile")}>{dog_name}</h4>
         </div>
         <p>{created_at}</p>
       </div>
