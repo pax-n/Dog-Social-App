@@ -37,7 +37,6 @@ function FriendsList({ changePage }) {
         </div>
         <div className="friendslist__users">
           {friends.map((friend) => {
-            console.log("friend= ", friend.id)
             return (
               <FriendsListUser
                 profile_pic_url={friend.profile_pic_url}

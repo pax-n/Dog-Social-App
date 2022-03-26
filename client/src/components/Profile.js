@@ -15,8 +15,9 @@ import Grid from '@mui/material/Grid';
 import axios from "axios";
 import { useContext } from "react";
 import { userContext } from "./providers/UserProvider";
+import { toggleContext } from "./providers/ToggleProvider";
 
-function Profile(prop) {
+function Profile({ changePage, userID }) {
 
   const [ownProfile, setOwnProfile] = useState(true)
   const [isFriend, setisFriend] = useState(false)
@@ -25,6 +26,7 @@ function Profile(prop) {
     {
       profilePic: null,
       name: null,
+      id: null,
     },
   ]);
   const [profile, setProfile] = useState([
@@ -39,19 +41,20 @@ function Profile(prop) {
     },
   ]);
   const { userDog } = useContext(userContext);
+  const { settargetID } = useContext(toggleContext);
 
   useEffect(() => {
-    if (prop.userID !== userDog) {
+    if (userID !== userDog) {
       setOwnProfile(false);  
     } else {
       setOwnProfile(true);
     }
-  }, [prop]);
+  }, [userID]);
   
 
   useEffect(() => {
     //Gets list of friends for user 1 and populates the friends section.
-    let dog_id = prop.userID;
+    let dog_id = userID;
     axios.get(`/api/friends/${dog_id}`).then((response) => {
       console.log("Friends response: ", response);
       let friendlist = response.data;
@@ -62,20 +65,20 @@ function Profile(prop) {
         }
       }
     });
-  }, [prop]);
+  }, [userID]);
 
   useEffect(() => {
-    let dog_id = prop.userID;
+    let dog_id = userID;
     axios.get(`/api/profile/${dog_id}`).then((response) => {
       console.log("Profile response: ", response);
       setProfile(response.data);
     });
-  }, [prop]);
+  }, [userID]);
 
   const addDogAsFriend = () => {
     let requested_dog_id = userDog;
 
-    let target_dog_id = prop.userID;
+    let target_dog_id = userID;
     const data = { requested_dog_id, target_dog_id };
     axios.post(`/api/addfriend/`, data).then((response) => {
       console.log("Add dog as friend response: ");
@@ -103,6 +106,11 @@ function Profile(prop) {
       "Greyhound",
     ];
     return breedList[breedKey-1];
+  }
+
+  const handleProfileClick = (page, friend) => () => {
+    settargetID(friend);
+    changePage(page);
   }
 
   return (
@@ -158,6 +166,7 @@ function Profile(prop) {
                     <ProfileFriends
                       profilePic={friend.profile_pic_url}
                       name={friend.dog_name}
+                      onClick={handleProfileClick("Profile", friend.id)}
                     />
                   );
                 })}
