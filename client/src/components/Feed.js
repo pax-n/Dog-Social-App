@@ -29,8 +29,8 @@ function Feed({ show, changePage }) {
   return (
     <div className="feed">
       {show === "Events" && <EventsFeed />}
-      {show === "Friends" && <FriendsList />}
-      {show === "Profile" && <Profile userID={targetID}/>}
+      {show === "Friends" && <FriendsList changePage={changePage}/>}
+      {show === "Profile" && <Profile userID={targetID} changePage={changePage}/>}
       {show === "Feed" && (
         <>
           <MessageSender setPosts={setPosts} />

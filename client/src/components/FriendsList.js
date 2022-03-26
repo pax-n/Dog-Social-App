@@ -6,10 +6,12 @@ import FriendRequest from "./FriendRequest";
 import axios from "axios";
 import { useContext } from "react";
 import { userContext } from "./providers/UserProvider";
+import { toggleContext } from "./providers/ToggleProvider";
 
-function FriendsList() {
+function FriendsList({ changePage }) {
   const [friends, setFriends] = useState([]);
   const { userDog } = useContext(userContext);
+  const { settargetID } = useContext(toggleContext);
 
   useEffect(() => {
     //Gets list of friends for user 1 and populates the friends section.
@@ -21,6 +23,11 @@ function FriendsList() {
     });
   }, []);
 
+  const handleProfileClick = (page, friend) => () => {
+    settargetID(friend);
+    changePage(page);
+  }
+
   return (
     <div className="friendslist">
       <FriendRequest />
@@ -30,10 +37,12 @@ function FriendsList() {
         </div>
         <div className="friendslist__users">
           {friends.map((friend) => {
+            console.log("friend= ", friend.id)
             return (
               <FriendsListUser
                 profile_pic_url={friend.profile_pic_url}
                 name={friend.dog_name}
+                onClick={handleProfileClick("Profile", friend.id)}
               />
             );
           })}
