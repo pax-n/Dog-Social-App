@@ -185,6 +185,19 @@ router.get(`/api/comments/:bark_id`, (req, res) => {
   });
 });
 
+router.post(`/comments`, (req, res) => {
+  console.log("Comments request body: ", req.body);
+  //UPDATE WITH COOKIE OF USER FOR DOG_ID
+  let dog_id = req.body.dog_id;
+  let bark_id = req.body.bark_id;
+  let postComment = req.body.postComment;
+
+  database.postComments(dog_id, bark_id, postComment).then((data) => {
+    console.log("Comment route data: ", data);
+    res.json(data);
+  });
+});
+
 router.get(`/api/friends/:dog_id`, (req, res) => {
   const dog_id = req.params.dog_id;
   database.getFriends(dog_id).then((friends) => {

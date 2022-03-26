@@ -94,17 +94,18 @@ const deleteBarks = (bark_id) => {
 //For the GET request to show the comments under the post/bark_id.
 const getCommentsFromPost = (bark_id) => {
   const queryStatement = `
-  SELECT c.id, c.dog_id, c.bark_id, c.comment, c.created_at, d.profile_pic_url FROM comments AS c JOIN dogs AS d ON d.id = c.dog_id WHERE bark_id = $1`;
+  SELECT d.dog_name, c.id, c.dog_id, c.bark_id, c.comment, c.created_at, d.profile_pic_url FROM comments AS c JOIN dogs AS d ON d.id = c.dog_id WHERE bark_id = $1
+  ORDER BY c.created_at DESC`;
   const queryParams = [bark_id];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows);
   });
 };
 
-const postComments = (dog_id, bark_id, comment, date_added) => {
+const postComments = (dog_id, bark_id, comment) => {
   const queryStatement = `
-  INSERT INTO comments (dog_id, bark_id, comment, date_added) VALUES ($1, $2, $3, $4) RETURNING *;`;
-  const queryParams = [dog_id, bark_id, comment, date_added];
+  INSERT INTO comments (dog_id, bark_id, comment) VALUES ($1, $2, $3) RETURNING *;`;
+  const queryParams = [dog_id, bark_id, comment];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows);
   });
