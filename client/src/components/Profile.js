@@ -13,7 +13,7 @@ import LocationCityIcon from "@mui/icons-material/LocationCity";
 import axios from "axios";
 
 function Profile({
-  username,
+  dog_name,
   profilePic,
   bio,
   ownerName,
@@ -27,20 +27,17 @@ function Profile({
         "https://www.nicepng.com/png/detail/1-10149_doge-deal-with-it-doge-png-transparent.png",
       name: "Doge",
     },
+  ]);
+  const [profile, setProfile] = useState([
     {
-      profilePic:
-        "https://www.nicepng.com/png/detail/1-10149_doge-deal-with-it-doge-png-transparent.png",
-      name: "Doge",
-    },
-    {
-      profilePic:
-        "https://www.nicepng.com/png/detail/1-10149_doge-deal-with-it-doge-png-transparent.png",
-      name: "Doge",
-    },
-    {
-      profilePic:
-        "https://www.nicepng.com/png/detail/1-10149_doge-deal-with-it-doge-png-transparent.png",
-      name: "Doge",
+      bio_description: "A doggo.",
+      owner_first_name: "Doge",
+      owner_last_name: "Dogest",
+      breed_id: 1,
+      Gender: "m",
+      Location: "Toronto, ON, Canada",
+      profile_pic_url:
+        "https://m.media-amazon.com/images/I/51Tahu98IiL._AC_SL1001_.jpg",
     },
   ]);
 
@@ -49,20 +46,29 @@ function Profile({
     let dog_id = 1;
     axios.get(`/api/friends/${dog_id}`).then((response) => {
       console.log("Friends response: ", response);
-      const friends = response;
+      let friendlist = response.data;
+      setFriends(friendlist);
     });
-  });
+  }, []);
+
+  useEffect(() => {
+    let dog_id = 2;
+    axios.get(`/api/profile/${dog_id}`).then((response) => {
+      console.log("Profile response: ", response);
+      setProfile(response.data);
+    });
+  }, []);
   return (
     <div className="profile">
       <div className="profile__top">
         <div className="profile__banner"></div>
         <Avatar
           className="profile__avatar"
-          src={profilePic}
+          src={profile.profile_pic_url}
           sx={{ height: "100px", width: "100px" }}
         />
         <div className="profile__user">
-          <p>{username}Username</p>
+          <p>{profile.dog_name}</p>
           <Button variant="outlined">Add Friend</Button>
         </div>
       </div>
@@ -71,23 +77,25 @@ function Profile({
         <div className="profile__description">
           <div className="profile__bio">
             <LibraryBooksIcon />
-            <p>{bio}Bio</p>
+            <p>Bio: {profile.bio_description}</p>
           </div>
           <div className="profile__owner">
             <PersonIcon />
-            <p>{ownerName}Owner</p>
+            <p>
+              Owner: {profile.owner_first_name} {profile.owner_last_name}
+            </p>
           </div>
           <div className="profile__breed">
             <PetsIcon />
-            <p>{breed}Breed</p>
+            <p>Breed: {profile.breed_id}</p>
           </div>
           <div className="profile__gender">
             <WcIcon />
-            <p>{gender}Gender</p>
+            <p>Gender: {profile.gender}</p>
           </div>
           <div className="profile__country">
             <PublicIcon />
-            <p>{location}Location</p>
+            <p>Location: {profile.location}</p>
           </div>
         </div>
 
@@ -97,8 +105,8 @@ function Profile({
             {friends.map((friend) => {
               return (
                 <ProfileFriends
-                  profilePic={friend.profilePic}
-                  name={friend.name}
+                  profilePic={friend.profile_pic_url}
+                  name={friend.dog_name}
                 />
               );
             })}

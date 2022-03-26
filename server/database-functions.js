@@ -227,14 +227,14 @@ const addLike = (dog_id, bark_id) => {
 
 const getFriends = (dog_id) => {
   const queryStatement = `
-  SELECT d.dog_name, d.profile_pic_url, d.id FROM dogs AS d
+ SELECT d.dog_name, d.profile_pic_url, d.id FROM dogs AS d
   WHERE d.id IN
   (SELECT target_dog_id FROM dog_friendlists WHERE requested_dog_id = $1 AND is_accepted = 'a')
-  OR d.id in (SELECT requested_dog_id FROM dog_friendlists WHERE target_dog_id = $1 AND is_accepted = 'a')
+  OR d.id in (SELECT requested_dog_id FROM dog_friendlists WHERE target_dog_id = $1 AND is_accepted = 'a');
   `;
   const queryParams = [dog_id];
   return db.query(queryStatement, queryParams).then((data) => {
-    return Promise.resolve(data.rows[0]);
+    return Promise.resolve(data.rows);
   });
 };
 
