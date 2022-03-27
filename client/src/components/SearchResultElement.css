@@ -1,0 +1,9 @@
+.SearchResultElement {
+  display: flex;
+  align-items: center;
+  padding: 45px;
+}
+
+.SearchResultElement h3 {
+  margin-left: 10px;
+}

@@ -1,0 +1,30 @@
+.createEvent {
+  background: #fff;
+  width: 800px;
+  border-radius: 15px;
+  margin-top: 15px;
+  padding: 15px 25px 15px 25px;
+  box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+}
+
+.createEvent__header h2 {
+  margin: 0;
+  padding: 10px 0px 20px 0px;
+}
+
+.createEvent__location {
+  margin-top: 10px;
+}
+
+.createEvent__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.createEvent__date {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}

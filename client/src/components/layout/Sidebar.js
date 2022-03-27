@@ -19,9 +19,9 @@ function Sidebar({ changePage }) {
   };
 
   const handleProfileClick = (page) => () => {
-    settargetID(userDog)
+    settargetID(userDog);
     changePage(page);
-  }
+  };
 
   return (
     <div className="sidebar">

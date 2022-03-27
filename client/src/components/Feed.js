@@ -7,14 +7,15 @@ import MessageSender from "./MessageSender";
 import Post from "./Post";
 import Profile from "./Profile";
 import FriendsList from "./FriendsList";
+import SearchResults from "./SearchResults";
 import EventsFeed from "./events/EventsFeed";
 import resolveProps from "@mui/utils/resolveProps";
 import { userContext } from "./providers/UserProvider";
 
 function Feed({ show, changePage }) {
   const [posts, setPosts] = useState([]);
-  const { targetID } = useContext(toggleContext);
-  const { userDog } = useContext(userContext);
+  const { targetID, searchQuery } = useContext(toggleContext);
+
   const [paws, setPaws] = useState(0);
 
   useEffect(() => {
@@ -31,6 +32,9 @@ function Feed({ show, changePage }) {
 
   return (
     <div className="feed">
+      {show === "Search" && (
+        <SearchResults changePage={changePage} searchQuery={searchQuery} />
+      )}
       {show === "Events" && <EventsFeed />}
       {show === "Friends" && <FriendsList changePage={changePage} />}
       {show === "Profile" && (

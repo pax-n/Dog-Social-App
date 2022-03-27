@@ -240,6 +240,16 @@ const getFriends = (dog_id) => {
   });
 };
 
+const searchResults = (searchQuery) => {
+  console.log(searchQuery);
+  const queryStatement = `
+  SELECT dog_name, profile_pic_url, id FROM dogs WHERE dog_name ILIKE '%' || $1 || '%';`;
+  const queryParams = [searchQuery];
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows);
+  });
+};
+
 //
 module.exports = {
   getDog,
@@ -260,4 +270,5 @@ module.exports = {
   getLikesByPostID,
   addLike,
   getFriends,
+  searchResults,
 };

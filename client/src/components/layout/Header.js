@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { userContext } from "../providers/UserProvider";
+import { toggleContext } from "../providers/ToggleProvider";
 import axios from "axios";
 import "./Header.css";
 import PetsIcon from "@mui/icons-material/Pets";
@@ -14,6 +15,8 @@ import MenuItem from "@mui/material/MenuItem";
 function Header({ changePage }) {
   const { loggedin, logout, userInfo } = useContext(userContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { setsearchQuery } = useContext(toggleContext);
+  
   const open = Boolean(anchorEl);
   const clickLogo = (page) => () => {
     changePage(page);
@@ -29,8 +32,20 @@ function Header({ changePage }) {
     handleClose();
     axios.post("/logout").then(() => {
       logout();
+      changePage("Feed");
     });
   }
+
+  const handleSearch = (event) => {
+    console.log("keydown", event)
+    if (event.key === "Enter") {
+      console.log("Enter: ", event.target.value)
+      setsearchQuery(event.target.value)
+      changePage("Search");
+      event.preventDefault();
+      }   
+  }
+
   console.log("userInfo: ", userInfo);
   
   return (
@@ -45,7 +60,7 @@ function Header({ changePage }) {
       {loggedin &&
       <div className="header__middle">
       <SearchIcon />
-        <input type="text" placeholder="Search"></input>
+        <input type="text" placeholder="Search" onKeyDown={handleSearch} />
       </div>
         }
         {loggedin && 
