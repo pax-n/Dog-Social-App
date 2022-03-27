@@ -224,4 +224,12 @@ router.post(`/api/addfriend/`, (req, res) => {
   });
 });
 
+router.get(`/api/search/:searchQuery`, (req, res) => {
+  const searchQuery = req.params.searchQuery;
+  database.searchResults(searchQuery).then((results) => {
+    console.log("Route for search: ", results);
+    res.json(results);
+  });
+});
+
 module.exports = router;
