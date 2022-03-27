@@ -10,18 +10,17 @@ import PetsIcon from "@mui/icons-material/Pets";
 import WcIcon from "@mui/icons-material/Wc";
 import PublicIcon from "@mui/icons-material/Public";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import axios from "axios";
 import { useContext } from "react";
 import { userContext } from "./providers/UserProvider";
 import { toggleContext } from "./providers/ToggleProvider";
 
 function Profile({ changePage, userID }) {
+  const [ownProfile, setOwnProfile] = useState(true);
+  const [isFriend, setisFriend] = useState(false);
 
-  const [ownProfile, setOwnProfile] = useState(true)
-  const [isFriend, setisFriend] = useState(false)
-  
   const [friends, setFriends] = useState([
     {
       profilePic: null,
@@ -61,7 +60,7 @@ function Profile({ changePage, userID }) {
       setFriends(friendlist);
       for (let friend in friendlist) {
         if (friendlist[friend].id === userDog) {
-          setisFriend(true)
+          setisFriend(true);
         }
       }
     });
@@ -86,12 +85,12 @@ function Profile({ changePage, userID }) {
   };
 
   const parseGender = (genderKey) => {
-    if (genderKey === 'm') {
-      return 'Male';
-    } else if (genderKey === 'f') {
-      return 'Female';
-    } else if (genderKey === 'u') {
-      return 'Other/Unknown';
+    if (genderKey === "m") {
+      return "Male";
+    } else if (genderKey === "f") {
+      return "Female";
+    } else if (genderKey === "u") {
+      return "Other/Unknown";
     }
   };
 
@@ -105,8 +104,8 @@ function Profile({ changePage, userID }) {
       "Poodle",
       "Greyhound",
     ];
-    return breedList[breedKey-1];
-  }
+    return breedList[breedKey - 1];
+  };
 
   const handleProfileClick = (page, friend) => () => {
     settargetID(friend);
@@ -124,9 +123,11 @@ function Profile({ changePage, userID }) {
         />
         <div className="profile__user">
           <p>{profile.dog_name}</p>
-          {!ownProfile && !isFriend && <Button variant="outlined" onClick={addDogAsFriend}>
-            Add Friend
-          </Button>}
+          {!ownProfile && !isFriend && (
+            <Button variant="outlined" color="success" onClick={addDogAsFriend}>
+              Add Friend
+            </Button>
+          )}
         </div>
       </div>
 
