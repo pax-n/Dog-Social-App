@@ -58,7 +58,7 @@ function Post({
     axios.get(`/api/comments/${bark_id}`).then((response) => {
       console.log("Load Comments Response: ", response);
       const comments = response.data;
-      setLoadComments(comments);
+      setLoadComments([...comments]);
     });
   };
 
@@ -71,10 +71,20 @@ function Post({
     console.log("Comment button clicked.");
     let dog_id = userDog;
     const data = { dog_id, bark_id, postComment };
+    console.log("Bark_id from sendComment: ", bark_id);
     axios.post(`/comments`, data).then((response) => {
-      console.log("Comment sent to database. Comment response: ", response);
+      console.log(
+        "Comment sent to database. Comment response: ",
+        response.data
+      );
+      // setPostComment("");
+      // setLoadComments([...loadComments, response.data]);
+      // setLoadComments((prev) => [...prev, response.data]);
+      // console.log("New data: ", loadComments);
+
+      loadCommentsForPost(bark_id);
+      setShowComments(showComments);
       setPostComment("");
-      setLoadComments((prev) => [postComment, ...prev]);
     });
   };
 

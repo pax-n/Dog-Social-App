@@ -8,15 +8,18 @@ import Post from "./Post";
 import Profile from "./Profile";
 import FriendsList from "./FriendsList";
 import EventsFeed from "./events/EventsFeed";
+import resolveProps from "@mui/utils/resolveProps";
+import { userContext } from "./providers/UserProvider";
 
 function Feed({ show, changePage }) {
   const [posts, setPosts] = useState([]);
   const { targetID } = useContext(toggleContext);
-
+  const { userDog } = useContext(userContext);
   const [paws, setPaws] = useState(0);
+
   useEffect(() => {
-    let bark_id = 1;
-    Promise.all([axios.get(`/barks/${bark_id}`), axios.get(`/paws/${bark_id}`)])
+    let dog_id = 1;
+    Promise.all([axios.get(`/barks/${dog_id}`), axios.get(`/paws/${dog_id}`)])
       .then((responses) => {
         const posts = responses[0].data;
         setPosts(posts);
@@ -29,8 +32,10 @@ function Feed({ show, changePage }) {
   return (
     <div className="feed">
       {show === "Events" && <EventsFeed />}
-      {show === "Friends" && <FriendsList changePage={changePage}/>}
-      {show === "Profile" && <Profile userID={targetID} changePage={changePage}/>}
+      {show === "Friends" && <FriendsList changePage={changePage} />}
+      {show === "Profile" && (
+        <Profile userID={targetID} changePage={changePage} />
+      )}
       {show === "Feed" && (
         <>
           <MessageSender setPosts={setPosts} />

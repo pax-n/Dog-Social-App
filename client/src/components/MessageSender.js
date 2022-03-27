@@ -13,6 +13,14 @@ const label = { inputProps: { "aria-label": "Switch demo" } };
 function MessageSender(props) {
   const [showImgURL, setShowImgURL] = useState(false);
   const [caption, setCaption] = useState(props.caption || "");
+
+  const reloadPosts = function (dog_id) {
+    axios.get(`/barks/${dog_id}`).then((response) => {
+      const posts = response[0].data;
+      props.setPosts(posts);
+    });
+  };
+
   const onClick = function () {
     console.log("Button clicked.");
     //PLACEHOLDER DOG_ID UNTIL LOGIN IS IMPLEMENTED
@@ -21,8 +29,7 @@ function MessageSender(props) {
     axios.post("/barks", data).then((responses) => {
       console.log("Post sent to database.");
       setCaption("");
-      //PESSIMISTIC PROGRAMMING --> Only loads the post at the top when the data has been sent to the database.
-      props.setPosts((prev) => [data, ...prev]);
+      reloadPosts(dog_id);
     });
   };
 
