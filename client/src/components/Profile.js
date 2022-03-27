@@ -9,7 +9,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import PetsIcon from "@mui/icons-material/Pets";
 import WcIcon from "@mui/icons-material/Wc";
 import PublicIcon from "@mui/icons-material/Public";
-import LocationCityIcon from "@mui/icons-material/LocationCity";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
@@ -44,12 +43,11 @@ function Profile({ changePage, userID }) {
 
   useEffect(() => {
     if (userID !== userDog) {
-      setOwnProfile(false);  
+      setOwnProfile(false);
     } else {
       setOwnProfile(true);
     }
   }, [userID]);
-  
 
   useEffect(() => {
     //Gets list of friends for user 1 and populates the friends section.
@@ -110,7 +108,7 @@ function Profile({ changePage, userID }) {
   const handleProfileClick = (page, friend) => () => {
     settargetID(friend);
     changePage(page);
-  }
+  };
 
   return (
     <div className="profile">
