@@ -6,6 +6,7 @@ export const toggleContext = createContext();
 export default function ToggleProvider(props) {
   const [toggleRegister, settoggleRegister] = useState(false);
   const [targetID, settargetID] = useState(null);
+  const [searchQuery, setsearchQuery] = useState(null);
 
   // Reset toggle
   const toggleReset = function() {
@@ -18,7 +19,7 @@ export default function ToggleProvider(props) {
   };
 
   // toggleContext will expose these items
-  const toggleData = { toggleRegister, targetID, toggle, toggleReset, settargetID };
+  const toggleData = { toggleRegister, targetID, searchQuery, toggle, toggleReset, settargetID, setsearchQuery };
 
   // We can use this component to wrap any content we want to share this context
   return (
