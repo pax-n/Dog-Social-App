@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./FriendsList.css";
+import "./FriendRequest.css";
 import FriendsListUser from "./FriendsListUser";
 import FriendRequest from "./FriendRequest";
 import axios from "axios";
@@ -23,7 +24,6 @@ function FriendsList({ changePage }) {
       setFriends(friendlist);
     });
     //Gets list of requested friends for user and populates the friendrequests section
-    console.log("Before axios call dog_id: ", dog_id)
     axios.get(`/api/friendreqs/${dog_id}`).then((response) => {
       console.log("Friends request response: ", response);
       let friendreqlist = response.data;
@@ -31,27 +31,50 @@ function FriendsList({ changePage }) {
     });
   }, []);
 
+
   const handleProfileClick = (page, friend) => () => {
     settargetID(friend);
     changePage(page);
   }
 
+  const onHandleFriend = (handle, dog_id) => {
+    const data = { requested_dog_id: dog_id, target_dog_id: userDog};
+    axios.post(`/api/${handle}friend/`, data).then((response) => {
+      axios.get(`/api/friendreqs/${userDog}`).then((response) => {
+        console.log("Friends request response: ", response);
+        let friendreqlist = response.data;
+        setfriendReqs(friendreqlist);
+      });
+      if (handle === 'confirm') {
+        axios.get(`/api/friends/${userDog}`).then((response) => {
+          console.log("Friends response: ", response);
+          let friendlist = response.data;
+          setFriends(friendlist);
+        });
+      }
+    });
+  }
+
   return (
     <div className="friendslist">
-      <div className="FriendRequest">
+          {friendReqs[0] && 
+       <div className="FriendRequest">
         <div className="FriendRequest__from">
-          <p>New friend request from...</p>
+            <p>New friend request from...</p>
         </div>
         {friendReqs.map((friendreq) => {
           return (
             <FriendRequest 
             profile_pic_url={friendreq.profile_pic_url}
             name={friendreq.dog_name}
+            dog_id = {friendreq.id}
             onClick={handleProfileClick("Profile", friendreq.id)}
+            onHandleFriend={onHandleFriend}
             />
-          )
-        })}
+            )
+          })}
       </div>
+        }
       <div className="friendslist__main">
         <div className="friendslist__title">
           <h2>Friends</h2>

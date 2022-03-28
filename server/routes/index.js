@@ -224,6 +224,22 @@ router.post(`/api/addfriend/`, (req, res) => {
   });
 });
 
+router.post('/api/deletefriend/', (req, res) => {
+  const requested_dog_id = req.body.requested_dog_id;
+  const target_dog_id = req.body.target_dog_id;
+  database.deleteFriend(requested_dog_id, target_dog_id).then((data) => {
+    res.status(201).send("");
+  });
+});
+
+router.post('/api/confirmfriend/', (req, res) => {
+  const requested_dog_id = req.body.requested_dog_id;
+  const target_dog_id = req.body.target_dog_id;
+  database.confirmFriend(requested_dog_id, target_dog_id).then((data) => {
+    res.status(201).send("");
+  });
+});
+
 router.get(`/api/search/:searchQuery`, (req, res) => {
   const searchQuery = req.params.searchQuery;
   database.searchResults(searchQuery).then((results) => {
@@ -248,7 +264,6 @@ router.get(`/api/events/:event_id`, (req, res) => {
 
 router.get(`/api/friendreqs/:dog_id`, (req, res) => {
   const dog_id = req.params.dog_id;
-  console.log("router dog_id= ", dog_id);
   database.getRequestedFriends(dog_id).then((results) => {
     console.log("Requested friends results: ", results);
     res.json(results);

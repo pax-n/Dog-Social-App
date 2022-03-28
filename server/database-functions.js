@@ -142,6 +142,18 @@ const deleteFriend = (requested_dog_id, target_dog_id) => {
   });
 };
 
+const confirmFriend = (requested_dog_id, target_dog_id) => {
+  const queryStatement = `
+  UPDATE dog_friendlists
+  SET is_accepted = 'a'
+  WHERE requested_dog_id = $1 AND target_dog_id = $2;`;
+  const queryParams = [requested_dog_id, target_dog_id];
+  console.log("confirm friends queryparams: ", queryParams)
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows);
+  });
+};
+
 //For the login, get the dog_id by the email inputted.
 const getDogByEmail = (email) => {
   const queryStatement = `
@@ -305,4 +317,5 @@ module.exports = {
   getEventsList,
   getEventDetails,
   getRequestedFriends,
+  confirmFriend,
 };

@@ -1,13 +1,11 @@
-import React from "react";
 import "./FriendRequest.css";
 import { Avatar } from "@mui/material";
 import Button from "@mui/material/Button";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 
-function FriendRequest({ profile_pic_url, name, onClick }) {
-  
-  
+function FriendRequest({ profile_pic_url, name, dog_id, onClick, onHandleFriend }) {
+
   return (
     
     <div className="FriendRequest__main">
@@ -24,6 +22,7 @@ function FriendRequest({ profile_pic_url, name, onClick }) {
           color="success"
           sx={{ borderRadius: 30 }}
           variant="outlined"
+          onClick={() => onHandleFriend('confirm', dog_id)}
         >
           <CheckIcon color="success" />
         </Button>
@@ -32,6 +31,7 @@ function FriendRequest({ profile_pic_url, name, onClick }) {
           color="error"
           sx={{ borderRadius: 30 }}
           variant="outlined"
+          onClick={() => onHandleFriend('delete', dog_id)}
         >
           <CloseIcon color="error" />
         </Button>
