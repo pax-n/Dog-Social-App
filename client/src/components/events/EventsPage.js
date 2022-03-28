@@ -1,48 +1,80 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
+import axios from "axios";
 import "./EventsPage.css";
 import EventMember from "./EventMember";
 import Button from "@mui/material/Button";
+import Moment from "react-moment";
+import { useContext } from "react";
+import { userContext } from "../providers/UserProvider";
 
 function EventsPage({
   showEvent,
   event_title,
   user,
-  location,
-  description,
+  city,
+  country,
   starting_time,
   ending_time,
+  targetEvent,
+  setMembers,
+  members,
+  event_id,
+  getMembers,
 }) {
+  const { userDog } = useContext(userContext);
+
+  const attendButton = () => {
+    const data = { userDog };
+    axios.post(`/api/attendevent/${event_id}`, data).then((response) => {
+      getMembers(event_id);
+    });
+  };
+
   return (
     <div>
-      {showEvent === "Event" && (
+      {showEvent === "Events Page" && (
         <div className="EventsPage">
           <div className="EventPage__top">
-            <h2>{event_title}Event Title</h2>
-            <p>Hosted by {user}User</p>
+            <h2>{event_title}</h2>
+            <p>Hosted by {user}</p>
           </div>
           <div className="EventPage__middle">
             <div className="EventPage__map">
               <h3>Location</h3>
-              <p>{location}location</p>
-              <p>map?</p>
+              <p>
+                {city}, {country}
+              </p>
             </div>
             <div className="EventPage_information">
               <h3>Information</h3>
-              <p>{description}Description</p>
               <p>
-                {starting_time}Starting Time to {ending_time}Ending Time
+                Starts: <Moment format="LLLL">{starting_time}</Moment>
+              </p>
+              <p>
+                Ends: <Moment format="LLLL">{ending_time}</Moment>
               </p>
             </div>
           </div>
           <div className="EventPage__bottom">
             <div className="EventPage_attending">
               <h3>Attending</h3>
-              <EventMember />
+              {members.map((member) => {
+                return (
+                  <EventMember
+                    profilePic={member.profile_pic_url}
+                    name={member.dog_name}
+                  />
+                );
+              })}
             </div>
             <div className="EventPage_attendance">
               <h3>Attendance</h3>
               <div className="EventPage_buttons">
-                <Button variant="outlined" color="success">
+                <Button
+                  variant="outlined"
+                  color="success"
+                  onClick={attendButton}
+                >
                   Going
                 </Button>
                 <Button variant="outlined" color="error">

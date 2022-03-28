@@ -9,12 +9,14 @@ import Profile from "./Profile";
 import FriendsList from "./FriendsList";
 import SearchResults from "./SearchResults";
 import EventsFeed from "./events/EventsFeed";
+import EventsPage from "./events/EventsPage";
 import resolveProps from "@mui/utils/resolveProps";
 import { userContext } from "./providers/UserProvider";
 
 function Feed({ show, changePage }) {
   const [posts, setPosts] = useState([]);
-  const { targetID, searchQuery } = useContext(toggleContext);
+  const { targetEvent, targetID, searchQuery } = useContext(toggleContext);
+  const [paws, setPaws] = useState(0);
 
   useEffect(() => {
     let dog_id = 1;
@@ -33,7 +35,12 @@ function Feed({ show, changePage }) {
       {show === "Search" && (
         <SearchResults changePage={changePage} searchQuery={searchQuery} />
       )}
-      {show === "Events" && <EventsFeed />}
+      {show === "Events" && (
+        <EventsFeed changePage={changePage} targetEvent={targetEvent} />
+      )}
+      {/* {show === "Events Page" && (
+        <EventsPage changePage={changePage} targetEvent={targetEvent} />
+      )} */}
       {show === "Friends" && <FriendsList changePage={changePage} />}
       {show === "Profile" && (
         <Profile userID={targetID} changePage={changePage} />

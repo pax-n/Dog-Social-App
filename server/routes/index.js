@@ -224,7 +224,7 @@ router.post(`/api/addfriend/`, (req, res) => {
   });
 });
 
-router.post('/api/deletefriend/', (req, res) => {
+router.post("/api/deletefriend/", (req, res) => {
   const requested_dog_id = req.body.requested_dog_id;
   const target_dog_id = req.body.target_dog_id;
   database.deleteFriend(requested_dog_id, target_dog_id).then((data) => {
@@ -232,7 +232,7 @@ router.post('/api/deletefriend/', (req, res) => {
   });
 });
 
-router.post('/api/confirmfriend/', (req, res) => {
+router.post("/api/confirmfriend/", (req, res) => {
   const requested_dog_id = req.body.requested_dog_id;
   const target_dog_id = req.body.target_dog_id;
   database.confirmFriend(requested_dog_id, target_dog_id).then((data) => {
@@ -250,14 +250,13 @@ router.get(`/api/search/:searchQuery`, (req, res) => {
 
 router.get(`/api/events`, (req, res) => {
   database.getEventsList().then((results) => {
-    console.log("Events list results: ", results);
     res.json(results);
   });
 });
 
 router.get(`/api/events/:event_id`, (req, res) => {
+  const event_id = req.params.event_id;
   database.getEventDetails(event_id).then((results) => {
-    console.log("Event details results: ", results);
     res.json(results);
   });
 });
@@ -266,6 +265,22 @@ router.get(`/api/friendreqs/:dog_id`, (req, res) => {
   const dog_id = req.params.dog_id;
   database.getRequestedFriends(dog_id).then((results) => {
     console.log("Requested friends results: ", results);
+    res.json(results);
+  });
+});
+
+router.get(`/api/eventmembers/:event_id`, (req, res) => {
+  const event_id = req.params.event_id;
+  database.getEventMembers(event_id).then((results) => {
+    console.log("Event members from db: ", results);
+    res.json(results);
+  });
+});
+
+router.post(`/api/attendevent/:event_id`, (req, res) => {
+  const event_id = req.params.event_id;
+  const dog_id = req.body.userDog;
+  database.addEventMembers(event_id, dog_id).then((results) => {
     res.json(results);
   });
 });

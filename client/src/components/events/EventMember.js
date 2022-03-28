@@ -9,7 +9,7 @@ function EventMember({ profilePic, name }) {
       <div className="EventsMember">
         <div className="EventsMember__member">
           <Avatar src={profilePic} sx={{ height: "50px", width: "50px" }} />
-          <p>{name}name</p>
+          <p>{name}</p>
         </div>
       </div>
     </Grid>

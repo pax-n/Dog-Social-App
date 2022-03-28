@@ -12,16 +12,13 @@ function EventsListing({
   showEvent,
   city,
   country,
+  event_id,
+  handleEventClick,
 }) {
-  const clickEvent = (page) => () => {
-    changeEvent(page);
-    console.log("Event clicked.");
-  };
-
   return (
     <div>
       {showEvent === "EventListing" && (
-        <div className="EventsListing" onClick={clickEvent("Event")}>
+        <div className="EventsListing" onClick={handleEventClick}>
           <div className="EventsListing__title">
             <h2>{event_title}</h2>
           </div>

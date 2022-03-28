@@ -148,7 +148,7 @@ const confirmFriend = (requested_dog_id, target_dog_id) => {
   SET is_accepted = 'a'
   WHERE requested_dog_id = $1 AND target_dog_id = $2;`;
   const queryParams = [requested_dog_id, target_dog_id];
-  console.log("confirm friends queryparams: ", queryParams)
+  console.log("confirm friends queryparams: ", queryParams);
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows);
   });
@@ -256,7 +256,7 @@ const getRequestedFriends = (dog_id) => {
   const queryStatement = `
   SELECT dog_name, profile_pic_url, dogs.id FROM dogs JOIN dog_friendlists ON requested_dog_id=dogs.id
   WHERE dog_friendlists.target_dog_id = $1 AND dog_friendlists.is_accepted = 'p';
-  `
+  `;
   const queryParams = [dog_id];
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows);
@@ -293,6 +293,26 @@ const getEventDetails = (event_id) => {
   });
 };
 
+const getEventMembers = (event_id) => {
+  const queryStatement = `
+  SELECT e.id, e.event_id, e.dog_id, d.dog_name, e.created_at, d.profile_pic_url FROM event_members AS e
+  JOIN dogs AS d ON d.id = e.dog_id
+  WHERE e.event_id = $1
+  ORDER BY e.created_at DESC;`;
+  return db.query(queryStatement, [event_id]).then((data) => {
+    return Promise.resolve(data.rows);
+  });
+};
+
+const addEventMembers = (event_id, dog_id) => {
+  const queryStatement = `
+  INSERT INTO event_members (event_id, dog_id) VALUES ($1, $2);`;
+  const queryParams = [event_id, dog_id];
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows[0]);
+  });
+};
+
 //
 module.exports = {
   getDog,
@@ -318,4 +338,6 @@ module.exports = {
   getEventDetails,
   getRequestedFriends,
   confirmFriend,
+  getEventMembers,
+  addEventMembers,
 };
