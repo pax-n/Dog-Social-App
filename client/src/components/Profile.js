@@ -42,14 +42,6 @@ function Profile({ changePage, userID }) {
   const { settargetID } = useContext(toggleContext);
 
   useEffect(() => {
-    if (userID !== userDog) {
-      setOwnProfile(false);
-    } else {
-      setOwnProfile(true);
-    }
-  }, [userID]);
-
-  useEffect(() => {
     //Gets list of friends for user 1 and populates the friends section.
     let dog_id = userID;
     axios.get(`/api/friends/${dog_id}`).then((response) => {
@@ -58,8 +50,10 @@ function Profile({ changePage, userID }) {
       setFriends(friendlist);
       for (let friend in friendlist) {
         if (friendlist[friend].id === userDog) {
-          setisFriend(true);
-        }
+           setisFriend(true);
+           return;
+        } 
+        setisFriend(false);    
       }
     });
   }, [userID]);
@@ -70,6 +64,11 @@ function Profile({ changePage, userID }) {
       console.log("Profile response: ", response);
       setProfile(response.data);
     });
+    if (userID !== userDog) {
+      setOwnProfile(false);
+    } else {
+      setOwnProfile(true);
+    }
   }, [userID]);
 
   const addDogAsFriend = () => {
@@ -109,7 +108,7 @@ function Profile({ changePage, userID }) {
     settargetID(friend);
     changePage(page);
   };
-
+console.log("ownProfile = ", ownProfile, "isFriend = ", isFriend);
   return (
     <div className="profile">
       <div className="profile__top">
