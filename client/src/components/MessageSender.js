@@ -23,14 +23,29 @@ function MessageSender(props, bark_id) {
     let data = { caption, dog_id };
 
     Promise.all([
+      //Post the new bark to the database
       axios.post("/barks", data),
-      axios.get(`/barks/${dog_id}`),
-    ]).then((response) => {
-      setCaption("");
-      const posts = response[1].data;
-      console.log("reloadPosts response: ", response);
-      props.setPosts([...posts]);
-    });
+      //Gets the new list of barks including the newest bark
+      axios.get(`/barks/${dog_id}`).then((response) => {
+        console.log("Get barks response: ", response);
+
+        //List of all the posts with new bark
+        const allPosts = response.data;
+        console.log("AllPosts: ", allPosts);
+        props.setPosts([...allPosts]);
+
+        //Resets the caption space to blank.
+        setCaption("");
+
+        const bark_id = response.data[0].id;
+        console.log("New bark_id: ", bark_id);
+        //Retrieves likes again from database with new post' likes
+        axios.get(`/paws/${bark_id}`).then((response) => {
+          console.log("Paws set.");
+          props.setPaws(0);
+        });
+      }),
+    ]);
   };
 
   return (

@@ -12,14 +12,13 @@ function EventsListing({
   showEvent,
   city,
   country,
+  event_id,
+  handleEventClick,
 }) {
-  const clickEvent = (page) => () => {
-    changeEvent(page);
-  };
   return (
     <div>
       {showEvent === "EventListing" && (
-        <div className="EventsListing" onClick={clickEvent("Event")}>
+        <div className="EventsListing" onClick={handleEventClick}>
           <div className="EventsListing__title">
             <h2>{event_title}</h2>
           </div>
@@ -33,9 +32,13 @@ function EventsListing({
             </p>
           </div>
           <div className="EventsListing__time">
-            <p>Starts: <Moment format="LLLL">{start_time}</Moment></p>
+            <p>
+              Starts: <Moment format="LLLL">{start_time}</Moment>
+            </p>
             <p> to </p>
-            <p>Ends: <Moment format="LLLL">{end_time}</Moment></p>
+            <p>
+              Ends: <Moment format="LLLL">{end_time}</Moment>
+            </p>
           </div>
         </div>
       )}

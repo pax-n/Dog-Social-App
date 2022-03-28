@@ -46,7 +46,6 @@ function Profile({ changePage, userID }) {
     //Gets list of friends for user 1 and populates the friends section.
     let dog_id = userID;
     axios.get(`/api/friends/${dog_id}`).then((response) => {
-      console.log("Friends response: ", response);
       let friendlist = response.data;
       setFriends(friendlist);
       for (let friend in friendlist) {
@@ -72,7 +71,6 @@ function Profile({ changePage, userID }) {
   useEffect(() => {
     let dog_id = userID;
     axios.get(`/api/profile/${dog_id}`).then((response) => {
-      console.log("Profile response: ", response);
       setProfile(response.data);
     });
     if (userID !== userDog) {
