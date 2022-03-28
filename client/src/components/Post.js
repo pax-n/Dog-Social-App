@@ -67,16 +67,14 @@ function Post({
     let dog_id = userDog;
     const data = { dog_id, bark_id, postComment };
     console.log("Bark_id from sendComment: ", bark_id);
+    //Sends the comment to the database
     axios.post(`/comments`, data).then((response) => {
       console.log(
         "Comment sent to database. Comment response: ",
         response.data
       );
-      // setPostComment("");
-      // setLoadComments([...loadComments, response.data]);
-      // setLoadComments((prev) => [...prev, response.data]);
-      // console.log("New data: ", loadComments);
 
+      //Helper function reloads the get request to retrieve the list of comments.
       loadCommentsForPost(bark_id);
       setShowComments(showComments);
       setPostComment("");

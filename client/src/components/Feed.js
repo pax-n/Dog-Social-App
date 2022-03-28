@@ -16,8 +16,6 @@ function Feed({ show, changePage }) {
   const [posts, setPosts] = useState([]);
   const { targetID, searchQuery } = useContext(toggleContext);
 
-  const [paws, setPaws] = useState(0);
-
   useEffect(() => {
     let dog_id = 1;
     Promise.all([axios.get(`/barks/${dog_id}`), axios.get(`/paws/${dog_id}`)])
@@ -42,7 +40,7 @@ function Feed({ show, changePage }) {
       )}
       {show === "Feed" && (
         <>
-          <MessageSender setPosts={setPosts} />
+          <MessageSender setPosts={setPosts} setPaws={setPaws} />
           {posts.map((post) => {
             return (
               <Post
