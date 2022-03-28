@@ -19,6 +19,7 @@ import { toggleContext } from "./providers/ToggleProvider";
 function Profile({ changePage, userID }) {
   const [ownProfile, setOwnProfile] = useState(true);
   const [isFriend, setisFriend] = useState(false);
+  const [isFriendReq, setisFriendReq] = useState(false);
   const [isSwitch, setisSwitch] = useState(true);
 
   const [friends, setFriends] = useState([
@@ -54,18 +55,22 @@ function Profile({ changePage, userID }) {
            return;
         } 
       }
+      setisFriend(false);
     });
-    console.log(dog_id)
+  }, [userID, isSwitch]);
+
+  useEffect(() => {
+    let dog_id = userID;
     axios.get(`/api/friendsrequests/${dog_id}`).then((response) => {
       let friendlist = response.data;
       for (let friend in friendlist) {
         if (friendlist[friend].id === userDog) {
-            setisFriend(true);
+            setisFriendReq(true);
             return;
         } 
       }
+      setisFriendReq(false);
     });
-    setisFriend(false);    
   }, [userID, isSwitch]);
 
   useEffect(() => {
@@ -117,7 +122,7 @@ function Profile({ changePage, userID }) {
     settargetID(friend);
     changePage(page);
   };
-console.log("ownProfile = ", ownProfile, "isFriend = ", isFriend);
+console.log("ownProfile = ", ownProfile, "isFriend = ", isFriend, "isFriendReq = ", isFriendReq);
   return (
     <div className="profile">
       <div className="profile__top">
@@ -129,7 +134,7 @@ console.log("ownProfile = ", ownProfile, "isFriend = ", isFriend);
         />
         <div className="profile__user">
           <p>{profile.dog_name}</p>
-          {!ownProfile && !isFriend && (
+          {!ownProfile && !isFriend && !isFriendReq && (
             <Button variant="outlined" color="success" onClick={addDogAsFriend}>
               Add Friend
             </Button>
