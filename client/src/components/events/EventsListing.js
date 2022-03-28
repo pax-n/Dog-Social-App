@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from "react-moment";
 import "./EventsListing.css";
 
 function EventsListing({
@@ -32,9 +33,9 @@ function EventsListing({
             </p>
           </div>
           <div className="EventsListing__time">
-            <p>Starts: {start_time}</p>
+            <p>Starts: <Moment format="LLLL">{start_time}</Moment></p>
             <p> to </p>
-            <p>Ends: {end_time}</p>
+            <p>Ends: <Moment format="LLLL">{end_time}</Moment></p>
           </div>
         </div>
       )}
