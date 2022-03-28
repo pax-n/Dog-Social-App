@@ -4,6 +4,7 @@
   border-right: 1px solid #e6e6e6;
   width: 225px;
   background-color: white;
+  min-height: 900px;
 }
 
 @media only screen and (max-width: 500px) {

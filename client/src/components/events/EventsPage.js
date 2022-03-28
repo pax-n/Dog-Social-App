@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Moment from "react-moment";
 import { useContext } from "react";
 import { userContext } from "../providers/UserProvider";
+import Grid from "@mui/material/Grid";
 
 function EventsPage({
   showEvent,
@@ -58,14 +59,16 @@ function EventsPage({
           <div className="EventPage__bottom">
             <div className="EventPage_attending">
               <h3>Attending</h3>
-              {members.map((member) => {
-                return (
-                  <EventMember
-                    profilePic={member.profile_pic_url}
-                    name={member.dog_name}
-                  />
-                );
-              })}
+              <Grid container spacing={0}>
+                {members.map((member) => {
+                  return (
+                    <EventMember
+                      profilePic={member.profile_pic_url}
+                      name={member.dog_name}
+                    />
+                  );
+                })}
+              </Grid>
             </div>
             <div className="EventPage_attendance">
               <h3>Attendance</h3>
@@ -77,9 +80,9 @@ function EventsPage({
                 >
                   Going
                 </Button>
-                <Button variant="outlined" color="error">
+                {/* <Button variant="outlined" color="error">
                   Not going
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>
