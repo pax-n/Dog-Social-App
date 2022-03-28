@@ -250,6 +250,27 @@ const searchResults = (searchQuery) => {
   });
 };
 
+const getEventsList = () => {
+  const queryStatement = `
+  SELECT e.id, e.created_by_dog_id, e.start_time, e.end_time, e.description, e.location_name, e.city, e.country, e.created_at, d.dog_name 
+  FROM events AS e
+  JOIN dogs AS d ON d.id = e.created_by_dog_id
+  ;`;
+  return db.query(queryStatement).then((data) => {
+    return Promise.resolve(data.rows);
+  });
+};
+
+const getEventDetails = (event_id) => {
+  const queryStatement = `SELECT e.id, e.created_by_dog_id, e.start_time, e.end_time, e.description, e.location_name, e.city, e.country, e.created_at, d.dog_name 
+  FROM events AS e
+  JOIN dogs AS d ON d.id = e.created_by_dog_id
+  WHERE e.id = $1`;
+  return db.query(queryStatement, [event_id]).then((data) => {
+    return Promise.resolve(data.rows[0]);
+  });
+};
+
 //
 module.exports = {
   getDog,
@@ -271,4 +292,6 @@ module.exports = {
   addLike,
   getFriends,
   searchResults,
+  getEventsList,
+  getEventDetails,
 };

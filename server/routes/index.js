@@ -232,4 +232,18 @@ router.get(`/api/search/:searchQuery`, (req, res) => {
   });
 });
 
+router.get(`/api/events`, (req, res) => {
+  database.getEventsList().then((results) => {
+    console.log("Events list results: ", results);
+    res.json(results);
+  });
+});
+
+router.get(`/api/events/:event_id`, (req, res) => {
+  database.getEventDetails(event_id).then((results) => {
+    console.log("Event details results: ", results);
+    res.json(results);
+  });
+});
+
 module.exports = router;

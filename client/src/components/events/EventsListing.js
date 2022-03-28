@@ -9,6 +9,8 @@ function EventsListing({
   end_time,
   changeEvent,
   showEvent,
+  city,
+  country,
 }) {
   const clickEvent = (page) => () => {
     changeEvent(page);
@@ -18,18 +20,21 @@ function EventsListing({
       {showEvent === "EventListing" && (
         <div className="EventsListing" onClick={clickEvent("Event")}>
           <div className="EventsListing__title">
-            <h2>{event_title}Event Title</h2>
+            <h2>{event_title}</h2>
           </div>
           <div className="EventsListing__creator">
-            <p>Event by {user}User</p>
+            <p>Event by {user}</p>
           </div>
           <div className="EventsListing__description">
-            <p> {description}Description </p>
+            <p>
+              {" "}
+              Location: {city}, {country}{" "}
+            </p>
           </div>
           <div className="EventsListing__time">
-            <p>{start_time}Start Time</p>
+            <p>Starts: {start_time}</p>
             <p> to </p>
-            <p>{end_time}End Time</p>
+            <p>Ends: {end_time}</p>
           </div>
         </div>
       )}
