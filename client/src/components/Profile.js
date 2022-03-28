@@ -19,6 +19,7 @@ import { toggleContext } from "./providers/ToggleProvider";
 function Profile({ changePage, userID }) {
   const [ownProfile, setOwnProfile] = useState(true);
   const [isFriend, setisFriend] = useState(false);
+  const [isSwitch, setisSwitch] = useState(true);
 
   const [friends, setFriends] = useState([
     {
@@ -53,10 +54,20 @@ function Profile({ changePage, userID }) {
            setisFriend(true);
            return;
         } 
-        setisFriend(false);    
       }
     });
-  }, [userID]);
+    console.log(dog_id)
+    axios.get(`/api/friendsrequests/${dog_id}`).then((response) => {
+      let friendlist = response.data;
+      for (let friend in friendlist) {
+        if (friendlist[friend].id === userDog) {
+            setisFriend(true);
+            return;
+        } 
+      }
+    });
+    setisFriend(false);    
+  }, [userID, isSwitch]);
 
   useEffect(() => {
     let dog_id = userID;
@@ -69,7 +80,7 @@ function Profile({ changePage, userID }) {
     } else {
       setOwnProfile(true);
     }
-  }, [userID]);
+  }, [userID, isSwitch]);
 
   const addDogAsFriend = () => {
     let requested_dog_id = userDog;
@@ -77,7 +88,7 @@ function Profile({ changePage, userID }) {
     let target_dog_id = userID;
     const data = { requested_dog_id, target_dog_id };
     axios.post(`/api/addfriend/`, data).then((response) => {
-      console.log("Add dog as friend response: ");
+      setisSwitch(!isSwitch);
     });
   };
 

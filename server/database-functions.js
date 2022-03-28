@@ -252,6 +252,19 @@ const getFriends = (dog_id) => {
   });
 };
 
+const getFriendsRequests = (dog_id) => {
+  const queryStatement = `
+ SELECT d.dog_name, d.profile_pic_url, d.id FROM dogs AS d
+  WHERE d.id IN
+  (SELECT target_dog_id FROM dog_friendlists WHERE requested_dog_id = $1 AND is_accepted = 'p')
+  OR d.id in (SELECT requested_dog_id FROM dog_friendlists WHERE target_dog_id = $1 AND is_accepted = 'p');
+  `;
+  const queryParams = [dog_id];
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows);
+  });
+};
+
 const getRequestedFriends = (dog_id) => {
   const queryStatement = `
   SELECT dog_name, profile_pic_url, dogs.id FROM dogs JOIN dog_friendlists ON requested_dog_id=dogs.id
@@ -318,4 +331,5 @@ module.exports = {
   getEventDetails,
   getRequestedFriends,
   confirmFriend,
+  getFriendsRequests,
 };

@@ -206,6 +206,14 @@ router.get(`/api/friends/:dog_id`, (req, res) => {
   });
 });
 
+// for friend requests that haven't been accepted yet (sent or received)
+router.get(`/api/friendsrequests/:dog_id`, (req, res) => {
+  const dog_id = req.params.dog_id;
+  database.getFriendsRequests(dog_id).then((friends) => {
+    res.json(friends);
+  });
+});
+
 router.get(`/api/profile/:dog_id`, (req, res) => {
   const dog_id = req.params.dog_id;
   database.getDog(dog_id).then((profile) => {
