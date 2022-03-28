@@ -37,11 +37,6 @@ function Post({
   }, []);
 
   const pawsLike = (dog_id, bark_id) => {
-    console.log("Paws clicked.");
-    console.log("Dog_id: ", dog_id);
-    console.log("Bark_id: ", bark_id);
-    // dog_id = 5;
-    // const bark_id = 15;
     const data = { dog_id };
     axios.post(`/paws/${bark_id}`, data).then((response) => {
       console.log("pawsLike PUT Response: ", response);

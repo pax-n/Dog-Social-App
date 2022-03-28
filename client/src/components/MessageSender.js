@@ -1,35 +1,35 @@
 import React from "react";
 import "./MessageSender.css";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import axios from "axios";
 import ImageIcon from "@mui/icons-material/Image";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import Switch from "@mui/material/Switch";
 import PublicIcon from "@mui/icons-material/Public";
 import PublicOffIcon from "@mui/icons-material/PublicOff";
+import resolveProps from "@mui/utils/resolveProps";
+import { userContext } from "./providers/UserProvider";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
-function MessageSender(props) {
+function MessageSender(props, bark_id) {
   const [showImgURL, setShowImgURL] = useState(false);
   const [caption, setCaption] = useState(props.caption || "");
-
-  const reloadPosts = function (dog_id) {
-    axios.get(`/barks/${dog_id}`).then((response) => {
-      const posts = response[0].data;
-      props.setPosts(posts);
-    });
-  };
+  const { userDog } = useContext(userContext);
 
   const onClick = function () {
-    console.log("Button clicked.");
-    //PLACEHOLDER DOG_ID UNTIL LOGIN IS IMPLEMENTED
-    let dog_id = 1;
+    console.log("Bork button clicked.");
+    let dog_id = userDog;
     let data = { caption, dog_id };
-    axios.post("/barks", data).then((responses) => {
-      console.log("Post sent to database.");
+
+    Promise.all([
+      axios.post("/barks", data),
+      axios.get(`/barks/${dog_id}`),
+    ]).then((response) => {
       setCaption("");
-      reloadPosts(dog_id);
+      const posts = response[1].data;
+      console.log("reloadPosts response: ", response);
+      props.setPosts([...posts]);
     });
   };
 
