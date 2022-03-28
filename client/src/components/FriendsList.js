@@ -38,13 +38,20 @@ function FriendsList({ changePage }) {
 
   return (
     <div className="friendslist">
-      {friendReqs.map((friendreq) => {
-        return (
-          <FriendRequest 
-          profile_pic_url={friendreq.profile_pic_url}
-          name={friendreq.dog_name}/>
-        )
-      })}
+      <div className="FriendRequest">
+        <div className="FriendRequest__from">
+          <p>New friend request from...</p>
+        </div>
+        {friendReqs.map((friendreq) => {
+          return (
+            <FriendRequest 
+            profile_pic_url={friendreq.profile_pic_url}
+            name={friendreq.dog_name}
+            onClick={handleProfileClick("Profile", friendreq.id)}
+            />
+          )
+        })}
+      </div>
       <div className="friendslist__main">
         <div className="friendslist__title">
           <h2>Friends</h2>
