@@ -10,6 +10,7 @@ import { toggleContext } from "./providers/ToggleProvider";
 
 function FriendsList({ changePage }) {
   const [friends, setFriends] = useState([]);
+  const [friendReqs, setfriendReqs] = useState([]);
   const { userDog } = useContext(userContext);
   const { settargetID } = useContext(toggleContext);
 
@@ -21,6 +22,13 @@ function FriendsList({ changePage }) {
       let friendlist = response.data;
       setFriends(friendlist);
     });
+    //Gets list of requested friends for user and populates the friendrequests section
+    console.log("Before axios call dog_id: ", dog_id)
+    axios.get(`/api/friendreqs/${dog_id}`).then((response) => {
+      console.log("Friends request response: ", response);
+      let friendreqlist = response.data;
+      setfriendReqs(friendreqlist);
+    });
   }, []);
 
   const handleProfileClick = (page, friend) => () => {
@@ -30,7 +38,13 @@ function FriendsList({ changePage }) {
 
   return (
     <div className="friendslist">
-      <FriendRequest />
+      {friendReqs.map((friendreq) => {
+        return (
+          <FriendRequest 
+          profile_pic_url={friendreq.profile_pic_url}
+          name={friendreq.dog_name}/>
+        )
+      })}
       <div className="friendslist__main">
         <div className="friendslist__title">
           <h2>Friends</h2>

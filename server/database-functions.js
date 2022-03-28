@@ -240,8 +240,18 @@ const getFriends = (dog_id) => {
   });
 };
 
+const getRequestedFriends = (dog_id) => {
+  const queryStatement = `
+  SELECT dog_name, profile_pic_url, dogs.id FROM dogs JOIN dog_friendlists ON requested_dog_id=dogs.id
+  WHERE dog_friendlists.target_dog_id = $1 AND dog_friendlists.is_accepted = 'p';
+  `
+  const queryParams = [dog_id];
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows);
+  });
+};
+
 const searchResults = (searchQuery) => {
-  console.log(searchQuery);
   const queryStatement = `
   SELECT dog_name, profile_pic_url, id FROM dogs WHERE dog_name ILIKE '%' || $1 || '%';`;
   const queryParams = [searchQuery];
@@ -294,4 +304,5 @@ module.exports = {
   searchResults,
   getEventsList,
   getEventDetails,
+  getRequestedFriends,
 };

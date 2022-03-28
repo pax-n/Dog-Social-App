@@ -6,6 +6,8 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 
 function FriendRequest({ profile_pic_url, name }) {
+  
+  
   return (
     <div className="FriendRequest">
       <div className="FriendRequest__from">
@@ -17,7 +19,7 @@ function FriendRequest({ profile_pic_url, name }) {
             src={profile_pic_url}
             sx={{ height: "50px", width: "50px" }}
           />
-          <p>{name}User</p>
+          <p>{name}</p>
         </div>
         <div className="FriendRequest__buttons">
           <Button

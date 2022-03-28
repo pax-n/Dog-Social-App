@@ -246,4 +246,13 @@ router.get(`/api/events/:event_id`, (req, res) => {
   });
 });
 
+router.get(`/api/friendreqs/:dog_id`, (req, res) => {
+  const dog_id = req.params.dog_id;
+  console.log("router dog_id= ", dog_id);
+  database.getRequestedFriends(dog_id).then((results) => {
+    console.log("Requested friends results: ", results);
+    res.json(results);
+  });
+});
+
 module.exports = router;
