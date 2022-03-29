@@ -39,11 +39,12 @@ function MessageSender(props, bark_id) {
 
         const bark_id = response.data[0].id;
         console.log("New bark_id: ", bark_id);
+        props.setisswitch(!props.isswitch);
         //Retrieves likes again from database with new post' likes
-        axios.get(`/paws/${bark_id}`).then((response) => {
-          console.log("Paws set.");
-          props.setPaws(0);
-        });
+        // axios.get(`/paws/${bark_id}`).then((response) => {
+        //   console.log("Paws set.");
+        //   props.setPaws(0);
+        // });
       }),
     ]);
   };

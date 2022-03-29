@@ -17,13 +17,15 @@ function Feed({ show, changePage }) {
   const [posts, setPosts] = useState([]);
   const { targetEvent, targetID, searchQuery } = useContext(toggleContext);
   const [paws, setPaws] = useState(0);
+  const [isswitch, setisswitch] = useState(false);
 
   useEffect(() => {
     let dog_id = 1;
-    Promise.all([axios.get(`/barks/${dog_id}`), axios.get(`/paws/${dog_id}`)])
+    Promise.all([axios.get(`/barks/${dog_id}`) ]) //, axios.get(`/paws/${dog_id}`)])
       .then((responses) => {
         const posts = responses[0].data;
         setPosts(posts);
+        setisswitch(!isswitch);
       })
       .catch((error) => {
         console.log(error);
@@ -47,7 +49,12 @@ function Feed({ show, changePage }) {
       )}
       {show === "Feed" && (
         <>
-          <MessageSender setPosts={setPosts} setPaws={setPaws} />
+          <MessageSender 
+            setPosts={setPosts} 
+            setPaws={setPaws}
+            isswitch={isswitch}
+            setisswitch={setisswitch}
+             />
           {posts.map((post) => {
             return (
               <Post
@@ -60,6 +67,8 @@ function Feed({ show, changePage }) {
                 image_url={post.image_url}
                 paws={post.paws}
                 changePage={changePage}
+                isswitch={isswitch}
+                setisswitch={setisswitch}
               />
             );
           })}

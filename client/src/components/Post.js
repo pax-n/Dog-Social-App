@@ -19,6 +19,8 @@ function Post({
   image_url,
   created_at,
   changePage,
+  isswitch,
+  setisswitch,
 }) {
   const [paws, setPaws] = useState(0);
   const [showComments, setShowComments] = useState(false);
@@ -34,7 +36,7 @@ function Post({
         return likes;
       });
     });
-  }, []);
+  }, [isswitch]);
 
   const pawsLike = (dog_id, bark_id) => {
     const data = { dog_id };
