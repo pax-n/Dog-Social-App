@@ -12,6 +12,7 @@ function EventsPage({
   showEvent,
   event_title,
   user,
+  user_id,
   city,
   country,
   starting_time,
@@ -21,6 +22,7 @@ function EventsPage({
   members,
   event_id,
   getMembers,
+  handleProfileClick,
 }) {
   const { userDog } = useContext(userContext);
 
@@ -30,14 +32,13 @@ function EventsPage({
       getMembers(event_id);
     });
   };
-
   return (
     <div>
       {showEvent === "Events Page" && (
         <div className="EventsPage">
           <div className="EventPage__top">
             <h2>{event_title}</h2>
-            <p>Hosted by {user}</p>
+            <p>Hosted by <a onClick={handleProfileClick(user_id)}>{user}</a></p>
           </div>
           <div className="EventPage__middle">
             <div className="EventPage__map">
@@ -65,6 +66,7 @@ function EventsPage({
                     <EventMember
                       profilePic={member.profile_pic_url}
                       name={member.dog_name}
+                      handleProfileClick={handleProfileClick(member.dog_id)}
                     />
                   );
                 })}

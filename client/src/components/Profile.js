@@ -122,7 +122,6 @@ function Profile({ changePage, userID }) {
     settargetID(friend);
     changePage(page);
   };
-console.log("ownProfile = ", ownProfile, "isFriend = ", isFriend, "isFriendReq = ", isFriendReq);
   return (
     <div className="profile">
       <div className="profile__top">
