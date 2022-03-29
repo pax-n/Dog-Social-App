@@ -4,6 +4,11 @@
   padding: 45px;
 }
 
+.FriendsListUser__avatar {
+  cursor: pointer;
+}
+
 .FriendsListUser h3 {
   margin-left: 10px;
+  cursor: pointer;
 }

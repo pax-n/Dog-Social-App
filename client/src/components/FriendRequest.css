@@ -22,6 +22,7 @@
 .FriendRequest__user {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .FriendRequest__user p {

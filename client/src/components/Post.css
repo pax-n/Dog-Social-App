@@ -36,8 +36,15 @@
   align-items: center;
   border-bottom: 1px solid #e6e6e6;
 }
+
+.post__counter > .counterIcon {
+  margin-right: 5px;
+}
+
 .post__counter > p {
   margin-left: 5px;
+  display: flex;
+  align-items: center;
 }
 
 .post__counter > .MuiSvgIcon-root {

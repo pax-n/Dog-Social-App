@@ -106,8 +106,8 @@ function Post({
       </div>
 
       <div className="post__counter">
-        <PetsIcon />
-        <p>{paws} paws</p>
+        <PetsIcon className="counterIcon" />
+        {paws} {paws === "1" ? <p>paw</p> : <p>paws</p>}
       </div>
 
       <div className="post__buttons">

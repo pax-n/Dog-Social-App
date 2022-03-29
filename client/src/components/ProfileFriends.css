@@ -1,5 +1,6 @@
 .profilefriends {
   display: flex;
+  cursor: pointer;
 }
 
 .profilefriends__friend {
