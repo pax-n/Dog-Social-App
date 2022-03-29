@@ -12,7 +12,8 @@ import axios from "axios";
 function EventsFeed({ changePage }) {
   const [events, setEvents] = useState([]);
   const [showEvent, setShowEvent] = useState("EventListing");
-  const { targetEvent, settargetEvent, settargetID } = useContext(toggleContext);
+  const { targetEvent, settargetEvent, settargetID } =
+    useContext(toggleContext);
   const [eventPage, setEventPage] = useState([]);
   const [members, setMembers] = useState([]);
 
@@ -45,7 +46,7 @@ function EventsFeed({ changePage }) {
     getEvent(event_id);
     getMembers(event_id);
   };
-  
+
   useEffect(() => {
     axios.get(`/api/events`).then((response) => {
       let eventsList = response.data;
@@ -60,16 +61,18 @@ function EventsFeed({ changePage }) {
   return (
     <div className="EventsFeed">
       {showEvent === "EventListing" && (
-        <Button
-          sx={{ my: 2 }}
-          onClick={clickButton("CreateEvent")}
-          className="createEventButton"
-          variant="contained"
-          color="success"
-          startIcon={<AddIcon />}
-        >
-          Create Event
-        </Button>
+        <div className="buttonContainer">
+          <Button
+            sx={{ my: 2 }}
+            onClick={clickButton("CreateEvent")}
+            className="createEventButton"
+            variant="contained"
+            color="success"
+            startIcon={<AddIcon />}
+          >
+            Create Event
+          </Button>
+        </div>
       )}
       {events.map((event) => {
         return (
