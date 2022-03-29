@@ -52,8 +52,8 @@ function Login() {
       axios.get("/auth").then((responses) => {
         console.log("Response: ", responses.data);
         if (responses.data) {
-          login(responses.data)
-        };
+          login(responses.data);
+        }
       });
       toggleReset();
     });
@@ -111,11 +111,16 @@ function Login() {
               label="Password"
             />
           </FormControl>
-          <Button variant="contained" type="Submit" sx={{ my: 0.5 }}>
+          <Button
+            variant="contained"
+            color="success"
+            type="Submit"
+            sx={{ my: 0.5 }}
+          >
             Submit
           </Button>
         </FormControl>
-        <Button onClick={toggle}>
+        <Button color="success" onClick={toggle}>
           <strong>Not registered?</strong>
         </Button>
       </div>
