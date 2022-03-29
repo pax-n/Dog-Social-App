@@ -115,6 +115,7 @@ function Profile({ changePage, userID }) {
       "Poodle",
       "Greyhound",
       "Beagle",
+      "Samoyed",
     ];
     return breedList[breedKey - 1];
   };
