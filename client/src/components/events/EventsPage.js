@@ -25,23 +25,15 @@ function EventsPage({
   handleProfileClick,
 }) {
   const { userDog } = useContext(userContext);
-  const [togglebuttons, settogglebuttons] = useState(true);
-  const [isswitch, setisswitch] = useState(true);
 
-  useEffect(() => {
+    const membersArray = []
     for (let member of members) {
-      if (member.dog_id === userDog) {
-        settogglebuttons(true);
-        return;
-      }
-      settogglebuttons(false);
+      membersArray.push(member.dog_id)
     }
-  }, [isswitch]);
 
   const attendButton = () => {
     const data = { userDog };
     axios.post(`/api/attendevent/${event_id}`, data).then((response) => {
-      setisswitch(!isswitch);
       getMembers(event_id);
     });
   };
@@ -49,7 +41,6 @@ function EventsPage({
   const notattendButton = () => {
     const data = { userDog };
     axios.post(`/api/notattendevent/${event_id}`, data).then((response) => {
-      setisswitch(!isswitch);
       getMembers(event_id);
     });
   }
@@ -96,7 +87,7 @@ function EventsPage({
             <div className="EventPage_attendance">
               <h3>Attendance</h3>
               <div className="EventPage_buttons">
-                { togglebuttons && 
+                { !membersArray.includes(userDog) && 
                 <Button
                   variant="outlined"
                   color="success"
@@ -105,7 +96,7 @@ function EventsPage({
                   Going
                 </Button>
                 }
-                { !togglebuttons &&
+                { membersArray.includes(userDog) &&
                 <Button 
                   variant="outlined" 
                   color="error"
