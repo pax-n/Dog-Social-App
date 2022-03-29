@@ -19,7 +19,6 @@ function App() {
   };
   useEffect(() => {
     axios.get("/auth").then((responses) => {
-      console.log("Response: ", responses.data);
       if (responses.data) {
         login(responses.data);
         axios.get(`/dog/${responses.data}`).then((dog) => {

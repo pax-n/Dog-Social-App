@@ -327,6 +327,16 @@ const addEventMembers = (event_id, dog_id) => {
   });
 };
 
+const removeEventMembers = (event_id, dog_id) => {
+  const queryStatement = `
+  DELETE FROM event_members WHERE dog_id = $1 AND event_id = $2;`;
+  const queryParams = [dog_id, event_id];
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows[0]);
+  });
+};
+
+
 //
 module.exports = {
   getDog,
@@ -355,4 +365,5 @@ module.exports = {
   getFriendsRequests,
   getEventMembers,
   addEventMembers,
+  removeEventMembers,
 };

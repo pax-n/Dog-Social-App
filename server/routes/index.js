@@ -293,4 +293,12 @@ router.post(`/api/attendevent/:event_id`, (req, res) => {
   });
 });
 
+router.post(`/api/notattendevent/:event_id`, (req, res) => {
+  const event_id = req.params.event_id;
+  const dog_id = req.body.userDog;
+  database.removeEventMembers(event_id, dog_id).then((results) => {
+    res.json(results);
+  });
+});
+
 module.exports = router;
