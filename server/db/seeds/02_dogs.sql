@@ -6,4 +6,6 @@ INSERT INTO dogs (breed_id, email, dog_name, owner_first_name, owner_last_name, 
 (4,'test3@test.com','Sydney','','','test','https://www.thesprucepets.com/thmb/AV6s4AL9uAcAobnwz0KdkW2UG08=/1333x1000/smart/filters:no_upscale()/shih-tzu-dog-breed-profile-1117999-hero-5541b7f6f936478ca766d85ff5af202e.jpeg','2010-03-20','Does not like anyone. Probably does not like you.','f','Toronto, ON, Canada'),
 (5,'test4@test.com','Stark','E','Chris','test','https://www.loveyourdog.com/wp-content/uploads/2020/04/Siberian-Husky-in-Snow.jpg','2018-07-29','Fierce but playful!','m','Toronto, ON, Canada'),
 (6,'test5@test.com','Lily','Olga','P','test','https://www.petlandflorida.com/wp-content/uploads/2021/01/Petland_Florida_Toy_Poodle.jpg','2021-02-14','Playful and energetic!','f','Toronto, ON, Canada'),
-(7,'test6@test.com','Sonic','','','test','https://figopetinsurance.com/sites/default/files/imagedogscute-italian-greyhound-sitting-couchblog.jpg','2015-09-12','GOTTA RUN FASTER!','f','Toronto, ON, Canada');
+(7,'test6@test.com','Sonic','','','test','https://figopetinsurance.com/sites/default/files/imagedogscute-italian-greyhound-sitting-couchblog.jpg','2015-09-12','GOTTA RUN FASTER!','f','Toronto, ON, Canada'),
+(8,'tubby@doggo.com','Tubby','Paxton','Nguyen','test','https://i.imgur.com/Df7HAeW.png','2017-06-07','I love to schniff everything','m','Toronto, ON, Canada'),
+(9,'nimbo@doggo.com','Nimbus','Paxton','Nguyen','test','https://i.imgur.com/sX3yTwV.jpg','2020-08-02','I am a big fluffy chonker boi','m','Toronto, ON, Canada');

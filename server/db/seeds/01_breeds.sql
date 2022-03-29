@@ -5,4 +5,6 @@ INSERT INTO breeds (breed_name) VALUES
 ('Shih-tzu'),
 ('Husky'),
 ('Poodle'),
-('Greyhound');
+('Greyhound'),
+('Beagle'),
+('Samoyed');

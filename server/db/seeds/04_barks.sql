@@ -33,4 +33,6 @@ INSERT INTO barks (dog_id, caption, image_url, video_url, created_at, is_public)
 (8,'What can I say? I love good food! MMmmmm', 'https://www.thesprucepets.com/thmb/yvGahRV-mwixoURka1J4rNgbQRg=/1280x854/filters:fill(auto,1)/dog-food-144564301-resized-1-56a26ad43df78cf7727563d1.jpg','','2022-03-10 15:47:00',true),
 (8,'Decided to treat myself to a delicious TWO COURSE MEAL tonight!!','https://bcpvetpharm.com/storage/2/best-dog-food-for-dogs-with-sensitive-stomachs-1150x700-1080x675.jpg','','2022-03-13 22:10:00',true),
 (8,'Eating like a human today! So exciting!!','https://www.ppfeurope.com/img/library/products/11214_Dry_dog_superpremium_junior.jpg','','2022-03-17 20:13:00',true),
-(8,'Look at this delicacy!','https://woofwhiskers.com/wp-content/uploads/2020/05/ST.jpg','','2022-03-19 14:36:00',true);
+(8,'Look at this delicacy!','https://woofwhiskers.com/wp-content/uploads/2020/05/ST.jpg','','2022-03-19 14:36:00',true),
+(9,'Me and my best fwend!','https://i.imgur.com/1QgcOPU.jpg','','2022-03-19 14:35:00',true),
+(10,'I think I am in trouble','https://i.imgur.com/2f924e6.jpg','','2022-03-18 19:24:00',true);

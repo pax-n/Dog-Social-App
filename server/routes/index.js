@@ -57,6 +57,8 @@ router.post("/register", (req, res) => {
       "Husky",
       "Poodle",
       "Greyhound",
+      "Beagle",
+      "Samoyed",
     ];
     for (let i = 0; i < breedList.length; i++) {
       if (element === breedList[i]) {

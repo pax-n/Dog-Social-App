@@ -23,4 +23,6 @@ INSERT INTO dog_friendlists (requested_dog_id, target_dog_id, is_accepted) VALUE
 (7, 4, 'p'),
 (7, 8, 'a'),
 (8, 2, 'p'),
-(8, 4, 'a');
+(8, 4, 'a'),
+(9, 10, 'a'),
+(10, 9, 'a');
