@@ -51,9 +51,9 @@ function Profile({ changePage, userID }) {
       setFriends(friendlist);
       for (let friend in friendlist) {
         if (friendlist[friend].id === userDog) {
-           setisFriend(true);
-           return;
-        } 
+          setisFriend(true);
+          return;
+        }
       }
       setisFriend(false);
     });
@@ -65,9 +65,9 @@ function Profile({ changePage, userID }) {
       let friendlist = response.data;
       for (let friend in friendlist) {
         if (friendlist[friend].id === userDog) {
-            setisFriendReq(true);
-            return;
-        } 
+          setisFriendReq(true);
+          return;
+        }
       }
       setisFriendReq(false);
     });
@@ -114,6 +114,7 @@ function Profile({ changePage, userID }) {
       "Husky",
       "Poodle",
       "Greyhound",
+      "Beagle",
     ];
     return breedList[breedKey - 1];
   };

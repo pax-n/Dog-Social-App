@@ -12,6 +12,7 @@ import EventsFeed from "./events/EventsFeed";
 import EventsPage from "./events/EventsPage";
 import resolveProps from "@mui/utils/resolveProps";
 import { userContext } from "./providers/UserProvider";
+import MarketplaceFeed from "./marketplace/MarketplaceFeed";
 
 function Feed({ show, changePage }) {
   const [posts, setPosts] = useState([]);
@@ -34,6 +35,7 @@ function Feed({ show, changePage }) {
 
   return (
     <div className="feed">
+      {show === "Market" && <MarketplaceFeed changePage={changePage} />}
       {show === "Search" && (
         <SearchResults changePage={changePage} searchQuery={searchQuery} />
       )}

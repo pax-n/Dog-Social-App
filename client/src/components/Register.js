@@ -105,6 +105,7 @@ function Register() {
     "Husky",
     "Poodle",
     "Greyhound",
+    "Beagle",
   ];
   const breedMenu = dogBreeds.map((element) => (
     <MenuItem value={element}>{element}</MenuItem>
