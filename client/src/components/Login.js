@@ -81,6 +81,7 @@ function Login() {
           <FormGroup sx={{ my: 0.25, width: "30ch" }} variant="outlined">
             <TextField
               id="outlined-uncontrolled"
+              color="success"
               label="Email"
               sx={{ width: "30ch" }}
               value={values.email}
@@ -88,11 +89,12 @@ function Login() {
             />
           </FormGroup>
           <FormControl sx={{ my: 0.25, width: "30ch" }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">
+            <InputLabel htmlFor="outlined-adornment-password" color="success">
               Password
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-password"
+              color="success"
               type={values.showPassword ? "text" : "password"}
               value={values.password}
               onChange={handleChange("password")}

@@ -126,6 +126,7 @@ function Register() {
     >
       <h1>Register</h1>
       <TextField
+        color="success"
         id="outlined-uncontrolled"
         label="Email"
         sx={{ m: 0.5, width: "30ch" }}
@@ -134,8 +135,11 @@ function Register() {
       />
 
       <FormControl sx={{ m: 0.5, width: "29.8ch" }} variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-password" color="success">
+          Password
+        </InputLabel>
         <OutlinedInput
+          color="success"
           id="outlined-adornment-password"
           type={values.showPassword ? "text" : "password"}
           value={values.password}
@@ -158,6 +162,7 @@ function Register() {
       <br />
 
       <TextField
+        color="success"
         id="outlined-uncontrolled"
         label="Dog Name"
         sx={{ m: 0.5, width: "30ch" }}
@@ -166,8 +171,11 @@ function Register() {
       />
 
       <FormControl sx={{ m: 0.5, width: "30ch" }}>
-        <InputLabel id="demo-simple-select-label">Dog Breed</InputLabel>
+        <InputLabel id="demo-simple-select-label" color="success">
+          Dog Breed
+        </InputLabel>
         <Select
+          color="success"
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Dog Breed"
@@ -180,8 +188,11 @@ function Register() {
       <br />
 
       <FormControl sx={{ m: 0.5, width: "29.8ch" }}>
-        <InputLabel id="demo-simple-select-label">Dog Gender</InputLabel>
+        <InputLabel color="success" id="demo-simple-select-label">
+          Dog Gender
+        </InputLabel>
         <Select
+          color="success"
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Dog Gender"
@@ -202,12 +213,13 @@ function Register() {
           onChange={(newValue) => {
             setValues({ ...values, date: newValue });
           }}
-          renderInput={(params) => <TextField {...params} />}
+          renderInput={(params) => <TextField {...params} color="success" />}
         />
       </LocalizationProvider>
       <br />
 
       <TextField
+        color="success"
         id="outlined-uncontrolled"
         label="Owner's First Name"
         sx={{ m: 0.5, width: "30ch" }}
@@ -215,6 +227,7 @@ function Register() {
         onChange={handleChange("owner_first_name")}
       />
       <TextField
+        color="success"
         id="outlined-uncontrolled"
         label="Owner's Last Name"
         sx={{ m: 0.5, width: "30ch" }}
@@ -224,6 +237,7 @@ function Register() {
       <br />
 
       <TextField
+        color="success"
         id="outlined-uncontrolled"
         label="Profile Image URL"
         sx={{ m: 0.5, width: "62ch" }}
@@ -235,6 +249,7 @@ function Register() {
       <br />
 
       <TextField
+        color="success"
         sx={{ m: 0.5, width: "62ch" }}
         id="outlined-multiline-static"
         label="Bio"
