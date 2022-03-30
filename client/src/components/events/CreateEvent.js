@@ -70,7 +70,7 @@ function CreateEvent({ showEvent }) {
   return (
     <div>
       {showEvent === "CreateEvent" && (
-        <div className="createEvent" onClick={onSubmit}>
+        <div className="createEvent">
           <div className="createEvent__header">
             <h2>Create an Event</h2>
           </div>
@@ -119,7 +119,7 @@ function CreateEvent({ showEvent }) {
                 className="createEvent__button"
                 variant="contained"
                 color="success"
-                onClick={toggle}
+                onClick={onSubmit}
               >
                 Create
               </Button>
