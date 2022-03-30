@@ -8,4 +8,7 @@ INSERT INTO dogs (breed_id, email, dog_name, owner_first_name, owner_last_name, 
 (6,'test5@test.com','Lily','Olga','P','test','https://www.petlandflorida.com/wp-content/uploads/2021/01/Petland_Florida_Toy_Poodle.jpg','2021-02-14','Playful and energetic!','f','Toronto, ON, Canada'),
 (7,'test6@test.com','Sonic','','','test','https://figopetinsurance.com/sites/default/files/imagedogscute-italian-greyhound-sitting-couchblog.jpg','2015-09-12','GOTTA RUN FASTER!','f','Toronto, ON, Canada'),
 (8,'tubby@doggo.com','Tubby','Paxton','Nguyen','test','https://i.imgur.com/Df7HAeW.png','2017-06-07','I love to schniff everything','m','Toronto, ON, Canada'),
-(9,'nimbo@doggo.com','Nimbus','Paxton','Nguyen','test','https://i.imgur.com/sX3yTwV.jpg','2020-08-02','I am a big fluffy chonker boi','m','Toronto, ON, Canada');
+(9,'nimbo@doggo.com','Nimbus','Paxton','Nguyen','test','https://i.imgur.com/sX3yTwV.jpg','2020-08-02','I am a big fluffy chonker boi','m','Toronto, ON, Canada'),
+(9,'test9@test.com','peanut','','','test','https://i.natgeofe.com/n/739c90bc-79da-46a1-ac83-6b9ec8b146cc/10-domestic-dog-gallery_3x4.jpg','2020-08-12','I am a ferocious beast','m','Toronto, ON, Canada'),
+(3,'test7@test.com','Mr Peanut','','','test','https://pbs.twimg.com/media/DNgo-JTU8AIobeP?format=jpg&name=large','2012-02-01','Everyone is allergic to me :(','m','Toronto, ON, Canada'),
+(2,'test8@test.com','Peanut','','','test','https://dachshundbonus.com/wp-content/uploads/2019/08/thumbnail-1024x536.jpg','2019-11-23','I LIKE FEESH','f','Toronto, ON, Canada');
