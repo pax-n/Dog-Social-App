@@ -37,11 +37,10 @@ function Header({ changePage }) {
   }
 
   const handleSearch = (event) => {
-    console.log("keydown", event)
     if (event.key === "Enter") {
-      console.log("Enter: ", event.target.value)
       setsearchQuery(event.target.value)
       changePage("Search");
+      event.target.value=""
       event.preventDefault();
       }   
   }
