@@ -317,4 +317,10 @@ router.post(`/api/events`, (req, res) => {
     });
 });
 
+router.get(`/api/classifieds`, (req, res) => {
+  database.getClassifieds().then((results) => {
+    res.json(results);
+  });
+});
+
 module.exports = router;

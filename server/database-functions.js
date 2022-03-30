@@ -9,7 +9,6 @@ const getDog = (userid) => {
   const queryStatement = `
   SELECT * FROM dogs WHERE id = $1;`;
   const queryParams = [userid];
-  console.log(queryStatement, queryParams);
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows[0]);
   });
@@ -148,7 +147,6 @@ const confirmFriend = (requested_dog_id, target_dog_id) => {
   SET is_accepted = 'a'
   WHERE requested_dog_id = $1 AND target_dog_id = $2;`;
   const queryParams = [requested_dog_id, target_dog_id];
-  console.log("confirm friends queryparams: ", queryParams);
   return db.query(queryStatement, queryParams).then((data) => {
     return Promise.resolve(data.rows);
   });
@@ -362,6 +360,16 @@ const addEvent = (
   });
 };
 
+const getClassifieds = () => {
+  const queryStatement = `
+  SELECT dog_name, profile_pic_url, dogs.id, email, classifieds.* FROM dogs RIGHT JOIN classifieds ON dog_id = dogs.id;
+  `;
+  return db.query(queryStatement).then((data) => {
+    console.log("getClassifieds: ", data);
+    return Promise.resolve(data.rows);
+  });
+};
+
 //
 module.exports = {
   getDog,
@@ -392,4 +400,5 @@ module.exports = {
   addEventMembers,
   removeEventMembers,
   addEvent,
+  getClassifieds,
 };
