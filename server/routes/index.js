@@ -303,4 +303,18 @@ router.post(`/api/notattendevent/:event_id`, (req, res) => {
   });
 });
 
+router.post(`/api/events`, (req, res) => {
+  const created_by_dog_id = req.body.created_by_dog_id;
+  const start_time = req.body.start_time;
+  const end_time = req.body.end_time;
+  const description = req.body.description;
+  const location = req.body.location;
+
+  database
+    .addEvent(created_by_dog_id, start_time, end_time, description, location)
+    .then((results) => {
+      res.json(results);
+    });
+});
+
 module.exports = router;

@@ -10,8 +10,7 @@ function EventsListing({
   end_time,
   changeEvent,
   showEvent,
-  city,
-  country,
+  location,
   event_id,
   handleEventClick,
 }) {
@@ -26,10 +25,7 @@ function EventsListing({
             <p>Event by {user}</p>
           </div>
           <div className="EventsListing__description">
-            <p>
-              {" "}
-              Location: {city}, {country}{" "}
-            </p>
+            <p> Location: {location}</p>
           </div>
           <div className="EventsListing__time">
             <p>

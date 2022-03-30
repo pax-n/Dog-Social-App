@@ -50,6 +50,7 @@ function EventsFeed({ changePage }) {
   useEffect(() => {
     axios.get(`/api/events`).then((response) => {
       let eventsList = response.data;
+      console.log("Eventslist: ", eventsList);
       setEvents(eventsList);
     });
   }, []);
@@ -84,8 +85,7 @@ function EventsFeed({ changePage }) {
             start_time={event.start_time}
             end_time={event.end_time}
             city={event.city}
-            country={event.country}
-            event_id={event.id}
+            location={event.location}
             handleEventClick={handleEventClick(event.id)}
           />
         );
@@ -97,8 +97,7 @@ function EventsFeed({ changePage }) {
         event_title={eventPage.description}
         user={eventPage.dog_name}
         user_id={eventPage.created_by_dog_id}
-        city={eventPage.city}
-        country={eventPage.country}
+        location={eventPage.location}
         starting_time={eventPage.start_time}
         ending_time={eventPage.end_time}
         members={members}

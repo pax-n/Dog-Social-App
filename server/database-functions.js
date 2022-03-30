@@ -288,9 +288,10 @@ const searchResults = (searchQuery) => {
 
 const getEventsList = () => {
   const queryStatement = `
-  SELECT e.id, e.created_by_dog_id, e.start_time, e.end_time, e.description, e.location_name, e.city, e.country, e.created_at, d.dog_name 
+  SELECT e.id, e.created_by_dog_id, e.start_time, e.end_time, e.description, e.location_name, e.location, e.created_at, d.dog_name 
   FROM events AS e
   JOIN dogs AS d ON d.id = e.created_by_dog_id
+  ORDER BY e.created_at DESC
   ;`;
   return db.query(queryStatement).then((data) => {
     return Promise.resolve(data.rows);
@@ -298,7 +299,7 @@ const getEventsList = () => {
 };
 
 const getEventDetails = (event_id) => {
-  const queryStatement = `SELECT e.id, e.created_by_dog_id, e.start_time, e.end_time, e.description, e.location_name, e.city, e.country, e.created_at, d.dog_name 
+  const queryStatement = `SELECT e.id, e.created_by_dog_id, e.start_time, e.end_time, e.description, e.location_name, e.location, e.created_at, d.dog_name 
   FROM events AS e
   JOIN dogs AS d ON d.id = e.created_by_dog_id
   WHERE e.id = $1`;
@@ -336,6 +337,30 @@ const removeEventMembers = (event_id, dog_id) => {
   });
 };
 
+const addEvent = (
+  created_by_dog_id,
+  start_time,
+  end_time,
+  description,
+  location
+) => {
+  const queryStatement = `
+  INSERT INTO events (created_by_dog_id,
+  start_time,
+  end_time, 
+  description, 
+  location) VALUES ($1, $2, $3, $4, $5);`;
+  const queryParams = [
+    created_by_dog_id,
+    start_time,
+    end_time,
+    description,
+    location,
+  ];
+  return db.query(queryStatement, queryParams).then((data) => {
+    return Promise.resolve(data.rows[0]);
+  });
+};
 
 //
 module.exports = {
@@ -366,4 +391,5 @@ module.exports = {
   getEventMembers,
   addEventMembers,
   removeEventMembers,
+  addEvent,
 };

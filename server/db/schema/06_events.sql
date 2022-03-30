@@ -8,8 +8,7 @@ CREATE TABLE events (
   description VARCHAR(1000),
   location_point POINT,
   location_name VARCHAR(100),
-  city VARCHAR(100),
-  country VARCHAR(100),
+  location VARCHAR(100),
   created_at TIMESTAMP default current_timestamp,
   updated_at TIMESTAMP
 );

@@ -23,13 +23,14 @@ function EventsPage({
   event_id,
   getMembers,
   handleProfileClick,
+  location,
 }) {
   const { userDog } = useContext(userContext);
 
-    const membersArray = []
-    for (let member of members) {
-      membersArray.push(member.dog_id)
-    }
+  const membersArray = [];
+  for (let member of members) {
+    membersArray.push(member.dog_id);
+  }
 
   const attendButton = () => {
     const data = { userDog };
@@ -43,21 +44,21 @@ function EventsPage({
     axios.post(`/api/notattendevent/${event_id}`, data).then((response) => {
       getMembers(event_id);
     });
-  }
+  };
   return (
     <div>
       {showEvent === "Events Page" && (
         <div className="EventsPage">
           <div className="EventPage__top">
             <h2>{event_title}</h2>
-            <p>Hosted by <a onClick={handleProfileClick(user_id)}>{user}</a></p>
+            <p>
+              Hosted by <a onClick={handleProfileClick(user_id)}>{user}</a>
+            </p>
           </div>
           <div className="EventPage__middle">
             <div className="EventPage__map">
               <h3>Location</h3>
-              <p>
-                {city}, {country}
-              </p>
+              <p>{location}</p>
             </div>
             <div className="EventPage_information">
               <h3>Information</h3>
@@ -87,24 +88,24 @@ function EventsPage({
             <div className="EventPage_attendance">
               <h3>Attendance</h3>
               <div className="EventPage_buttons">
-                { !membersArray.includes(userDog) && 
-                <Button
-                  variant="outlined"
-                  color="success"
-                  onClick={attendButton}
-                >
-                  Going
-                </Button>
-                }
-                { membersArray.includes(userDog) &&
-                <Button 
-                  variant="outlined" 
-                  color="error"
-                  onClick={notattendButton}
-                >
-                  Not going
-                </Button>
-                }
+                {!membersArray.includes(userDog) && (
+                  <Button
+                    variant="outlined"
+                    color="success"
+                    onClick={attendButton}
+                  >
+                    Going
+                  </Button>
+                )}
+                {membersArray.includes(userDog) && (
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={notattendButton}
+                  >
+                    Not going
+                  </Button>
+                )}
               </div>
             </div>
           </div>
