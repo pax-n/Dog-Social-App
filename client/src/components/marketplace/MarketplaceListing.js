@@ -6,29 +6,32 @@ import Button from "@mui/material/Button";
 function MarketplaceListing({
   profilePic,
   username,
+  email,
   item,
   item_img,
   price,
   description,
-  phone_number,
 }) {
+  const emailParse = `mailto:${email}?subject=Inquiry%20about%20${item}`
   return (
     <div className="MarketplaceListing">
       <div className="MarketplaceListing__user">
         <Avatar src={profilePic} sx={{ height: "40px", width: "40px" }} />
-        <p>{username}Username</p>
+        <p>{username}</p>
       </div>
       <div className="MarketplaceListing__image">
-        <h4>{item} Toy Bone</h4>
-        <img src="https://www.popsci.com/uploads/2021/08/18/kong-goodie-bone-dog-toy-best-chew-dog-toy.jpg?auto=webp"></img>
+        <h4>{item}</h4>
+        <img src={item_img} alt="Product image"/>
       </div>
       <div className="MarketplaceListing__bottom">
-        <h4>${price}5</h4>
-        <p>{description}Description</p>
+        <h4>
+          {price && `$${price/100}`}
+          {!price && `Contact for price`}
+        </h4>
+        <p>{description}</p>
       </div>
       <div className="MarketplaceListing__contact">
-        <p>{phone_number}Phone Number</p>
-        <Button variant="text" color="success">
+        <Button variant="text" color="success" href={emailParse}>
           Contact
         </Button>
       </div>
