@@ -45,11 +45,11 @@ function Sidebar({ changePage }) {
         Icon={StorefrontIcon}
         sideName="Marketplace"
       />
-      <SidebarRow
+      {/* <SidebarRow
         onClick={handleClick("Chat")}
         Icon={ChatIcon}
         sideName="Chat"
-      />
+      /> */}
     </div>
   );
 }
