@@ -4,23 +4,23 @@ A social media application built using the PERN stack for the Lighthouse Labs Fi
 
 ## Screengrabs
 
-## Demo
+### Demo
 
 ![Demo gif](https://github.com/pax-n/Dog-Social-App/blob/master/client/public/images/finaldemo.gif)
 
-## Registration Page
+### Registration Page
 
 !["registration"](https://github.com/pax-n/Dog-Social-App/blob/master/client/public/images/RegistrationPage.png)
 
-## Profile Page
+### Profile Page
 
 !["profile"](https://github.com/pax-n/Dog-Social-App/blob/master/client/public/images/ProfilePage.png)
 
-## Market Place
+### Market Place
 
 !["market"](https://github.com/pax-n/Dog-Social-App/blob/master/client/public/images/MarketPlace.png)
 
-## Front end Setup
+### Front end Setup
 
 1. From the client directory, run `npm i`
 2. Copy the .env file and fill in a google API KEY (note: this method is safe only for a localhost in development mode)
