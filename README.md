@@ -4,17 +4,21 @@ A social media application built using the PERN stack for the Lighthouse Labs Fi
 
 ## Screengrabs
 
-### TITLE
-!["CAPTION"](https://LINK)
+## Demo
 
-### TITLE
-!["CAPTION"](https://LINK)
+![Demo gif](https://github.com/pax-n/Dog-Social-App/blob/master/client/public/images/finaldemo.gif)
 
-### TITLE
-!["CAPTION"](https://LINK)
+## Registration Page
 
-### TITLE
-!["CAPTION"](https://LINK)
+!["registration"](https://github.com/pax-n/Dog-Social-App/blob/master/client/public/images/RegistrationPage.png)
+
+## Profile Page
+
+!["profile"](https://github.com/pax-n/Dog-Social-App/blob/master/client/public/images/ProfilePage.png)
+
+## Market Place
+
+!["market"](https://github.com/pax-n/Dog-Social-App/blob/master/client/public/images/MarketPlace.png)
 
 ## Front end Setup
 
@@ -33,34 +37,29 @@ A social media application built using the PERN stack for the Lighthouse Labs Fi
 1. Open PSQL
 2. Create a user and password (or use an existing one) - `CREATE ROLE labber WITH LOGIN password 'labber';`
 3. Create a new database using the above user - `CREATE DATABASE final OWNER labber;`
-4. Fill in the server side .env with the proper info - 
-`DB_HOST=localhost
-DB_USER=labber
-DB_PASS=labber
-DB_NAME=final
-DB_PORT=5432`
+4. Fill in the server side .env with the proper info -
+   `DB_HOST=localhost DB_USER=labber DB_PASS=labber DB_NAME=final DB_PORT=5432`
 5. From the server directory, run `npm run db:reset` to populate/reset the database with seeds
-
 
 ## Dependencies
 
-* React v17.0.2
-* PostgreSQL 9.x
-* Express v4.16.1
-* pg v8.7.3
-* dotenv v2.0.0
-* cors v2.8.5
-* cookie-session v2.0.0
-* http-errors v1.6.3
-* cookie-parser v1.4.4
-* body-parser v1.19.2
-* morgan v1.9.1
-* mui:
-  * @mui/icons-material v5.5.1
-  * @mui/lab v5.0.0-alpha.74
-  * @mui/material v5.5.1
-* axios v0.26.1
-* react-dom v17.0.2
-* react-moment v1.1.1
-* lodash v4.17.21
-* autosuggest-highlight v3.2.1
+- React v17.0.2
+- PostgreSQL 9.x
+- Express v4.16.1
+- pg v8.7.3
+- dotenv v2.0.0
+- cors v2.8.5
+- cookie-session v2.0.0
+- http-errors v1.6.3
+- cookie-parser v1.4.4
+- body-parser v1.19.2
+- morgan v1.9.1
+- mui:
+  - @mui/icons-material v5.5.1
+  - @mui/lab v5.0.0-alpha.74
+  - @mui/material v5.5.1
+- axios v0.26.1
+- react-dom v17.0.2
+- react-moment v1.1.1
+- lodash v4.17.21
+- autosuggest-highlight v3.2.1
