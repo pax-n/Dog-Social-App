@@ -20,7 +20,7 @@ A social media application built using the PERN stack for the Lighthouse Labs Fi
 
 !["market"](https://github.com/pax-n/Dog-Social-App/blob/master/client/public/images/MarketPlace.png)
 
-### Front end Setup
+## Front end Setup
 
 1. From the client directory, run `npm i`
 2. Copy the .env file and fill in a google API KEY (note: this method is safe only for a localhost in development mode)
